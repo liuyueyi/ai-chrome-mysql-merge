@@ -1,0 +1,6 @@
+select
+  *
+from
+  user
+where
+  userId = 10

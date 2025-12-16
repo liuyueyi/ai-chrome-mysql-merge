@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "MyBatis SQL Log Merger",
+  "version": "1.0",
+  "description": "Merge MyBatis SQL logs into complete SQL statements",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "tabs",
+    "storage"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "MyBatis SQL Log Merger",
+    "default_icon": {
+      "16": "images/icon16.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["js/business/content.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["standalone.html", "js/business/standalone.js", "js/business/collapsible.js", "js/business/i18n.js", "js/vendor/sql-formatter.min.js"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "options_page": "settings.html"
+}
