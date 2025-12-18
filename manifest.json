@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "MyBatis SQL Log Merger",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Merge MyBatis SQL logs into complete SQL statements",
   "permissions": [
     "activeTab",
@@ -30,7 +30,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["standalone.html", "js/business/standalone.js", "js/business/collapsible.js", "js/business/i18n.js", "js/vendor/sql-formatter.min.js"],
+      "resources": ["standalone.html", "help.html", "js/business/standalone.js", "js/business/collapsible.js", "js/business/i18n.js", "js/vendor/sql-formatter.min.js"],
       "matches": ["<all_urls>"]
     }
   ],

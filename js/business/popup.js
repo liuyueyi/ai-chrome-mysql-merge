@@ -1,7 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
+    console.log('Popup DOM loaded');
+
     const openStandaloneButton = document.getElementById('openStandalone');
     const toggleExtractionButton = document.getElementById('toggleExtraction');
     const openSettingsButton = document.getElementById('openSettings');
+    const openHelpButton = document.getElementById('openHelp');
     const extractionStatus = document.getElementById('extractionStatus');
     const extractionText = document.getElementById('extractionText');
 
@@ -14,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
             injectExtractionText: '注入提取SQL按钮',
             cancelExtractionText: '取消提取SQL按钮',
             settingsText: '设置',
+            helpText: '帮助',
             activeStatus: '已激活',
             inactiveStatus: '未激活'
         },
@@ -24,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
             injectExtractionText: 'Inject SQL Extraction Button',
             cancelExtractionText: 'Cancel SQL Extraction Button',
             settingsText: 'Settings',
+            helpText: 'Help',
             activeStatus: 'Active',
             inactiveStatus: 'Inactive'
         }
@@ -84,7 +89,9 @@ document.addEventListener('DOMContentLoaded', function () {
             if (element.id === 'extractionText') {
                 text = getText(isActive ? 'cancelExtractionText' : 'injectExtractionText', language);
             }
-
+            if (element.id === 'extractionStatus') {
+                text = getText(isActive ? 'activeStatus' : 'inactiveStatus', language);
+            }
             element.textContent = text;
         });
     }
@@ -133,17 +140,9 @@ document.addEventListener('DOMContentLoaded', function () {
                             if (index > -1) {
                                 // 如果存在，则移除
                                 settings.urlPatterns.splice(index, 1);
-                                extractionStatus.textContent = getText('inactiveStatus', settings.language);
-                                extractionStatus.className = 'status-indicator status-inactive';
-                                // 更新按钮文本为"注入提取SQL按钮"
-                                extractionText.textContent = getText('injectExtractionText', settings.language);
                             } else {
                                 // 如果不存在，则添加
                                 settings.urlPatterns.push(host);
-                                extractionStatus.textContent = getText('activeStatus', settings.language);
-                                extractionStatus.className = 'status-indicator status-active';
-                                // 更新按钮文本为"取消提取SQL按钮"
-                                extractionText.textContent = getText('cancelExtractionText', settings.language);
                             }
 
                             // 保存更新后的设置
@@ -166,6 +165,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
                                 // 自动刷新当前页面以显示注入的按钮
                                 chrome.tabs.reload(currentTab.id);
+
+                                // 更新popup界面状态
+                                checkExtractionStatus();
                             });
                         });
                     } catch (e) {
@@ -183,6 +185,13 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Add event listener for opening help page
+    if (openHelpButton) {
+        openHelpButton.addEventListener('click', function () {
+            chrome.tabs.create({ url: chrome.runtime.getURL('help.html') });
+        });
+    }
+
     // 检查当前页面是否已激活提取按钮功能
     function checkExtractionStatus() {
         // 获取当前活动标签页
@@ -191,52 +200,117 @@ document.addEventListener('DOMContentLoaded', function () {
                 const currentTab = tabs[0];
                 const currentUrl = currentTab.url;
 
-                // 获取当前域名
-                try {
-                    const urlObj = new URL(currentUrl);
-                    const host = urlObj.origin; // 包含协议和域名
+                // 获取当前设置
+                storage.get(DEFAULT_SETTINGS, function (settings) {
+                    // 确保settings是一个有效的对象
+                    if (!settings || typeof settings !== 'object') {
+                        settings = DEFAULT_SETTINGS;
+                    }
 
-                    // 获取当前设置
-                    storage.get(DEFAULT_SETTINGS, function (settings) {
-                        // 确保settings是一个有效的对象
-                        if (!settings || typeof settings !== 'object') {
-                            settings = DEFAULT_SETTINGS;
+                    // 确保language属性存在
+                    if (!settings.hasOwnProperty('language')) {
+                        settings.language = DEFAULT_SETTINGS.language;
+                    }
+
+                    // 确保urlPatterns是一个数组
+                    if (!Array.isArray(settings.urlPatterns)) {
+                        settings.urlPatterns = DEFAULT_SETTINGS.urlPatterns;
+                    }
+
+                    // 使用与content.js相同的逻辑检查是否应该显示按钮
+                    let shouldShow = false;
+
+                    // Check if current URL matches any of the patterns
+                    for (let i = 0; i < settings.urlPatterns.length; i++) {
+                        const pattern = settings.urlPatterns[i];
+
+                        // Handle special case <all_urls>
+                        if (pattern === '<all_urls>') {
+                            shouldShow = true;
+                            break;
                         }
 
-                        // 确保language属性存在
-                        if (!settings.hasOwnProperty('language')) {
-                            settings.language = DEFAULT_SETTINGS.language;
+                        // Convert pattern to regex
+                        try {
+                            // 如果pattern是完整的URL（以http或https开头），则检查是否匹配
+                            if (pattern.startsWith('http://') || pattern.startsWith('https://')) {
+                                // 检查当前URL是否以pattern开头
+                                if (currentUrl.startsWith(pattern)) {
+                                    shouldShow = true;
+                                    break;
+                                }
+                            } else {
+                                // 处理通配符模式
+                                // Escape special regex characters except * and ?
+                                let regexPattern = pattern.replace(/[.+^${}()|[\]\\]/g, '\\$&');
+                                // Convert * to .* and ? to .
+                                regexPattern = regexPattern.replace(/\*/g, '.*').replace(/\?/g, '.');
+
+                                const regex = new RegExp('^' + regexPattern + '$');
+
+                                // Check if current URL matches pattern
+                                if (regex.test(currentUrl)) {
+                                    shouldShow = true;
+                                    break;
+                                }
+
+                                // Also check protocol + hostname + pathname combination
+                                const urlObj = new URL(currentUrl);
+                                const simplifiedUrl = urlObj.protocol + '//' + urlObj.hostname + urlObj.pathname;
+                                if (regex.test(simplifiedUrl)) {
+                                    shouldShow = true;
+                                    break;
+                                }
+                            }
+                        } catch (e) {
+                            console.warn('Invalid URL pattern:', pattern);
                         }
+                    }
 
-                        // 确保urlPatterns是一个数组
-                        if (!Array.isArray(settings.urlPatterns)) {
-                            settings.urlPatterns = DEFAULT_SETTINGS.urlPatterns;
-                        }
+                    if (shouldShow) {
+                        extractionStatus.textContent = getText('activeStatus', settings.language);
+                        extractionStatus.className = 'status-indicator status-active';
+                    } else {
+                        extractionStatus.textContent = getText('inactiveStatus', settings.language);
+                        extractionStatus.className = 'status-indicator status-inactive';
+                    }
 
-                        // 检查当前host是否已经在urlPatterns中
-                        const index = settings.urlPatterns.indexOf(host);
-                        const isActive = index > -1;
+                    // 更新页面文本
+                    updatePageTexts(settings.language, shouldShow);
+                });
+            } else {
+                // 如果没有活动标签页，也要确保界面正确初始化
+                storage.get(DEFAULT_SETTINGS, function (settings) {
+                    // 确保settings是一个有效的对象
+                    if (!settings || typeof settings !== 'object') {
+                        settings = DEFAULT_SETTINGS;
+                    }
 
-                        if (isActive) {
-                            extractionStatus.textContent = getText('activeStatus', settings.language);
-                            extractionStatus.className = 'status-indicator status-active';
-                        } else {
-                            extractionStatus.textContent = getText('inactiveStatus', settings.language);
-                            extractionStatus.className = 'status-indicator status-inactive';
-                        }
+                    // 确保language属性存在
+                    if (!settings.hasOwnProperty('language')) {
+                        settings.language = DEFAULT_SETTINGS.language;
+                    }
 
-                        // 更新页面文本
-                        updatePageTexts(settings.language, isActive);
-                    });
-                } catch (e) {
-                    console.error('Failed to parse URL:', currentUrl);
-                }
+                    // 更新页面文本（默认为未激活状态）
+                    updatePageTexts(settings.language, false);
+                });
             }
         });
     }
 
     // 初始化时检查提取按钮状态
     checkExtractionStatus();
+
+    // 监听设置更新消息
+    if (chrome.runtime && chrome.runtime.onMessage) {
+        chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+            console.log('Received message:', request);
+            if (request.action === "settingsUpdated") {
+                // 设置更新后重新检查状态
+                checkExtractionStatus();
+            }
+        });
+    }
 });
 
 // 保留原有的函数以便其他地方可能使用

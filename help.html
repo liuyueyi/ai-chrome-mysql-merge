@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title data-i18n="helpTitle">帮助 - MyBatis SQL Log Merger</title>
+    <style>
+        body {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-top: 0;
+            text-align: center;
+        }
+
+        h2 {
+            color: #3498db;
+            margin-top: 30px;
+        }
+
+        h3 {
+            color: #2c3e50;
+            margin-top: 20px;
+        }
+
+        .help-section {
+            background: white;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-list {
+            padding-left: 20px;
+        }
+
+        .step-list li {
+            margin-bottom: 10px;
+        }
+
+        .note {
+            background-color: #e8f4fc;
+            border-left: 4px solid #3498db;
+            padding: 10px;
+            margin: 15px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .tip {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 10px;
+            margin: 15px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .example {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            white-space: pre-wrap;
+        }
+
+        .back-button {
+            padding: 10px 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #2980b9;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #7f8c8d;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="popup.html" class="back-button" data-i18n="backToPopup">← 返回插件主页</a>
+
+    <h1 id="helpHeading" data-i18n="helpHeading">MyBatis SQL Log Merger 帮助文档</h1>
+
+    <div class="help-section">
+        <h2 id="introductionHeading" data-i18n="introductionHeading">简介</h2>
+        <p id="introductionText1" data-i18n="introductionText1">
+            MyBatis SQL Log Merger 是一款 Chrome 扩展程序，旨在帮助开发者轻松地将 MyBatis 日志中的 SQL 模板和参数合并成完整的可执行 SQL 语句。
+        </p>
+        <p id="introductionText2" data-i18n="introductionText2">
+            该插件提供了三种不同的使用方式，满足各种使用场景的需求。
+        </p>
+    </div>
+
+    <div class="help-section">
+        <h2 id="usageModesHeading" data-i18n="usageModesHeading">使用方式</h2>
+
+        <h3 id="standaloneModeHeading" data-i18n="standaloneModeHeading">1. 独立页面模式</h3>
+        <ol class="step-list">
+            <li id="standaloneStep1" data-i18n="standaloneStep1">点击 Chrome 工具栏中的插件图标</li>
+            <li id="standaloneStep2" data-i18n="standaloneStep2">点击"打开独立页面"按钮</li>
+            <li id="standaloneStep3" data-i18n="standaloneStep3">在独立页面中粘贴 MyBatis 日志或分别输入 SQL 模板和参数</li>
+            <li id="standaloneStep4" data-i18n="standaloneStep4">点击"处理SQL"按钮生成完整的 SQL 语句</li>
+        </ol>
+
+        <div class="note">
+            <strong data-i18n="noteLabel">🚩:</strong>
+            <span id="standaloneNote" data-i18n="standaloneNote">独立页面支持两种输入模式：单框模式（粘贴完整日志）和双框模式（分别输入 SQL 模板和参数）。</span>
+        </div>
+
+        <h3 id="pageButtonModeHeading" data-i18n="pageButtonModeHeading">2. 页面按钮模式</h3>
+        <ol class="step-list">
+            <li id="pageButtonStep1" data-i18n="pageButtonStep1">在目标网站上激活提取按钮功能（见下方说明）</li>
+            <li id="pageButtonStep2" data-i18n="pageButtonStep2">在任何网页上选中 MyBatis 日志文本</li>
+            <li id="pageButtonStep3" data-i18n="pageButtonStep3">点击页面右下角出现的绿色"提取MyBatis SQL"按钮</li>
+            <li id="pageButtonStep4" data-i18n="pageButtonStep4">在弹出的面板中查看合并后的 SQL 结果</li>
+        </ol>
+
+        <h3 id="popupModeHeading" data-i18n="popupModeHeading">3. 弹出窗口模式</h3>
+        <p id="popupModeText" data-i18n="popupModeText">弹出窗口主要用于快速访问插件的主要功能，如打开独立页面、激活页面按钮等。</p>
+    </div>
+
+    <div class="help-section">
+        <h2 id="activatingButtonHeading" data-i18n="activatingButtonHeading">激活页面按钮功能</h2>
+        <p id="activatingButtonText" data-i18n="activatingButtonText">默认情况下，页面按钮不会在任何网站上显示。您需要手动激活特定网站的功能：</p>
+        <ol class="step-list">
+            <li id="activatingButtonStep1" data-i18n="activatingButtonStep1">导航到您想要使用插件的目标网站</li>
+            <li id="activatingButtonStep2" data-i18n="activatingButtonStep2">点击 Chrome 工具栏中的插件图标</li>
+            <li id="activatingButtonStep3" data-i18n="activatingButtonStep3">在弹出窗口中，点击"注入提取SQL按钮"旁边的"未激活"状态标签</li>
+            <li id="activatingButtonStep4" data-i18n="activatingButtonStep4">状态将变为"已激活"，刷新页面后即可看到提取按钮</li>
+        </ol>
+
+        <div class="tip">
+            <strong data-i18n="tipLabel">💡:</strong>
+            <span id="activatingButtonTip" data-i18n="activatingButtonTip">您也可以在设置页面中配置 URL 模式来批量激活多个网站。</span>
+        </div>
+    </div>
+
+    <div class="help-section">
+        <h2 id="usingExtractorHeading" data-i18n="usingExtractorHeading">使用提取按钮</h2>
+        <ol class="step-list">
+            <li id="usingExtractorStep1" data-i18n="usingExtractorStep1">在网页上找到并选中 MyBatis 日志文本</li>
+            <li id="usingExtractorStep2" data-i18n="usingExtractorStep2">点击页面右下角的绿色"提取MyBatis SQL"按钮</li>
+            <li id="usingExtractorStep3" data-i18n="usingExtractorStep3">在弹出的结果面板中查看合并后的 SQL</li>
+            <li id="usingExtractorStep4" data-i18n="usingExtractorStep4">您可以使用"复制"按钮将 SQL 复制到剪贴板</li>
+        </ol>
+
+        <h3 id="manualEntryHeading" data-i18n="manualEntryHeading">手动输入模式</h3>
+        <p id="manualEntryText" data-i18n="manualEntryText">如果您想手动输入 SQL 模板和参数，可以点击提取按钮旁的展开图标：</p>
+        <ol class="step-list">
+            <li id="manualEntryStep1" data-i18n="manualEntryStep1">点击提取按钮旁的"⋯"图标</li>
+            <li id="manualEntryStep2" data-i18n="manualEntryStep2">在弹出的面板中分别输入 SQL 模板和参数</li>
+            <li id="manualEntryStep3" data-i18n="manualEntryStep3">点击"合成SQL"按钮生成结果</li>
+        </ol>
+    </div>
+
+    <div class="help-section">
+        <h2 id="inputFormatsHeading" data-i18n="inputFormatsHeading">输入格式说明</h2>
+
+        <h3 id="singleModeFormatHeading" data-i18n="singleModeFormatHeading">单框模式</h3>
+        <p id="singleModeFormatText" data-i18n="singleModeFormatText">支持带或不带 Preparing: 和 Parameters: 前缀的日志：</p>
+        <div class="example" id="singleModeExample">
+            ==> Preparing: SELECT * FROM users WHERE id = ? AND name = ?
+            ==> Parameters: 123(Long), "John"(String)
+        </div>
+
+        <h3 id="dualModeFormatHeading" data-i18n="dualModeFormatHeading">双框模式</h3>
+        <p id="dualModeFormatText1" data-i18n="dualModeFormatText1">SQL 模板支持以下两种格式：</p>
+        <div class="example" id="sqlTemplateExample1">
+            Preparing: SELECT * FROM users WHERE id = ? AND name = ?
+        </div>
+        <div class="example" id="sqlTemplateExample2">
+            SELECT * FROM users WHERE id = ? AND name = ?
+        </div>
+
+        <p id="dualModeFormatText2" data-i18n="dualModeFormatText2">参数支持以下两种格式：</p>
+        <div class="example" id="parametersExample1">
+            Parameters: 123(Long), "John"(String)
+        </div>
+        <div class="example" id="parametersExample2">
+            123(Long), "John"(String)
+        </div>
+    </div>
+
+    <div class="help-section">
+        <h2 id="supportedTypesHeading" data-i18n="supportedTypesHeading">支持的参数类型</h2>
+        <ul class="step-list">
+            <li id="typeLong" data-i18n="typeLong">Long</li>
+            <li id="typeString" data-i18n="typeString">String</li>
+            <li id="typeInteger" data-i18n="typeInteger">Integer</li>
+            <li id="typeDouble" data-i18n="typeDouble">Double</li>
+            <li id="typeFloat" data-i18n="typeFloat">Float</li>
+            <li id="typeBoolean" data-i18n="typeBoolean">Boolean</li>
+            <li id="typeTimestamp" data-i18n="typeTimestamp">Timestamp</li>
+            <li id="typeDate" data-i18n="typeDate">Date</li>
+            <li id="typeNull" data-i18n="typeNull">NULL 值</li>
+        </ul>
+    </div>
+
+    <footer id="helpFooter" data-i18n="helpFooter">
+        MyBatis SQL Log Merger v1.0
+    </footer>
+
+    <script src="js/business/i18n.js"></script>
+    <script>
+        // 等待 DOM 加载完成
+        document.addEventListener('DOMContentLoaded', function () {
+            // 从设置中加载语言偏好设置
+            if (typeof loadLanguageFromSettings === 'function') {
+                loadLanguageFromSettings();
+            } else {
+                // 如果无法从设置加载，则使用默认的更新UI文本函数
+                if (typeof updateUIText === 'function') {
+                    updateUIText();
+                }
+            }
+
+            // 添加返回按钮事件监听器
+            const backButton = document.querySelector('.back-button');
+            if (backButton) {
+                backButton.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    window.close(); // 关闭当前窗口
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

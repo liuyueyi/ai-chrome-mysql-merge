@@ -1,6 +1,3 @@
-// Content script to interact with the page
-console.log('MyBatis SQL Log Merger content script loaded');
-
 // 默认设置
 const DEFAULT_SETTINGS = {
     language: 'zh',
