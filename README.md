@@ -142,16 +142,21 @@ The standalone page offers enhanced functionality:
 
 Input:
 ```
-2025-12-15 15:09:30.055	
-ga||tender-api||tender-api-58d84fb947-k6264||DEBUG||com.paut.tender.mgt.business.mapper.order.OrderPaymentMapper.queryPreMinusAmountBySettleSysNos||2025-12-15T15:09:29.971Z||f55726b11267623a1c5de0b06a5d718f|313/445|[thread-pool-asyncServiceExecutor12]||f55726b11267623a1c5de0b06a5d718f-TID: N/A - 485> ==>  Preparing: select SUM(IFNULL(op.pre_minus_amount, 0)) as preMinusAmount,opd.settlement_sys_no as settlementSysNo from zc_tender_db.order_payment_detail opd inner join zc_tender_db.order_payment op on op.sys_no = opd.payment_sys_no where opd.settlement_sys_no in ( ? , ? , ? ) and op.common_status = 1 group by opd.settlement_sys_no
+2025-12-15T15:09:29.971Z||f55726b11267623a1c5de0b06a5d718f|313/445|[thread-pool-asyncServiceExecutor12]||f55726b11267623a1c5de0b06a5d718f-TID: N/A - 485> ==>  Preparing: select * from user where userId=?
 
-2025-12-15 15:09:30.055	
-ga||tender-api||tender-api-58d84fb947-k6264||DEBUG||com.paut.tender.mgt.business.mapper.order.OrderPaymentMapper.queryPreMinusAmountBySettleSysNos||2025-12-15T15:09:29.971Z||f55726b11267623a1c5de0b06a5d718f|314/446|[thread-pool-asyncServiceExecutor12]||f55726b11267623a1c5de0b06a5d718f-TID: N/A - 554> ==> Parameters: 1201489816869648539(Long), 1201468021147800812(Long), 1201468021143606337(Long)
+2025-12-15T15:09:29.971Z||f55726b11267623a1c5de0b06a5d718f|314/446|[thread-pool-asyncServiceExecutor12]||f55726b11267623a1c5de0b06a5d718f-TID: N/A - 554> ==> Parameters: 10(Integer)
+
+2025-12-15T15:09:29.972Z||f55726b11267623a1c5de0b06a5d718f|315/447|[thread-pool-asyncServiceExecutor12]||f55726b11267623a1c5de0b06a5d718f-TID: N/A - 17> <==      Total: 1
 ```
 
 Output:
 ```sql
-select SUM(IFNULL(op.pre_minus_amount, 0)) as preMinusAmount,opd.settlement_sys_no as settlementSysNo from zc_tender_db.order_payment_detail opd inner join zc_tender_db.order_payment op on op.sys_no = opd.payment_sys_no where opd.settlement_sys_no in ( 1201489816869648539 , 1201468021147800812 , 1201468021143606337 ) and op.common_status = 1 group by opd.settlement_sys_no
+select
+  *
+from
+  user
+where
+  userId = 10
 ```
 
 ### Supported Parameter Types
@@ -316,16 +321,21 @@ sql-log-merge/
 
 输入：
 ```
-2025-12-15 15:09:30.055	
-ga||tender-api||tender-api-58d84fb947-k6264||DEBUG||com.paut.tender.mgt.business.mapper.order.OrderPaymentMapper.queryPreMinusAmountBySettleSysNos||2025-12-15T15:09:29.971Z||f55726b11267623a1c5de0b06a5d718f|313/445|[thread-pool-asyncServiceExecutor12]||f55726b11267623a1c5de0b06a5d718f-TID: N/A - 485> ==>  Preparing: select SUM(IFNULL(op.pre_minus_amount, 0)) as preMinusAmount,opd.settlement_sys_no as settlementSysNo from zc_tender_db.order_payment_detail opd inner join zc_tender_db.order_payment op on op.sys_no = opd.payment_sys_no where opd.settlement_sys_no in ( ? , ? , ? ) and op.common_status = 1 group by opd.settlement_sys_no
+2025-12-15T15:09:29.971Z||f55726b11267623a1c5de0b06a5d718f|313/445|[thread-pool-asyncServiceExecutor12]||f55726b11267623a1c5de0b06a5d718f-TID: N/A - 485> ==>  Preparing: select * from user where userId=?
 
-2025-12-15 15:09:30.055	
-ga||tender-api||tender-api-58d84fb947-k6264||DEBUG||com.paut.tender.mgt.business.mapper.order.OrderPaymentMapper.queryPreMinusAmountBySettleSysNos||2025-12-15T15:09:29.971Z||f55726b11267623a1c5de0b06a5d718f|314/446|[thread-pool-asyncServiceExecutor12]||f55726b11267623a1c5de0b06a5d718f-TID: N/A - 554> ==> Parameters: 1201489816869648539(Long), 1201468021147800812(Long), 1201468021143606337(Long)
+2025-12-15T15:09:29.971Z||f55726b11267623a1c5de0b06a5d718f|314/446|[thread-pool-asyncServiceExecutor12]||f55726b11267623a1c5de0b06a5d718f-TID: N/A - 554> ==> Parameters: 10(Integer)
+
+2025-12-15T15:09:29.972Z||f55726b11267623a1c5de0b06a5d718f|315/447|[thread-pool-asyncServiceExecutor12]||f55726b11267623a1c5de0b06a5d718f-TID: N/A - 17> <==      Total: 1
 ```
 
 输出：
 ```sql
-select SUM(IFNULL(op.pre_minus_amount, 0)) as preMinusAmount,opd.settlement_sys_no as settlementSysNo from zc_tender_db.order_payment_detail opd inner join zc_tender_db.order_payment op on op.sys_no = opd.payment_sys_no where opd.settlement_sys_no in ( 1201489816869648539 , 1201468021147800812 , 1201468021143606337 ) and op.common_status = 1 group by opd.settlement_sys_no
+select
+  *
+from
+  user
+where
+  userId = 10
 ```
 
 ### 支持的参数类型
