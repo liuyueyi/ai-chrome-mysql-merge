@@ -7,44 +7,90 @@
     <link rel="stylesheet" href="css/styles.css">
     <style>
         /* 新增样式以优化布局 */
-        .header-container {
+        .plugin-info-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
+            padding: 0px 0 5px 0;
             border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 20px;
+            background-color: #f5f5f5;
+            padding: 5px 10px 10px 10px;
         }
 
-        .header-container h1 {
-            margin: 0;
-            font-size: 24px;
-            color: #333;
+        .plugin-info-left {
+            display: flex;
+            align-items: center;
         }
 
-        .header-container .toggle-btn {
-            background-color: #6c757d;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
+        .plugin-info-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .version-info {
+            margin-left: 10px;
+            color: #6c757d;
             font-size: 14px;
         }
 
-        .header-container .toggle-btn:hover {
-            background-color: #5a6268;
+        .info-content {
+            padding: 10px 30px 0px 30px;
+            min-height: 400px;
+        }
+
+        /* 广告位网格布局样式 */
+        .ad-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 10px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+
+        .ad-item {
+            padding: 15px;
+            background-color: white;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .ad-item h3 {
+            margin-top: 0;
+            color: #495057;
+            font-size: 16px;
+        }
+
+        .ad-item p {
+            color: #6c757d;
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+
+        .toggle-btn {
+            display: inline-block;
+            border-color: rgb(77, 137, 254);
+            background-color: rgb(77, 137, 254);
+            color: white;
+            margin-left: 5px;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 10px;
+        }
+
+        .toggle-btn:hover {
+            background-color: #086ab4;
         }
 
         .section {
             margin-bottom: 25px;
         }
 
-        .row {
-            display: flex;
-            flex-wrap: wrap;
-            margin: 0 -10px;
-        }
 
         .col-half {
             flex: 1;
@@ -217,9 +263,25 @@
             margin-bottom: 10px;
         }
 
-        .label-toggle-container label {
-            font-weight: 500;
+        .input-section label {
             margin: 0;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            color: rgb(45, 55, 72);
+            font-size: 16px;
+            gap: 8px;
+            padding-bottom: 8px;
+        }
+
+        .label-toggle-container label {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            color: rgb(45, 55, 72);
+            font-size: 16px;
+            gap: 8px;
         }
 
         .label-toggle-container .toggle-btn {
@@ -255,9 +317,14 @@
         }
 
         .output-section label {
-            font-weight: 500;
-            margin-bottom: 10px;
-            display: block;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            color: rgb(45, 55, 72);
+            font-size: 16px;
+            gap: 8px;
+            padding-bottom: 8px;
         }
 
         #result,
@@ -292,118 +359,146 @@
 
 <body>
     <div class="container">
-        <div class="header-container">
-            <h1 id="pageTitle">MyBatis SQL Log Merger</h1>
-            <button id="settingsBtn" class="toggle-btn">设置</button>
+        <!-- 插件信息行 -->
+        <div class="plugin-info-row">
+            <div class="plugin-info-left">
+                <img src="images/icon128.png" alt="MyBatis SQL Log Merger" width="32" height="32"
+                    style="vertical-align: middle; margin-right: 10px;">
+                <h1 id="pageTitle" style="display: inline; vertical-align: middle;">MyBatis SQL Log Merger</h1>
+            </div>
+            <div class="plugin-info-right">
+                <button id="settingsBtn" class="toggle-btn" style="">设置</button>
+                <button id="aboutBtn" class="toggle-btn" style="margin-left: 10px;">About</button>
+                <span class="version-info" style="margin-left: 10px;">v1.0.2</span>
+            </div>
         </div>
 
-        <!-- 使用说明和示例折叠面板 -->
-        <div class="section">
-            <div class="row">
-                <div class="col-half">
-                    <button type="button" class="collapsible" id="instructionsHeader">使用说明 ▼</button>
-                    <div class="content">
-                        <div class="instructions">
-                            <ul id="instructionsList">
-                                <li id="instruction1">将您的MyBatis日志粘贴到下方的输入框中</li>
-                                <li id="instruction2">点击"处理SQL"按钮将日志转换为完整的SQL语句</li>
-                                <li id="instruction3">转换后的SQL将显示在结果区域</li>
-                                <li id="instruction4">使用"清空"按钮可以清除所有内容</li>
-                                <li id="instruction5">使用"美化SQL"按钮可以格式化并高亮显示SQL语句</li>
-                                <li id="instruction6">使用"拷贝结果"按钮可以将SQL复制到剪贴板</li>
-                                <li id="instruction7">可以切换输入模式：单框模式（粘贴完整日志）或双框模式（分别输入SQL模板和参数）</li>
-                                <li id="instruction8">双框模式支持带或不带Preparing:和Parameters:前缀的输入</li>
-                            </ul>
+        <div class="info-content">
+
+            <!-- 推广广告位网格布局 -->
+            <div class="ad-grid">
+                <div class="ad-item">
+                    <h3>广告位 1</h3>
+                    <p>推广内容描述...</p>
+                </div>
+                <div class="ad-item">
+                    <h3>广告位 2</h3>
+                    <p>推广内容描述...</p>
+                </div>
+                <div class="ad-item">
+                    <h3>广告位 3</h3>
+                    <p>推广内容描述...</p>
+                </div>
+                <div class="ad-item">
+                    <h3>广告位 4</h3>
+                    <p>推广内容描述...</p>
+                </div>
+            </div>
+
+            <!-- 使用说明和示例折叠面板 -->
+            <div class="section">
+                <div class="row">
+                    <div class="col-half">
+                        <button type="button" class="collapsible" id="instructionsHeader">使用说明 ▼</button>
+                        <div class="content">
+                            <div class="instructions">
+                                <ul id="instructionsList">
+                                    <li id="instruction1">将您的MyBatis日志粘贴到下方的输入框中</li>
+                                    <li id="instruction2">点击"处理SQL"按钮将日志转换为完整的SQL语句</li>
+                                    <li id="instruction3">转换后的SQL将显示在结果区域</li>
+                                    <li id="instruction4">使用"清空"按钮可以清除所有内容</li>
+                                    <li id="instruction5">使用"美化SQL"按钮可以格式化并高亮显示SQL语句</li>
+                                    <li id="instruction6">使用"拷贝结果"按钮可以将SQL复制到剪贴板</li>
+                                    <li id="instruction7">可以切换输入模式：单框模式（粘贴完整日志）或双框模式（分别输入SQL模板和参数）</li>
+                                    <li id="instruction8">双框模式支持带或不带Preparing:和Parameters:前缀的输入</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-half">
-                    <button type="button" class="collapsible" id="exampleHeader">示例 ▼</button>
-                    <div class="content">
-                        <div class="example">
-                            <p id="exampleInputLabel">输入日志片段：</p>
-                            <pre>==>  Preparing: SELECT * FROM users WHERE id = ? AND name = ?
+                    <div class="col-half">
+                        <button type="button" class="collapsible" id="exampleHeader">示例 ▼</button>
+                        <div class="content">
+                            <div class="example">
+                                <p id="exampleInputLabel">输入日志片段：</p>
+                                <pre>==>  Preparing: SELECT * FROM users WHERE id = ? AND name = ?
 ==> Parameters: 123(Long), "John"(String)</pre>
-                            <p id="exampleOutputLabel">输出SQL：</p>
-                            <pre>SELECT * FROM users WHERE id = 123 AND name = 'John'</pre>
+                                <p id="exampleOutputLabel">输出SQL：</p>
+                                <pre>SELECT * FROM users WHERE id = 123 AND name = 'John'</pre>
 
-                            <p id="dualModeExampleLabel">双框模式输入示例：</p>
-                            <p id="sqlTemplateExampleLabel">SQL模板（可带或不带Preparing:前缀）：</p>
-                            <pre>Preparing: SELECT * FROM users WHERE id = ? AND name = ?
+                                <p id="dualModeExampleLabel">双框模式输入示例：</p>
+                                <p id="sqlTemplateExampleLabel">SQL模板（可带或不带Preparing:前缀）：</p>
+                                <pre>Preparing: SELECT * FROM users WHERE id = ? AND name = ?
 或
 SELECT * FROM users WHERE id = ? AND name = ?</pre>
-                            <p id="parametersExampleLabel">参数（可带或不带Parameters:前缀）：</p>
-                            <pre>Parameters: 123(Long), "John"(String)
+                                <p id="parametersExampleLabel">参数（可带或不带Parameters:前缀）：</p>
+                                <pre>Parameters: 123(Long), "John"(String)
 或
 123(Long), "John"(String)</pre>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- 按钮组移到输入输出上方 -->
-        <div class="button-group">
-            <div class="button-row">
-                <button id="processBtn">处理SQL</button>
-                <button id="formatBtn" disabled>美化SQL</button>
-                <button id="copyBtn" disabled>拷贝结果</button>
-                <button id="clearBtn">清空</button>
-                <button id="navigateToSqlPlatform" style="display: none;">导航到SQL查询平台</button>
-            </div>
-        </div>
-
-        <!-- 日志输入和结果输出 -->
-        <div class="section">
-            <!-- 单框模式：MyBatis日志输入 -->
-            <div id="singleMode" class="input-mode">
-                <div class="row">
-                    <div class="input-section">
-                        <div class="label-toggle-container">
-                            <label for="input" id="singleModeLabel">MyBatis日志输入：</label>
-                            <button id="toggleModeBtn" class="toggle-btn">切换到双框模式</button>
-                        </div>
-                        <textarea id="input" placeholder=""></textarea>
-                    </div>
-                    <div class="output-section">
-                        <label for="result" id="resultLabel">处理结果：</label>
-                        <div id="result"></div>
-                        <!-- 用于显示高亮结果的容器 -->
-                        <pre id="highlighted-result"><code class="language-sql"></code></pre>
-                    </div>
+            <!-- 按钮组移到输入输出上方 -->
+            <div class="button-group">
+                <div class="button-row">
+                    <button id="processBtn">处理SQL</button>
+                    <button id="formatBtn" disabled>美化SQL</button>
+                    <button id="copyBtn" disabled>拷贝结果</button>
+                    <button id="clearBtn">清空</button>
+                    <button id="navigateToSqlPlatform" style="display: none;">导航到SQL查询平台</button>
                 </div>
             </div>
 
-            <!-- 双框模式：SQL模板和参数分别输入 -->
-            <div id="doubleMode" class="input-mode" style="display: none;">
-                <div class="row">
-                    <div class="input-section">
-                        <div class="label-toggle-container">
-                            <label for="sqlTemplate" id="sqlTemplateLabel">SQL模板输入：</label>
-                            <button id="toggleModeBtnDouble" class="toggle-btn">切换到单框模式</button>
+            <!-- 日志输入和结果输出 -->
+            <div class="section">
+                <!-- 单框模式：MyBatis日志输入 -->
+                <div id="singleMode" class="input-mode">
+                    <div class="row">
+                        <div class="input-section">
+                            <div class="label-toggle-container">
+                                <label for="input" id="singleModeLabel">MyBatis日志输入：</label>
+                                <button id="toggleModeBtn" class="toggle-btn">切换到双框模式</button>
+                            </div>
+                            <textarea id="input" placeholder=""></textarea>
                         </div>
-                        <textarea id="sqlTemplate" placeholder=""></textarea>
-                    </div>
-                    <div class="input-section">
-                        <label for="sqlParameters" id="sqlParametersLabel">参数输入：</label>
-                        <textarea id="sqlParameters" placeholder=""></textarea>
+                        <div class="output-section">
+                            <label for="result" id="resultLabel">处理结果：</label>
+                            <div id="result"></div>
+                            <!-- 用于显示高亮结果的容器 -->
+                            <pre id="highlighted-result"><code class="language-sql"></code></pre>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="output-section">
-                        <label for="resultDouble" id="resultDoubleLabel">处理结果：</label>
-                        <div id="resultDouble"></div>
-                        <!-- 用于显示高亮结果的容器 -->
-                        <pre id="highlighted-result-double"><code class="language-sql"></code></pre>
+
+                <!-- 双框模式：SQL模板和参数分别输入 -->
+                <div id="doubleMode" class="input-mode" style="display: none;">
+                    <div class="row">
+                        <div class="input-section">
+                            <div class="label-toggle-container">
+                                <label for="sqlTemplate" id="sqlTemplateLabel">SQL模板输入：</label>
+                                <button id="toggleModeBtnDouble" class="toggle-btn">切换到单框模式</button>
+                            </div>
+                            <textarea id="sqlTemplate" placeholder=""></textarea>
+                        </div>
+                        <div class="input-section">
+                            <label for="sqlParameters" id="sqlParametersLabel">参数输入：</label>
+                            <textarea id="sqlParameters" placeholder=""></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="output-section">
+                            <label for="resultDouble" id="resultDoubleLabel">处理结果：</label>
+                            <div id="resultDouble"></div>
+                            <!-- 用于显示高亮结果的容器 -->
+                            <pre id="highlighted-result-double"><code class="language-sql"></code></pre>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <footer>
-        <p id="footerText">MyBatis SQL Log Merger Chrome Extension</p>
-    </footer>
 
     <!-- 引入本地的sql-formatter库 -->
     <script src="js/vendor/sql-formatter.min.js"></script>
