@@ -6,16 +6,25 @@
     <style>
         body {
             width: 300px;
-            padding: 5px;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
         }
 
         .header {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 5px;
+            padding: 10px 5px;
             padding-bottom: 10px;
             border-bottom: 1px solid #eee;
+            background-color: #f1f3ff;
+        }
+
+        .header>div {
+            display: flex;
+            flex-direction: column;
         }
 
         .header h2 {
@@ -25,25 +34,41 @@
         }
 
         .footer {
-            text-align: center;
-            color: #777;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            background-color: #f1f3ff;
+            margin-top: auto;
         }
 
-        .header .version {
+        .footer .menu-item {
+            flex: 1;
+            margin: 0 5px;
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .footer .menu-item:hover {
+            .text {
+                color: #e6152a;
+            }
+        }
+
+        .copyright {
             font-size: 12px;
             color: #777;
+            text-align: left;
+            padding-top: 5px;
         }
 
         .menu-item {
             display: flex;
             align-items: center;
             padding: 10px 15px;
-            margin-bottom: 8px;
-            background: #f8f9fa;
-            border-radius: 6px;
+            margin-bottom: 4px;
             cursor: pointer;
             transition: all 0.2s ease;
-            border: 1px solid #e9ecef;
+            border-bottom: 1px solid #e9ecef;
         }
 
         .menu-item:hover {
@@ -86,7 +111,10 @@
 <body>
     <div class="header">
         <img src="images/icon128.png" alt="MyBatis SQL Log Merger" width="40" height="40" style="margin-right: 10px;">
-        <h2 id="appTitle" data-i18n="appTitle">MyBatis SQL Log Merger</h2>
+        <div>
+            <h2 id="appTitle" data-i18n="appTitle">MyBatis SQL Log Merger</h2>
+            <div class="copyright">Copyright ©2025-now V1.0.2</div>
+        </div>
     </div>
 
     <div class="menu-item" id="openStandalone">
@@ -166,19 +194,15 @@
         <div class="text" id="settingsText" data-i18n="settingsText">设置</div>
     </div>
 
-    <div class="menu-item" id="openHelp">
-        <div class="icon">❓</div>
-        <div class="text" id="helpText" data-i18n="helpText">帮助</div>
-    </div>
-
-    <div class="menu-item" id="openAbout">
-        <div class="icon">ℹ️</div>
-        <div class="text" id="aboutText" data-i18n="aboutText">关于</div>
-    </div>
-
     <div class="footer">
-        <!-- 根据当前年份显示时间 -->
-        Copyright Since ©2025-now v1.0.2. All rights reserved.
+        <div class="menu-item" id="openHelp">
+            <div class="icon">❓</div>
+            <div class="text" id="helpText" data-i18n="helpText">帮助</div>
+        </div>
+        <div class="menu-item" id="openAbout">
+            <div class="icon">ℹ️</div>
+            <div class="text" id="aboutText" data-i18n="aboutText">关于</div>
+        </div>
     </div>
     <script src="js/business/popup.js"></script>
 </body>
