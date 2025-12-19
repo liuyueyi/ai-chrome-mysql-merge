@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "MyBatis SQL Log Merger",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Merge MyBatis SQL logs into complete SQL statements",
   "permissions": [
     "activeTab",

@@ -86,7 +86,7 @@ const translations = {
         typeTimestamp: 'Timestamp',
         typeDate: 'Date',
         typeNull: 'NULL 值',
-        helpFooter: 'MyBatis SQL Log Merger v1.0.2',
+        helpFooter: 'MyBatis SQL Log Merger v1.0.3',
         noteLabel: '注意:',
         tipLabel: '提示:',
 
@@ -110,7 +110,7 @@ const translations = {
         sponsorDescription: '如果您觉得这个工具对您的工作有所帮助，欢迎通过以下方式支持项目的发展。您的支持将帮助我们持续改进和维护这个项目。',
         coffeeSponsor: '请我喝杯咖啡 ☕',
         patreonSponsor: '成为 Patreon 赞助者 🌟',
-        aboutFooter: 'MyBatis SQL Log Merger v1.0.2'
+        aboutFooter: 'MyBatis SQL Log Merger v1.0.3'
     },
     'en': {
         pageTitle: 'MyBatis SQL Log Merger',
@@ -198,7 +198,7 @@ const translations = {
         typeTimestamp: 'Timestamp',
         typeDate: 'Date',
         typeNull: 'NULL Values',
-        helpFooter: 'MyBatis SQL Log Merger v1.0.2',
+        helpFooter: 'MyBatis SQL Log Merger v1.0.3',
         noteLabel: 'Note:',
         tipLabel: 'Tip:',
 
@@ -222,7 +222,7 @@ const translations = {
         sponsorDescription: 'If you find this tool helpful for your work, please support the project\'s development through the following methods.Your support will help us continuously improve and maintain this project.',
         coffeeSponsor: 'Buy Me a Coffee ☕',
         patreonSponsor: 'Become a Patreon Supporter 🌟',
-        aboutFooter: 'MyBatis SQL Log Merger v1.0.2'
+        aboutFooter: 'MyBatis SQL Log Merger v1.0.3'
     }
 };
 
