@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title data-i18n="aboutTitle">关于 - MyBatis SQL Log Merger</title>
+    <style>
+        body {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-top: 0;
+            text-align: center;
+        }
+
+        h2 {
+            color: #3498db;
+            margin-top: 30px;
+        }
+
+        .about-section {
+            background: white;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-button {
+            padding: 10px 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #2980b9;
+        }
+
+        .author-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .author-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-right: 20px;
+            background-color: #3498db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .author-details {
+            flex: 1;
+        }
+
+        .project-links {
+            margin: 20px 0;
+        }
+
+        .project-links a {
+            display: inline-block;
+            margin-right: 15px;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .project-links a:hover {
+            text-decoration: underline;
+        }
+
+        .sponsor-section {
+            text-align: center;
+            padding: 20px;
+            background-color: #e8f4fc;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .sponsor-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #27ae60;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            margin: 10px;
+        }
+
+        .sponsor-button:hover {
+            background-color: #219653;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #7f8c8d;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="popup.html" class="back-button" data-i18n="backToPopup">← 返回插件主页</a>
+
+    <h1 id="aboutHeading" data-i18n="aboutHeading">关于 MyBatis SQL Log Merger</h1>
+
+    <div class="about-section">
+        <h2 id="authorHeading" data-i18n="authorHeading">作者信息</h2>
+        <div class="author-info">
+            <div class="author-avatar">YH</div>
+            <div class="author-details">
+                <p id="authorName" data-i18n="authorName"><strong>作者:</strong> YiHui</p>
+                <p id="authorDescription" data-i18n="authorDescription">一位专注于开发实用工具的软件工程师，致力于提升开发者的工作效率。</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="about-section">
+        <h2 id="projectHeading" data-i18n="projectHeading">项目说明</h2>
+        <p id="projectDescription1" data-i18n="projectDescription1">
+            MyBatis SQL Log Merger 是一款专为开发者设计的 Chrome 扩展程序，旨在简化 MyBatis 日志的处理过程。
+            它能够自动将 MyBatis 生成的日志中的 SQL 模板和参数合并成完整的可执行 SQL 语句，大大提高了调试效率。
+        </p>
+        <p id="projectDescription2" data-i18n="projectDescription2">
+            该插件支持多种使用方式，包括独立页面模式、页面按钮模式和弹出窗口模式，满足不同场景下的使用需求。
+            同时支持中英文界面切换，让全球开发者都能方便使用。
+        </p>
+
+        <div class="project-links">
+            <a href="https://github.com/your-username/mybatis-sql-log-merger" target="_blank" id="sourceCodeLink"
+                data-i18n="sourceCodeLink">源码仓库</a>
+            <a href="https://github.com/your-username/mybatis-sql-log-merger/issues" target="_blank"
+                id="issueTrackerLink" data-i18n="issueTrackerLink">问题反馈</a>
+            <a href="https://github.com/your-username/mybatis-sql-log-merger/releases" target="_blank"
+                id="releaseNotesLink" data-i18n="releaseNotesLink">版本更新</a>
+        </div>
+    </div>
+
+    <div class="about-section">
+        <h2 id="opensourceHeading" data-i18n="opensourceHeading">开源许可</h2>
+        <p id="licenseText" data-i18n="licenseText">
+            本项目采用 MIT 许可证开源，意味着您可以自由地使用、复制、修改、分发此软件。
+            但我们不对使用本软件可能造成的任何后果承担责任。
+        </p>
+        <p id="contributionText" data-i18n="contributionText">
+            欢迎提交 Issue 或 Pull Request 来帮助改进项目。您的贡献将使这个工具变得更好！
+        </p>
+    </div>
+
+    <div class="sponsor-section">
+        <h2 id="sponsorHeading" data-i18n="sponsorHeading">支持项目发展</h2>
+        <p id="sponsorDescription" data-i18n="sponsorDescription">
+            如果您觉得这个工具对您的工作有所帮助，欢迎通过以下方式支持项目的发展。
+            您的支持将帮助我们持续改进和维护这个项目。
+        </p>
+        <a href="https://www.buymeacoffee.com/yourusername" target="_blank" class="sponsor-button" id="coffeeSponsor"
+            data-i18n="coffeeSponsor">请我喝杯咖啡 ☕</a>
+        <a href="https://patreon.com/yourusername" target="_blank" class="sponsor-button" id="patreonSponsor"
+            data-i18n="patreonSponsor">成为 Patreon 赞助者 🌟</a>
+    </div>
+
+    <footer id="aboutFooter" data-i18n="aboutFooter">
+        MyBatis SQL Log Merger v1.0.2
+    </footer>
+
+    <script src="js/business/i18n.js"></script>
+    <script>
+        // 等待 DOM 加载完成
+        document.addEventListener('DOMContentLoaded', function () {
+            // 添加返回按钮事件监听器
+            const backButton = document.querySelector('.back-button');
+            if (backButton) {
+                backButton.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    window.close(); // 关闭当前窗口
+                });
+            }
+
+            // 从设置中加载语言偏好设置
+            if (typeof loadLanguageFromSettings === 'function') {
+                loadLanguageFromSettings();
+            } else {
+                // 如果无法从设置加载，则使用默认的更新UI文本函数
+                if (typeof updateUIText === 'function') {
+                    updateUIText();
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

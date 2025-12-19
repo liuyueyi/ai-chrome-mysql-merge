@@ -33,7 +33,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["standalone.html", "help.html", "js/business/standalone.js", "js/business/collapsible.js", "js/business/i18n.js", "js/vendor/sql-formatter.min.js"],
+      "resources": ["standalone.html", "help.html", "about.html", "js/business/standalone.js", "js/business/collapsible.js", "js/business/i18n.js", "js/vendor/sql-formatter.min.js"],
       "matches": ["<all_urls>"]
     }
   ],

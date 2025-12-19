@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const toggleExtractionButton = document.getElementById('toggleExtraction');
     const openSettingsButton = document.getElementById('openSettings');
     const openHelpButton = document.getElementById('openHelp');
+    const openAboutButton = document.getElementById('openAbout');
     const extractionStatus = document.getElementById('extractionStatus');
     const extractionText = document.getElementById('extractionText');
 
@@ -18,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
             cancelExtractionText: '取消提取SQL按钮',
             settingsText: '设置',
             helpText: '帮助',
+            aboutText: '关于',
             activeStatus: '已激活',
             inactiveStatus: '未激活'
         },
@@ -29,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
             cancelExtractionText: 'Cancel SQL Extraction Button',
             settingsText: 'Settings',
             helpText: 'Help',
+            aboutText: 'About',
             activeStatus: 'Active',
             inactiveStatus: 'Inactive'
         }
@@ -189,6 +192,13 @@ document.addEventListener('DOMContentLoaded', function () {
     if (openHelpButton) {
         openHelpButton.addEventListener('click', function () {
             chrome.tabs.create({ url: chrome.runtime.getURL('help.html') });
+        });
+    }
+
+    // Add event listener for opening about page
+    if (openAboutButton) {
+        openAboutButton.addEventListener('click', function () {
+            chrome.tabs.create({ url: chrome.runtime.getURL('about.html') });
         });
     }
 

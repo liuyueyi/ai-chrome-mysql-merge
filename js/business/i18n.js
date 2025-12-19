@@ -87,7 +87,28 @@ const translations = {
         typeNull: 'NULL 值',
         helpFooter: 'MyBatis SQL Log Merger v1.0.2',
         noteLabel: '注意:',
-        tipLabel: '提示:'
+        tipLabel: '提示:',
+
+        // About page text
+        aboutTitle: '关于 - MyBatis SQL Log Merger',
+        aboutHeading: '关于 MyBatis SQL Log Merger',
+        authorHeading: '作者信息',
+        authorName: '作者: YiHui',
+        authorDescription: '一位专注于开发实用工具的软件工程师，致力于提升开发者的工作效率。',
+        projectHeading: '项目说明',
+        projectDescription1: 'MyBatis SQL Log Merger 是一款专为开发者设计的 Chrome 扩展程序，旨在简化 MyBatis 日志的处理过程。它能够自动将 MyBatis 生成的日志中的 SQL 模板和参数合并成完整的可执行 SQL 语句，大大提高了调试效率。',
+        projectDescription2: '该插件支持多种使用方式，包括独立页面模式、页面按钮模式和弹出窗口模式，满足不同场景下的使用需求。同时支持中英文界面切换，让全球开发者都能方便使用。',
+        sourceCodeLink: '源码仓库',
+        issueTrackerLink: '问题反馈',
+        releaseNotesLink: '版本更新',
+        opensourceHeading: '开源许可',
+        licenseText: '本项目采用 MIT 许可证开源，意味着您可以自由地使用、复制、修改、分发此软件。但我们不对使用本软件可能造成的任何后果承担责任。',
+        contributionText: '欢迎提交 Issue 或 Pull Request 来帮助改进项目。您的贡献将使这个工具变得更好！',
+        sponsorHeading: '支持项目发展',
+        sponsorDescription: '如果您觉得这个工具对您的工作有所帮助，欢迎通过以下方式支持项目的发展。您的支持将帮助我们持续改进和维护这个项目。',
+        coffeeSponsor: '请我喝杯咖啡 ☕',
+        patreonSponsor: '成为 Patreon 赞助者 🌟',
+        aboutFooter: 'MyBatis SQL Log Merger v1.0.2'
     },
     'en': {
         pageTitle: 'MyBatis SQL Log Merger',
@@ -176,7 +197,28 @@ const translations = {
         typeNull: 'NULL Values',
         helpFooter: 'MyBatis SQL Log Merger v1.0.2',
         noteLabel: 'Note:',
-        tipLabel: 'Tip:'
+        tipLabel: 'Tip:',
+
+        // About page text
+        aboutTitle: 'About - MyBatis SQL Log Merger',
+        aboutHeading: 'About MyBatis SQL Log Merger',
+        authorHeading: 'Author Information',
+        authorName: 'Author: YiHui',
+        authorDescription: 'A software engineer focused on developing practical tools, dedicated to improving developer productivity.',
+        projectHeading: 'Project Description',
+        projectDescription1: 'MyBatis SQL Log Merger is a Chrome extension designed for developers to simplify the processing of MyBatis logs. It automatically merges SQL templates and parameters from MyBatis-generated logs into complete executable SQL statements, greatly improving debugging efficiency.',
+        projectDescription2: 'The plugin supports multiple usage methods, including standalone page mode, page button mode, and popup window mode, meeting usage needs in different scenarios. It also supports Chinese and English interface switching, making it convenient for developers worldwide.',
+        sourceCodeLink: 'Source Code Repository',
+        issueTrackerLink: 'Issue Tracker',
+        releaseNotesLink: 'Release Notes',
+        opensourceHeading: 'Open Source License',
+        licenseText: 'This project is open-sourced under the MIT License, which means you can freely use, copy, modify, and distribute this software. However, we are not responsible for any consequences that may arise from using this software.',
+        contributionText: 'Welcome to submit Issues or Pull Requests to help improve the project. Your contributions will make this tool better!',
+        sponsorHeading: 'Support Project Development',
+        sponsorDescription: 'If you find this tool helpful for your work, please support the project\'s development through the following methods.Your support will help us continuously improve and maintain this project.',
+        coffeeSponsor: 'Buy Me a Coffee ☕',
+        patreonSponsor: 'Become a Patreon Supporter 🌟',
+        aboutFooter: 'MyBatis SQL Log Merger v1.0.2'
     }
 };
 
@@ -317,6 +359,34 @@ function updateUIText() {
         }
     });
 
+    // 更新关于页面元素
+    const aboutElements = [
+        'aboutHeading', 'authorHeading', 'authorName', 'authorDescription',
+        'projectHeading', 'projectDescription1', 'projectDescription2',
+        'opensourceHeading', 'licenseText', 'contributionText',
+        'sponsorHeading', 'sponsorDescription', 'aboutFooter'
+    ];
+
+    aboutElements.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.textContent = getText(id);
+        }
+    });
+
+    // 更新链接元素
+    const linkElements = [
+        'sourceCodeLink', 'issueTrackerLink', 'releaseNotesLink',
+        'coffeeSponsor', 'patreonSponsor'
+    ];
+
+    linkElements.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.textContent = getText(id);
+        }
+    });
+
     // 更新返回按钮文本
     const backButtonElement = document.querySelector('.back-button[data-i18n]');
     if (backButtonElement) {
@@ -329,6 +399,12 @@ function updateUIText() {
     if (helpTitleElement) {
         const key = helpTitleElement.getAttribute('data-i18n');
         helpTitleElement.textContent = getText(key);
+    }
+
+    // 更新关于页面标题
+    const aboutTitleElement = document.querySelector('title[data-i18n="aboutTitle"]');
+    if (aboutTitleElement) {
+        aboutTitleElement.textContent = getText('aboutTitle');
     }
 }
 
