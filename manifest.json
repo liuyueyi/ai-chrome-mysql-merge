@@ -8,6 +8,9 @@
     "tabs",
     "storage"
   ],
+  "background": {
+    "service_worker": "js/business/background.js"
+  },
   "action": {
     "default_popup": "popup.html",
     "default_title": "MyBatis SQL Log Merger",

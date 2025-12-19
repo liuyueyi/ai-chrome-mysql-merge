@@ -85,7 +85,7 @@ const translations = {
         typeTimestamp: 'Timestamp',
         typeDate: 'Date',
         typeNull: 'NULL 值',
-        helpFooter: 'MyBatis SQL Log Merger v1.0',
+        helpFooter: 'MyBatis SQL Log Merger v1.0.2',
         noteLabel: '注意:',
         tipLabel: '提示:'
     },
@@ -174,7 +174,7 @@ const translations = {
         typeTimestamp: 'Timestamp',
         typeDate: 'Date',
         typeNull: 'NULL Values',
-        helpFooter: 'MyBatis SQL Log Merger v1.0',
+        helpFooter: 'MyBatis SQL Log Merger v1.0.2',
         noteLabel: 'Note:',
         tipLabel: 'Tip:'
     }
