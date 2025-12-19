@@ -527,6 +527,59 @@ function showFloatingPanelWithResult(sql, language = 'zh') {
     title.style.margin = '0';
     title.style.color = '#333';
 
+    // Create button container
+    const buttonContainer = document.createElement('div');
+    buttonContainer.style.display = 'flex';
+    buttonContainer.style.alignItems = 'center';
+
+    // Create help button
+    const helpButton = document.createElement('button');
+    helpButton.innerHTML = '?';
+    helpButton.style.background = 'none';
+    helpButton.style.border = 'none';
+    helpButton.style.fontSize = '18px';
+    helpButton.style.cursor = 'pointer';
+    helpButton.style.color = '#999';
+    helpButton.style.padding = '0';
+    helpButton.style.width = '30px';
+    helpButton.style.height = '30px';
+    helpButton.style.display = 'flex';
+    helpButton.style.alignItems = 'center';
+    helpButton.style.justifyContent = 'center';
+    helpButton.style.marginRight = '10px';
+    helpButton.title = language === 'zh' ? '帮助' : 'Help';
+
+    helpButton.addEventListener('click', function () {
+        // Open help.html in a new tab
+        chrome.runtime.getURL ?
+            window.open(chrome.runtime.getURL('help.html'), '_blank') :
+            window.open('help.html', '_blank');
+    });
+
+    // Create mybatis icon button
+    const mybatisButton = document.createElement('button');
+    mybatisButton.innerHTML = 'M';
+    mybatisButton.style.background = 'none';
+    mybatisButton.style.border = 'none';
+    mybatisButton.style.fontSize = '18px';
+    mybatisButton.style.cursor = 'pointer';
+    mybatisButton.style.color = '#999';
+    mybatisButton.style.padding = '0';
+    mybatisButton.style.width = '30px';
+    mybatisButton.style.height = '30px';
+    mybatisButton.style.display = 'flex';
+    mybatisButton.style.alignItems = 'center';
+    mybatisButton.style.justifyContent = 'center';
+    mybatisButton.style.marginRight = '10px';
+    mybatisButton.title = language === 'zh' ? 'MyBatis合成器' : 'MyBatis Composer';
+
+    mybatisButton.addEventListener('click', function () {
+        // Open standalone.html in a new tab
+        chrome.runtime.getURL ?
+            window.open(chrome.runtime.getURL('standalone.html'), '_blank') :
+            window.open('standalone.html', '_blank');
+    });
+
     const closeButton = document.createElement('button');
     closeButton.textContent = '×';
     closeButton.style.background = 'none';
@@ -551,8 +604,13 @@ function showFloatingPanelWithResult(sql, language = 'zh') {
         }
     });
 
+    // Append buttons to container
+    buttonContainer.appendChild(helpButton);
+    buttonContainer.appendChild(mybatisButton);
+    buttonContainer.appendChild(closeButton);
+
     header.appendChild(title);
-    header.appendChild(closeButton);
+    header.appendChild(buttonContainer);
 
     // Create result display - 固定高度并支持滚动
     const resultLabel = document.createElement('label');
@@ -736,6 +794,59 @@ function showFloatingPanelWithMessage(message, language = 'zh') {
     title.style.margin = '0';
     title.style.color = '#333';
 
+    // Create button container
+    const buttonContainer = document.createElement('div');
+    buttonContainer.style.display = 'flex';
+    buttonContainer.style.alignItems = 'center';
+
+    // Create help button
+    const helpButton = document.createElement('button');
+    helpButton.innerHTML = '?';
+    helpButton.style.background = 'none';
+    helpButton.style.border = 'none';
+    helpButton.style.fontSize = '18px';
+    helpButton.style.cursor = 'pointer';
+    helpButton.style.color = '#999';
+    helpButton.style.padding = '0';
+    helpButton.style.width = '30px';
+    helpButton.style.height = '30px';
+    helpButton.style.display = 'flex';
+    helpButton.style.alignItems = 'center';
+    helpButton.style.justifyContent = 'center';
+    helpButton.style.marginRight = '10px';
+    helpButton.title = language === 'zh' ? '帮助' : 'Help';
+
+    helpButton.addEventListener('click', function () {
+        // Open help.html in a new tab
+        chrome.runtime.getURL ?
+            window.open(chrome.runtime.getURL('help.html'), '_blank') :
+            window.open('help.html', '_blank');
+    });
+
+    // Create mybatis icon button
+    const mybatisButton = document.createElement('button');
+    mybatisButton.innerHTML = 'M';
+    mybatisButton.style.background = 'none';
+    mybatisButton.style.border = 'none';
+    mybatisButton.style.fontSize = '18px';
+    mybatisButton.style.cursor = 'pointer';
+    mybatisButton.style.color = '#999';
+    mybatisButton.style.padding = '0';
+    mybatisButton.style.width = '30px';
+    mybatisButton.style.height = '30px';
+    mybatisButton.style.display = 'flex';
+    mybatisButton.style.alignItems = 'center';
+    mybatisButton.style.justifyContent = 'center';
+    mybatisButton.style.marginRight = '10px';
+    mybatisButton.title = language === 'zh' ? 'MyBatis合成器' : 'MyBatis Composer';
+
+    mybatisButton.addEventListener('click', function () {
+        // Open standalone.html in a new tab
+        chrome.runtime.getURL ?
+            window.open(chrome.runtime.getURL('standalone.html'), '_blank') :
+            window.open('standalone.html', '_blank');
+    });
+
     const closeButton = document.createElement('button');
     closeButton.textContent = '×';
     closeButton.style.background = 'none';
@@ -760,8 +871,13 @@ function showFloatingPanelWithMessage(message, language = 'zh') {
         }
     });
 
+    // Append buttons to container
+    buttonContainer.appendChild(helpButton);
+    buttonContainer.appendChild(mybatisButton);
+    buttonContainer.appendChild(closeButton);
+
     header.appendChild(title);
-    header.appendChild(closeButton);
+    header.appendChild(buttonContainer);
 
     // Create message display
     const messageDisplay = document.createElement('div');
@@ -819,6 +935,59 @@ function showFloatingPanelWithInputs(language = 'zh') {
     title.style.margin = '0';
     title.style.color = '#333';
 
+    // Create button container
+    const buttonContainer = document.createElement('div');
+    buttonContainer.style.display = 'flex';
+    buttonContainer.style.alignItems = 'center';
+
+    // Create help button
+    const helpButton = document.createElement('button');
+    helpButton.innerHTML = '?';
+    helpButton.style.background = 'none';
+    helpButton.style.border = 'none';
+    helpButton.style.fontSize = '18px';
+    helpButton.style.cursor = 'pointer';
+    helpButton.style.color = '#999';
+    helpButton.style.padding = '0';
+    helpButton.style.width = '30px';
+    helpButton.style.height = '30px';
+    helpButton.style.display = 'flex';
+    helpButton.style.alignItems = 'center';
+    helpButton.style.justifyContent = 'center';
+    helpButton.style.marginRight = '10px';
+    helpButton.title = language === 'zh' ? '帮助' : 'Help';
+
+    helpButton.addEventListener('click', function () {
+        // Open help.html in a new tab
+        chrome.runtime.getURL ?
+            window.open(chrome.runtime.getURL('help.html'), '_blank') :
+            window.open('help.html', '_blank');
+    });
+
+    // Create mybatis icon button
+    const mybatisButton = document.createElement('button');
+    mybatisButton.innerHTML = 'M';
+    mybatisButton.style.background = 'none';
+    mybatisButton.style.border = 'none';
+    mybatisButton.style.fontSize = '18px';
+    mybatisButton.style.cursor = 'pointer';
+    mybatisButton.style.color = '#999';
+    mybatisButton.style.padding = '0';
+    mybatisButton.style.width = '30px';
+    mybatisButton.style.height = '30px';
+    mybatisButton.style.display = 'flex';
+    mybatisButton.style.alignItems = 'center';
+    mybatisButton.style.justifyContent = 'center';
+    mybatisButton.style.marginRight = '10px';
+    mybatisButton.title = language === 'zh' ? 'MyBatis合成器' : 'MyBatis Composer';
+
+    mybatisButton.addEventListener('click', function () {
+        // Open standalone.html in a new tab
+        chrome.runtime.getURL ?
+            window.open(chrome.runtime.getURL('standalone.html'), '_blank') :
+            window.open('standalone.html', '_blank');
+    });
+
     const closeButton = document.createElement('button');
     closeButton.textContent = '×';
     closeButton.style.background = 'none';
@@ -843,8 +1012,13 @@ function showFloatingPanelWithInputs(language = 'zh') {
         }
     });
 
+    // Append buttons to container
+    buttonContainer.appendChild(helpButton);
+    buttonContainer.appendChild(mybatisButton);
+    buttonContainer.appendChild(closeButton);
+
     header.appendChild(title);
-    header.appendChild(closeButton);
+    header.appendChild(buttonContainer);
 
     // Create form elements
     const form = document.createElement('div');

@@ -39,6 +39,7 @@ const translations = {
         introductionText1: 'MyBatis SQL Log Merger 是一款 Chrome 扩展程序，旨在帮助开发者轻松地将 MyBatis 日志中的 SQL 模板和参数合并成完整的可执行 SQL 语句。',
         introductionText2: '该插件提供了三种不同的使用方式，满足各种使用场景的需求。',
         usageModesHeading: '使用方式',
+        onlineGuide: '在线使用教程',
         standaloneModeHeading: '1. 独立页面模式',
         standaloneStep1: '点击 Chrome 工具栏中的插件图标',
         standaloneStep2: '点击"Mybatis Sql合并"按钮',
@@ -96,6 +97,7 @@ const translations = {
         authorName: '作者: YiHui',
         authorDescription: '一位专注于开发实用工具的软件工程师，致力于提升开发者的工作效率。',
         projectHeading: '项目说明',
+        projectHomePage: '项目主页',
         projectDescription1: 'MyBatis SQL Log Merger 是一款专为开发者设计的 Chrome 扩展程序，旨在简化 MyBatis 日志的处理过程。它能够自动将 MyBatis 生成的日志中的 SQL 模板和参数合并成完整的可执行 SQL 语句，大大提高了调试效率。',
         projectDescription2: '该插件支持多种使用方式，包括独立页面模式、页面按钮模式和弹出窗口模式，满足不同场景下的使用需求。同时支持中英文界面切换，让全球开发者都能方便使用。',
         sourceCodeLink: '源码仓库',
@@ -149,6 +151,7 @@ const translations = {
         introductionText1: 'MyBatis SQL Log Merger is a Chrome extension designed to help developers easily merge SQL templates and parameters from MyBatis logs into complete executable SQL statements.',
         introductionText2: 'The plugin provides three different usage methods to meet various usage scenario needs.',
         usageModesHeading: 'Usage Methods',
+        onlineGuide: 'Online Guide',
         standaloneModeHeading: '1. Standalone Page Mode',
         standaloneStep1: 'Click the plugin icon in the Chrome toolbar',
         standaloneStep2: 'Click the "Mybatis Sql Merge" button',
@@ -206,6 +209,7 @@ const translations = {
         authorName: 'Author: YiHui',
         authorDescription: 'A software engineer focused on developing practical tools, dedicated to improving developer productivity.',
         projectHeading: 'Project Description',
+        projectHomePage: 'Project Home Page',
         projectDescription1: 'MyBatis SQL Log Merger is a Chrome extension designed for developers to simplify the processing of MyBatis logs. It automatically merges SQL templates and parameters from MyBatis-generated logs into complete executable SQL statements, greatly improving debugging efficiency.',
         projectDescription2: 'The plugin supports multiple usage methods, including standalone page mode, page button mode, and popup window mode, meeting usage needs in different scenarios. It also supports Chinese and English interface switching, making it convenient for developers worldwide.',
         sourceCodeLink: 'Source Code Repository',
@@ -338,7 +342,7 @@ function updateUIText() {
     // 更新帮助页面元素
     const helpElements = [
         'helpHeading', 'introductionHeading', 'introductionText1', 'introductionText2',
-        'usageModesHeading', 'standaloneModeHeading', 'standaloneStep1', 'standaloneStep2',
+        'usageModesHeading', 'onlineGuide', 'standaloneModeHeading', 'standaloneStep1', 'standaloneStep2',
         'standaloneStep3', 'standaloneStep4', 'standaloneNote', 'pageButtonModeHeading',
         'pageButtonStep1', 'pageButtonStep2', 'pageButtonStep3', 'pageButtonStep4',
         'popupModeHeading', 'popupModeText', 'activatingButtonHeading', 'activatingButtonText',
@@ -362,7 +366,7 @@ function updateUIText() {
     // 更新关于页面元素
     const aboutElements = [
         'aboutHeading', 'authorHeading', 'authorName', 'authorDescription',
-        'projectHeading', 'projectDescription1', 'projectDescription2',
+        'projectHeading', 'projectHomePage', 'projectDescription1', 'projectDescription2',
         'opensourceHeading', 'licenseText', 'contributionText',
         'sponsorHeading', 'sponsorDescription', 'aboutFooter'
     ];
