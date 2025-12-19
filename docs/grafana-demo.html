@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Grafana SQL Log List Demo</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* New styles to optimize layout */
+        .plugin-info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0px 0 5px 0;
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 20px;
+            background-color: #f5f5f5;
+            padding: 5px 10px 10px 10px;
+        }
+
+        .plugin-info-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .plugin-info-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .version-info {
+            margin-left: 10px;
+            color: #6c757d;
+            font-size: 14px;
+        }
+
+        .info-content {
+            padding: 10px 30px 0px 30px;
+            min-height: 400px;
+        }
+
+        .toggle-btn {
+            display: inline-block;
+            border-color: rgb(77, 137, 254);
+            background-color: rgb(77, 137, 254);
+            color: white;
+            margin-left: 5px;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 10px;
+        }
+
+        .toggle-btn:hover {
+            background-color: #086ab4;
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        .col-half {
+            flex: 1;
+            min-width: 300px;
+            padding: 0 10px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .col-half {
+                min-width: 100%;
+                padding: 0;
+            }
+        }
+
+        .collapsible {
+            background-color: #f8f9fa;
+            color: #495057;
+            cursor: pointer;
+            padding: 12px 15px;
+            width: 100%;
+            border: 1px solid #dee2e6;
+            text-align: left;
+            outline: none;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 4px 4px 0 0;
+        }
+
+        .collapsible:hover {
+            background-color: #e9ecef;
+        }
+
+        .content {
+            padding: 15px;
+            border: 1px solid #dee2e6;
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+            margin-bottom: 15px;
+            background-color: #fff;
+            display: none;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        .instructions ul,
+        .example {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 8px;
+        }
+
+        .example pre {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        .button-group {
+            margin-bottom: 25px;
+        }
+
+        .button-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .button-row button {
+            flex: 1;
+            min-width: 100px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        #processBtn {
+            background-color: #28a745;
+            color: white;
+        }
+
+        #processBtn:hover {
+            background-color: #218838;
+        }
+
+        #formatBtn {
+            background-color: #17a2b8;
+            color: white;
+        }
+
+        #formatBtn:hover:not(:disabled) {
+            background-color: #138496;
+        }
+
+        #formatBtn:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+
+        #copyBtn {
+            background-color: #007bff;
+            color: white;
+        }
+
+        #copyBtn:hover:not(:disabled) {
+            background-color: #0069d9;
+        }
+
+        #copyBtn:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+
+        #clearBtn {
+            background-color: #ffc107;
+            color: #212529;
+        }
+
+        #clearBtn:hover {
+            background-color: #e0a800;
+        }
+
+        #navigateToSqlPlatform {
+            background-color: #6f42c1;
+            color: white;
+        }
+
+        #navigateToSqlPlatform:hover {
+            background-color: #5a32a3;
+        }
+
+        .input-section,
+        .output-section {
+            flex: 1;
+            min-width: 300px;
+            padding: 0 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 768px) {
+
+            .input-section,
+            .output-section {
+                min-width: 100%;
+                padding: 0;
+            }
+        }
+
+        .label-toggle-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .label-toggle-container label {
+            margin-bottom: 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            resize: vertical;
+            box-sizing: border-box;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+        #result,
+        #resultDouble {
+            min-height: 120px;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            background-color: #f8f9fa;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            white-space: pre-wrap;
+            overflow: auto;
+            box-sizing: border-box;
+        }
+
+        /* SQL Syntax Highlighting Styles */
+        .sql-keyword {
+            color: #00f;
+            font-weight: bold;
+        }
+
+        .sql-function {
+            color: #008080;
+            font-weight: bold;
+        }
+
+        .sql-string {
+            color: #a31515;
+        }
+
+        .sql-number {
+            color: #098658;
+        }
+
+        .sql-comment {
+            color: #008000;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            color: #6c757d;
+            font-size: 14px;
+        }
+
+        /* Grafana Log List Styles */
+        .log-list-container {
+            margin-top: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            background-color: #fff;
+        }
+
+        .log-list-header {
+            padding: 12px 15px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            font-weight: 500;
+            color: #495057;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .log-list-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .log-list-controls select,
+        .log-list-controls input {
+            padding: 5px 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .log-list-controls button {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .log-list-controls button:hover {
+            background-color: #0069d9;
+        }
+
+        .log-list {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .log-item {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .log-item:last-child {
+            border-bottom: none;
+        }
+
+        .log-timestamp {
+            color: #007bff;
+            min-width: 180px;
+            margin-right: 15px;
+            font-weight: 500;
+        }
+
+        .log-content {
+            flex: 1;
+            word-break: break-all;
+        }
+
+        .log-level-debug {
+            color: #17a2b8;
+        }
+
+        .log-level-info {
+            color: #28a745;
+        }
+
+        .log-level-warn {
+            color: #ffc107;
+        }
+
+        .log-level-error {
+            color: #dc3545;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            padding: 15px;
+            gap: 5px;
+        }
+
+        .pagination button {
+            padding: 5px 10px;
+            border: 1px solid #dee2e6;
+            background-color: #fff;
+            cursor: pointer;
+        }
+
+        .pagination button.active {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .pagination button:hover:not(.active) {
+            background-color: #f8f9fa;
+        }
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Plugin Info Row -->
+        <div class="plugin-info-row">
+            <div class="plugin-info-left">
+                <img src="imgs/icon128.png" alt="MyBatis SQL Log Merger" width="32" height="32"
+                    style="vertical-align: middle; margin-right: 10px;">
+                <h1 id="pageTitle" style="display: inline; vertical-align: middle;">Grafana SQL Log List Demo</h1>
+            </div>
+            <div class="plugin-info-right">
+                <button id="backBtn" class="toggle-btn" style="">Download</button>
+                <span class="version-info" style="margin-left: 10px;">v1.0.2</span>
+            </div>
+        </div>
+
+        <div class="info-content">
+            <!-- Grafana Log List -->
+            <div class="section">
+                <div class="log-list-container">
+                    <div class="log-list-header">
+                        <div>SQL Log List</div>
+                        <div class="log-list-controls">
+                            <select id="levelFilter">
+                                <option value="">All Levels</option>
+                                <option value="DEBUG">DEBUG</option>
+                                <option value="INFO">INFO</option>
+                                <option value="WARN">WARN</option>
+                                <option value="ERROR">ERROR</option>
+                            </select>
+                            <input type="text" id="keywordSearch" placeholder="Search keywords">
+                            <button id="searchBtn">Search</button>
+                        </div>
+                    </div>
+                    <div class="log-list" id="logList">
+                        <!-- Log items will be dynamically generated by JavaScript -->
+                    </div>
+                    <div class="pagination" id="pagination">
+                        <!-- Pagination controls will be dynamically generated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simulated log data
+        const logData = [
+            "2025-12-19 11:49:17,614 [http-nio-8080-exec-2] DEBUG|ac10294b.1766116155563.028841001||c.g.p.f.s.a.r.m.A.listYearArticleByUserId.debug(BaseJdbcLogger.java:137) - ==>  Preparing: select DATE_FORMAT(create_time, \" % Y\") as year, count(*) as articleCount from article where user_id = ? and status = 1 and deleted = 0 group by year",
+            "2025-12-19 11:49:17,614 [http-nio-8080-exec-2] DEBUG|ac10294b.1766116155563.028841001||c.g.p.f.s.a.r.m.A.listYearArticleByUserId.debug(BaseJdbcLogger.java:137) - ==> Parameters: 4(Long)",
+            "2025-12-19 11:49:17,617 [http-nio-8080-exec-2] DEBUG|ac10294b.1766116155563.028841001||c.g.p.f.s.a.r.m.A.listYearArticleByUserId.debug(BaseJdbcLogger.java:137) - <==      Total: 1",
+            "2025-12-19 11:49:17,958 [http-nio-8080-exec-2] DEBUG|ac10294b.1766116155563.028841001||c.g.p.f.s.a.r.m.A.listArticlesByUserIdOrderByReadCounts.debug(BaseJdbcLogger.java:137) - ==>  Preparing: select rc.document_id as id, a.title as title, a.create_time as createTime from read_count as rc left join article as a on rc.document_id = a.id where rc.document_type = 1 and a.status = 1 and a.deleted = 0 and a.user_id = ? order by rc.cnt desc limit ?, ?",
+            "2025-12-19 11:49:17,959 [http-nio-8080-exec-2] DEBUG|ac10294b.1766116155563.028841001||c.g.p.f.s.a.r.m.A.listArticlesByUserIdOrderByReadCounts.debug(BaseJdbcLogger.java:137) - ==> Parameters: 4(Long), 0(Long), 10(Long)",
+            "2025-12-19 11:49:17,961 [http-nio-8080-exec-2] DEBUG|ac10294b.1766116155563.028841001||c.g.p.f.s.a.r.m.A.listArticlesByUserIdOrderByReadCounts.debug(BaseJdbcLogger.java:137) - <==      Total: 1",
+            "2025-12-19 11:49:53,828 [http-nio-8080-exec-1] DEBUG|ac10294b.1766116193817.028841009||c.g.p.f.s.a.r.m.A.selectById.debug(BaseJdbcLogger.java:137) - ==>  Preparing: SELECT id,user_id,article_type,title,short_title,picture,summary,category_id,source,source_url,status,offical_stat,topping_stat,cream_stat,deleted,read_type,pay_amount,pay_way,create_time,update_time FROM article WHERE id=?",
+            "2025-12-19 11:49:53,829 [http-nio-8080-exec-1] DEBUG|ac10294b.1766116193817.028841009||c.g.p.f.s.a.r.m.A.selectById.debug(BaseJdbcLogger.java:137) - ==> Parameters: 100(Long)",
+            "2025-12-19 11:49:53,833 [http-nio-8080-exec-1] DEBUG|ac10294b.1766116193817.028841009||c.g.p.f.s.a.r.m.A.selectById.debug(BaseJdbcLogger.java:137) - <==      Total: 1",
+            "2025-12-19 11:50:16,050 [paicoding-20] DEBUG|||c.g.p.f.s.a.r.m.A.selectList.debug(BaseJdbcLogger.java:137) - ==>  Preparing: SELECT id,user_id,article_type,title,short_title,picture,summary,category_id,source,source_url,status,offical_stat,topping_stat,cream_stat,deleted,read_type,pay_amount,pay_way,create_time,update_time FROM article WHERE (deleted = ? AND status = ?) ORDER BY topping_stat DESC,create_time DESC limit 0,10",
+            "2025-12-19 11:50:16,050 [paicoding-20] DEBUG|||c.g.p.f.s.a.r.m.A.selectList.debug(BaseJdbcLogger.java:137) - ==> Parameters: 0(Integer), 1(Integer)",
+            "2025-12-19 11:50:16,050 [paicoding-21] DEBUG|||c.g.p.f.s.a.r.m.A.selectList.debug(BaseJdbcLogger.java:137) - ==>  Preparing: SELECT id,user_id,article_type,title,short_title,picture,summary,category_id,source,source_url,status,offical_stat,topping_stat,cream_stat,deleted,read_type,pay_amount,pay_way,create_time,update_time FROM article WHERE (deleted = ? AND status = ? AND offical_stat = ?) ORDER BY topping_stat DESC,create_time DESC limit 0,4",
+            "2025-12-19 11:50:16,051 [paicoding-21] DEBUG|||c.g.p.f.s.a.r.m.A.selectList.debug(BaseJdbcLogger.java:137) - ==> Parameters: 0(Integer), 1(Integer), 1(Integer)",
+            "2025-12-19 11:50:16,054 [paicoding-20] DEBUG|||c.g.p.f.s.a.r.m.A.selectList.debug(BaseJdbcLogger.java:137) - <==      Total: 10",
+            "2025-12-19 11:50:16,056 [paicoding-21] DEBUG|||c.g.p.f.s.a.r.m.A.selectList.debug(BaseJdbcLogger.java:137) - <==      Total: 4",
+            "2025-12-19 11:50:16,140 [paicoding-24] DEBUG|||c.g.p.f.s.a.r.m.A.listYearArticleByUserId.debug(BaseJdbcLogger.java:137) - ==>  Preparing: select DATE_FORMAT(create_time, \" % Y\") as year, count(*) as articleCount from article where user_id = ? and status = 1 and deleted = 0 group by year",
+            "2025-12-19 11:50:16,141 [paicoding-24] DEBUG|||c.g.p.f.s.a.r.m.A.listYearArticleByUserId.debug(BaseJdbcLogger.java:137) - ==> Parameters: 4(Long)",
+            "2025-12-19 11:50:16,145 [paicoding-24] DEBUG|||c.g.p.f.s.a.r.m.A.listYearArticleByUserId.debug(BaseJdbcLogger.java:137) - <==      Total: 1",
+            "2025-12-19 11:52:06,007 [http-nio-8080-exec-10] DEBUG|ac10294b.1766116325962.028841032|0|c.g.p.f.s.a.r.m.A.selectById.debug(BaseJdbcLogger.java:137) - ==>  Preparing: SELECT id,user_id,article_type,title,short_title,picture,summary,category_id,source,source_url,status,offical_stat,topping_stat,cream_stat,deleted,read_type,pay_amount,pay_way,create_time,update_time FROM article WHERE id=?",
+            "2025-12-19 11:52:06,008 [http-nio-8080-exec-10] DEBUG|ac10294b.1766116325962.028841032|0|c.g.p.f.s.a.r.m.A.selectById.debug(BaseJdbcLogger.java:137) - ==> Parameters: 2535314602993665(Long)",
+            "2025-12-19 11:52:06,009 [http-nio-8080-exec-10] DEBUG|ac10294b.1766116325962.028841032|0|c.g.p.f.s.a.r.m.A.selectById.debug(BaseJdbcLogger.java:137) - <==      Total: 0",
+            "2025-12-19 11:52:06,022 [http-nio-8080-exec-10] DEBUG|ac10294b.1766116325962.028841032|0|c.g.p.f.s.a.r.m.ArticleMapper.insert.debug(BaseJdbcLogger.java:137) - ==>  Preparing: INSERT INTO article ( id, user_id, article_type, title, picture, summary, category_id, source, source_url, status, deleted, read_type ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )",
+            "2025-12-19 11:52:06,023 [http-nio-8080-exec-10] DEBUG|ac10294b.1766116325962.028841032|0|c.g.p.f.s.a.r.m.ArticleMapper.insert.debug(BaseJdbcLogger.java:137) - ==> Parameters: 2535314602993665(Long), 4(Long), 1(Integer), 发布一个文章叭叭叭b - 付费阅读(String), (String), 这是一个简单的小测试哦这是一个简单的小测试哦这是一个简单的小测试哦这是一个简单的小测试哦(String), 9(Long), 2(Integer), (String), 2(Integer), 0(Integer), 0(Integer)",
+            "2025-12-19 11:52:06,027 [http-nio-8080-exec-10] DEBUG|ac10294b.1766116325962.028841032|0|c.g.p.f.s.a.r.m.ArticleMapper.insert.debug(BaseJdbcLogger.java:137) - <==    Updates: 1",
+            "2025-12-19 11:52:06,128 [http-nio-8080-exec-6] DEBUG|ac10294b.1766116326107.028841033||c.g.p.f.s.a.r.m.A.selectById.debug(BaseJdbcLogger.java:137) - ==>  Preparing: SELECT id,user_id,article_type,title,short_title,picture,summary,category_id,source,source_url,status,offical_stat,topping_stat,cream_stat,deleted,read_type,pay_amount,pay_way,create_time,update_time FROM article WHERE id=?",
+            "2025-12-19 11:52:06,129 [http-nio-8080-exec-6] DEBUG|ac10294b.1766116326107.028841033||c.g.p.f.s.a.r.m.A.selectById.debug(BaseJdbcLogger.java:137) - ==> Parameters: 2535314602993665(Long)",
+            "2025-12-19 11:52:06,131 [http-nio-8080-exec-6] DEBUG|ac10294b.1766116326107.028841033||c.g.p.f.s.a.r.m.A.selectById.debug(BaseJdbcLogger.java:137) - <==      Total: 1",
+            "2025-12-19 11:52:06,198 [http-nio-8080-exec-6] DEBUG|ac10294b.1766116326107.028841033||c.g.p.f.s.a.r.m.A.listYearArticleByUserId.debug(BaseJdbcLogger.java:137) - ==>  Preparing: select DATE_FORMAT(create_time, \" % Y\") as year, count(*) as articleCount from article where user_id = ? and status = 1 and deleted = 0 group by year",
+            "2025-12-19 11:52:06,200 [http-nio-8080-exec-6] DEBUG|ac10294b.1766116326107.028841033||c.g.p.f.s.a.r.m.A.listYearArticleByUserId.debug(BaseJdbcLogger.java:137) - ==> Parameters: 4(Long)",
+            "2025-12-19 11:52:06,202 [http-nio-8080-exec-6] DEBUG|ac10294b.1766116326107.028841033||c.g.p.f.s.a.r.m.A.listYearArticleByUserId.debug(BaseJdbcLogger.java:137) - <==      Total: 1",
+            "2025-12-19 11:52:06,205 [http-nio-8080-exec-6] DEBUG|ac10294b.1766116326107.028841033||c.g.p.f.s.a.r.m.A.listArticlesByUserIdOrderByReadCounts.debug(BaseJdbcLogger.java:137) - ==>  Preparing: select rc.document_id as id, a.title as title, a.create_time as createTime from read_count as rc left join article as a on rc.document_id = a.id where rc.document_type = 1 and a.status = 1 and a.deleted = 0 and a.user_id = ? order by rc.cnt desc limit ?, ?",
+            "2025-12-19 11:52:06,206 [http-nio-8080-exec-6] DEBUG|ac10294b.1766116326107.028841033||c.g.p.f.s.a.r.m.A.listArticlesByUserIdOrderByReadCounts.debug(BaseJdbcLogger.java:137) - ==> Parameters: 4(Long), 0(Long), 10(Long)",
+            "2025-12-19 11:52:06,209 [http-nio-8080-exec-6] DEBUG|ac10294b.1766116326107.028841033||c.g.p.f.s.a.r.m.A.listArticlesByUserIdOrderByReadCounts.debug(BaseJdbcLogger.java:137) - <==      Total: 1",
+        ];
+
+        // Pagination configuration
+        const pageSize = 25;
+        let currentPage = 1;
+        let filteredLogs = [...logData];
+
+        // Get log level
+        function getLogLevel(log) {
+            const match = log.match(/\|\|\|(DEBUG|INFO|WARN|ERROR)\|\|\|/);
+            return match ? match[1] : 'UNKNOWN';
+        }
+
+        // Render log list
+        function renderLogList() {
+            const logListElement = document.getElementById('logList');
+            logListElement.innerHTML = '';
+
+            // Calculate pagination
+            const startIndex = (currentPage - 1) * pageSize;
+            const endIndex = Math.min(startIndex + pageSize, filteredLogs.length);
+            const pageLogs = filteredLogs.slice(startIndex, endIndex);
+
+            // Render log item
+            pageLogs.forEach(log => {
+                const logLevel = getLogLevel(log);
+                const logItem = document.createElement('div');
+                logItem.className = `log-item`;
+
+                // Extract timestamp (first 23 characters)
+                const timestamp = log.substring(0, 23);
+                const content = log.substring(24);
+
+                logItem.innerHTML = `
+                    <div class="log-timestamp">${timestamp}</div>
+                    <div class="log-content log-level-${logLevel.toLowerCase()}">${content}</div>
+                `;
+                logListElement.appendChild(logItem);
+            });
+
+            renderPagination();
+        }
+
+        // Render pagination controls
+        function renderPagination() {
+            const paginationElement = document.getElementById('pagination');
+            paginationElement.innerHTML = '';
+
+            const totalPages = Math.ceil(filteredLogs.length / pageSize);
+
+            // Previous page button
+            const prevButton = document.createElement('button');
+            prevButton.textContent = 'Previous';
+            prevButton.disabled = currentPage === 1;
+            prevButton.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderLogList();
+                }
+            });
+            paginationElement.appendChild(prevButton);
+
+            // Page number buttons
+            for (let i = 1; i <= totalPages; i++) {
+                const pageButton = document.createElement('button');
+                pageButton.textContent = i;
+                pageButton.classList.toggle('active', i === currentPage);
+                pageButton.addEventListener('click', () => {
+                    currentPage = i;
+                    renderLogList();
+                });
+                paginationElement.appendChild(pageButton);
+            }
+
+            // Next page button
+            const nextButton = document.createElement('button');
+            nextButton.textContent = 'Next';
+            nextButton.disabled = currentPage === totalPages;
+            nextButton.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderLogList();
+                }
+            });
+            paginationElement.appendChild(nextButton);
+        }
+
+        // Filter logs
+        function filterLogs() {
+            const levelFilter = document.getElementById('levelFilter').value;
+            const keyword = document.getElementById('keywordSearch').value.toLowerCase();
+
+            filteredLogs = logData.filter(log => {
+                const logLevel = getLogLevel(log);
+
+                // Level filtering
+                if (levelFilter && logLevel !== levelFilter) {
+                    return false;
+                }
+
+                // Keyword search
+                if (keyword && !log.toLowerCase().includes(keyword)) {
+                    return false;
+                }
+
+                return true;
+            });
+
+            currentPage = 1;
+            renderLogList();
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Bind events
+            document.getElementById('levelFilter').addEventListener('change', filterLogs);
+            document.getElementById('searchBtn').addEventListener('click', filterLogs);
+            document.getElementById('keywordSearch').addEventListener('keyup', (event) => {
+                if (event.key === 'Enter') {
+                    filterLogs();
+                }
+            });
+
+            // Back button
+            document.getElementById('backBtn').addEventListener('click', () => {
+                window.location.href = 'https://chromewebstore.google.com/detail/mybatis-sql-log-merger/ldlekpjpadmkfoohidfgjjcmegdbkbho';
+            });
+
+            // Collapsible panel functionality
+            const collapsibles = document.querySelectorAll('.collapsible');
+            collapsibles.forEach(collapsible => {
+                collapsible.addEventListener('click', function () {
+                    this.classList.toggle('active');
+                    const content = this.nextElementSibling;
+                    if (content.style.display === 'block') {
+                        content.style.display = 'none';
+                        this.textContent = this.textContent.replace('▲', '▼');
+                    } else {
+                        content.style.display = 'block';
+                        this.textContent = this.textContent.replace('▼', '▲');
+                    }
+                });
+            });
+
+            // Initial rendering
+            renderLogList();
+        });
+    </script>
+</body>
+
+</html>

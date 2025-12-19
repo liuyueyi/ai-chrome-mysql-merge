@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="MyBatis SQL Log Merger User Guide - Learn how to use this powerful Chrome extension to merge MyBatis SQL logs into executable SQL statements.">
+    <meta name="keywords"
+        content="MyBatis, SQL, Log Merger, Chrome Extension, User Guide, Tutorial, Debugging, Database">
+    <meta name="author" content="MyBatis SQL Log Merger Team">
+    <title>MyBatis SQL Log Merger - User Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #1a2530 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .cta-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.85), rgba(26, 37, 48, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%232c3e50"/><path d="M0 0 L100 100 M100 0 L0 100" stroke="%2334495e" stroke-width="1"/></svg>');
+            background-size: cover;
+            color: white;
+            text-align: center;
+            padding: 5rem 0;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 2rem;
+        }
+
+        .secondary-button {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .secondary-button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Guide Content */
+        .guide-content {
+            padding: 5rem 0;
+            background-color: white;
+        }
+
+        .guide-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+        }
+
+        .guide-intro {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            text-align: center;
+            font-size: 1.2rem;
+            color: #7f8c8d;
+        }
+
+        .guide-steps {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .step {
+            margin-bottom: 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .step:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        .step-number {
+            background-color: #3498db;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .step-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .step-content {
+            display: flex;
+            gap: 30px;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .step-content {
+                flex-direction: column;
+            }
+        }
+
+        .step-text {
+            flex: 1;
+        }
+
+        .step-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .step-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .step-image-placeholder {
+            width: 100%;
+            height: 300px;
+            background-color: #ecf0f1;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #7f8c8d;
+            font-size: 1.2rem;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .image-caption {
+            text-align: center;
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* Image carousel styles */
+        .image-carousel {
+            width: 100%;
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            background-color: #ecf0f1;
+        }
+
+        .carousel-container {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #7f8c8d;
+            font-size: 1.2rem;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .carousel-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .carousel-dot.active {
+            background-color: white;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.3);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .carousel-nav:hover {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .carousel-nav.prev {
+            left: 15px;
+        }
+
+        .carousel-nav.next {
+            right: 15px;
+        }
+
+        .tip {
+            background-color: #e8f4fc;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .tip h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .tip h4 i {
+            margin-right: 10px;
+            color: #3498db;
+        }
+
+        .tip p {
+            margin: 0;
+            color: #555;
+        }
+
+        /* Dual Mode Section */
+        .dual-mode {
+            background-color: #f8f9fa;
+            padding: 5rem 0;
+        }
+
+        .mode-comparison {
+            display: flex;
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .mode-comparison {
+                flex-direction: column;
+            }
+        }
+
+        .mode-card {
+            flex: 1;
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .mode-card h3 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .mode-card ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .mode-card li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .mode-card li:last-child {
+            border-bottom: none;
+        }
+
+        .mode-card li i {
+            color: #3498db;
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 5rem 0;
+            background-color: white;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .faq-question {
+            background-color: white;
+            padding: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            background-color: #fff;
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-answer.open {
+            padding: 20px;
+            max-height: 500px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: #3498db;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: #3498db;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: #3498db;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .guide-title {
+                font-size: 2rem;
+            }
+
+            .step-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%234CAF50'/><path d='M30 40 L45 55 L70 30' stroke='white' stroke-width='8' fill='none'/></svg>"
+                    alt="MyBatis SQL Log Merger Logo">
+                <h1>MyBatis SQL Log Merger</h1>
+            </div>
+            <a href="https://chromewebstore.google.com/detail/mybatis-sql-log-merger/ldlekpjpadmkfoohidfgjjcmegdbkbho"
+                class="cta-button" target="_blank">
+                <i class="fas fa-download"></i> Install Now
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>User Guide</h2>
+            <p>Learn how to effectively use MyBatis SQL Log Merger to transform your debugging workflow</p>
+            <div class="hero-buttons">
+                <a href="#getting-started" class="secondary-button">
+                    <i class="fas fa-book-open"></i> Getting Started
+                </a>
+                <a href="index.html" class="secondary-button">
+                    <i class="fas fa-home"></i> Home
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guide Content -->
+    <section class="guide-content">
+        <div class="container">
+            <h2 class="guide-title">How to Use MyBatis SQL Log Merger</h2>
+            <p class="guide-intro">This comprehensive guide will walk you through all the features and capabilities of
+                the MyBatis SQL Log Merger extension. Whether you're a beginner or an experienced user, you'll find
+                valuable tips to enhance your productivity.</p>
+
+            <div class="guide-steps">
+                <!-- Step 1: Installation -->
+                <div class="step" id="getting-started">
+                    <div class="step-header">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">Installation</h3>
+                    </div>
+                    <div class="step-content">
+                        <div class="step-text">
+                            <p>Getting started with MyBatis SQL Log Merger is simple:</p>
+                            <ol>
+                                <li>Visit the Chrome Web Store link provided below</li>
+                                <li>Click "Add to Chrome" to install the extension</li>
+                                <li>Once installed, you'll see the extension icon in your Chrome toolbar</li>
+                                <li>Click the icon to open the extension popup</li>
+                            </ol>
+                            <div class="tip">
+                                <h4><i class="fas fa-lightbulb"></i> Pro Tip</h4>
+                                <p>You can pin the extension to your toolbar for quick access by clicking the puzzle
+                                    piece icon in Chrome, finding MyBatis SQL Log Merger, and selecting the pin icon.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="step-image">
+                            <div class="step-image-placeholder">
+                                <img src="imgs/g1.jpg" style="max-height: 300px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Activate Injection Button -->
+                <div class="step">
+                    <div class="step-header">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">Activating the Injection Button</h3>
+                    </div>
+                    <div class="step-content">
+                        <div class="step-text">
+                            <p>MyBatis SQL Log Merger offers a convenient way to extract SQL directly from any webpage
+                                by injecting a button into the page. Here's how to activate this feature:</p>
+                            <ol>
+                                <li>Navigate to the target website where you want to use the extraction feature</li>
+                                <li>Click the MyBatis SQL Log Merger icon in the Chrome toolbar</li>
+                                <li>In the popup window, click the "Inject SQL Extraction Button" toggle next to the
+                                    inactive status indicator</li>
+                                <li>The status will change to "Active" and the page will refresh to show the extraction
+                                    button</li>
+                                <li>You'll now see a green button in the bottom-right corner of the page</li>
+                            </ol>
+                            <div class="tip">
+                                <h4><i class="fas fa-lightbulb"></i> Pro Tip</h4>
+                                <p>You can also configure URL patterns in the Settings page to automatically activate
+                                    the button on multiple websites.</p>
+                            </div>
+                        </div>
+                        <div class="step-image">
+                            <div class="image-carousel" id="activateCarousel">
+                                <div class="carousel-container">
+                                    <div class="carousel-slide">
+                                        Popup window showing inactive status<br>
+                                        (Visual representation of popup with inactive toggle)
+                                    </div>
+                                    <div class="carousel-slide">
+                                        Click the inactive status to activate<br>
+                                        (Visual representation of clicking the toggle)
+                                    </div>
+                                    <div class="carousel-slide">
+                                        Popup window showing active status<br>
+                                        (Visual representation of popup with active toggle)
+                                    </div>
+                                </div>
+                                <div class="carousel-nav prev">&#10094;</div>
+                                <div class="carousel-nav next">&#10095;</div>
+                                <div class="carousel-controls">
+                                    <div class="carousel-dot active" data-index="0"></div>
+                                    <div class="carousel-dot" data-index="1"></div>
+                                    <div class="carousel-dot" data-index="2"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Using the Injection Button -->
+                <div class="step">
+                    <div class="step-header">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">Using the Injection Button to Extract SQL</h3>
+                    </div>
+                    <div class="step-content">
+                        <div class="step-text">
+                            <p>Once activated, you can easily extract SQL from any selected MyBatis logs on the page:
+                            </p>
+                            <ol>
+                                <li>Select the MyBatis log text on the webpage</li>
+                                <li>Click the green "Extract SQL" button that appears in the bottom-right corner</li>
+                                <li>View the merged SQL result in the popup panel</li>
+                                <li>Use the "Copy" button to copy the SQL to your clipboard</li>
+                            </ol>
+                            <p>If you want to manually enter SQL templates and parameters, click the expand icon next to
+                                the extraction button:</p>
+                            <ol>
+                                <li>Click the "⋯" icon next to the extraction button</li>
+                                <li>Enter the SQL template and parameters in the popup panel</li>
+                                <li>Click "Parse" to generate the result</li>
+                            </ol>
+                            <div class="tip">
+                                <h4><i class="fas fa-info-circle"></i> Note</h4>
+                                <p>The injection button feature works with the same log formats as the standalone mode,
+                                    supporting both formats with and without Preparing: and Parameters: prefixes.</p>
+                            </div>
+                        </div>
+                        <div class="step-image">
+                            <div class="image-carousel" id="extractCarousel">
+                                <div class="carousel-container">
+                                    <div class="carousel-slide">
+                                        Webpage with MyBatis log selected<br>
+                                        (Visual representation of selected log text)
+                                    </div>
+                                    <div class="carousel-slide">
+                                        Green extraction button in bottom-right corner<br>
+                                        (Visual representation of the injected button)
+                                    </div>
+                                    <div class="carousel-slide">
+                                        Popup panel with SQL result<br>
+                                        (Visual representation of result panel with copy button)
+                                    </div>
+                                    <div class="carousel-slide">
+                                        Manual entry mode panel<br>
+                                        (Visual representation of manual input fields)
+                                    </div>
+                                </div>
+                                <div class="carousel-nav prev">&#10094;</div>
+                                <div class="carousel-nav next">&#10095;</div>
+                                <div class="carousel-controls">
+                                    <div class="carousel-dot active" data-index="0"></div>
+                                    <div class="carousel-dot" data-index="1"></div>
+                                    <div class="carousel-dot" data-index="2"></div>
+                                    <div class="carousel-dot" data-index="3"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Single Mode Usage -->
+                <div class="step">
+                    <div class="step-header">
+                        <div class="step-number">4</div>
+                        <h3 class="step-title">Using Single Mode</h3>
+                    </div>
+                    <div class="step-content">
+                        <div class="step-text">
+                            <p>Single Mode is ideal when you have complete MyBatis logs in one place:</p>
+                            <ol>
+                                <li>Open the extension popup by clicking the toolbar icon</li>
+                                <li>Ensure you're in Single Mode (indicated by the active tab)</li>
+                                <li>Copy your MyBatis logs from your application console or log files</li>
+                                <li>Paste the logs into the large text area</li>
+                                <li>Click the "Process SQL" button to generate executable SQL</li>
+                                <li>Your formatted SQL will appear in the results section</li>
+                                <li>Use the "Copy Result" button to copy the SQL to your clipboard</li>
+                            </ol>
+                            <div class="tip">
+                                <h4><i class="fas fa-info-circle"></i> Note</h4>
+                                <p>Single Mode works with logs that contain both the SQL template and parameters in one
+                                    continuous block. It supports logs with or without "Preparing:" and "Parameters:"
+                                    prefixes.</p>
+                            </div>
+                        </div>
+                        <div class="step-image">
+                            <div class="step-image-placeholder">
+                                Single Mode interface screenshot<br>
+                                (Showing input and output areas)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Dual Mode Usage -->
+                <div class="step">
+                    <div class="step-header">
+                        <div class="step-number">5</div>
+                        <h3 class="step-title">Using Dual Mode</h3>
+                    </div>
+                    <div class="step-content">
+                        <div class="step-text">
+                            <p>Dual Mode is perfect when your SQL templates and parameters are in separate locations:
+                            </p>
+                            <ol>
+                                <li>Switch to Dual Mode using the toggle button</li>
+                                <li>In the first text area, paste your SQL template (with or without "Preparing:"
+                                    prefix)</li>
+                                <li>In the second text area, paste your parameters (with or without "Parameters:"
+                                    prefix)</li>
+                                <li>Click the "Process SQL" button to combine them into executable SQL</li>
+                                <li>Your formatted SQL will appear in the results section</li>
+                                <li>Use the "Copy Result" button to copy the SQL to your clipboard</li>
+                            </ol>
+                            <div class="tip">
+                                <h4><i class="fas fa-info-circle"></i> Note</h4>
+                                <p>Dual Mode gives you more control over the input and is especially useful when copying
+                                    from different sources or when logs are fragmented.</p>
+                            </div>
+                        </div>
+                        <div class="step-image">
+                            <div class="step-image-placeholder">
+                                Dual Mode interface screenshot<br>
+                                (Showing two input areas and output area)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Advanced Features -->
+                <div class="step">
+                    <div class="step-header">
+                        <div class="step-number">6</div>
+                        <h3 class="step-title">Advanced Features</h3>
+                    </div>
+                    <div class="step-content">
+                        <div class="step-text">
+                            <p>Take advantage of these powerful features to enhance your workflow:</p>
+                            <ul>
+                                <li><strong>SQL Formatting:</strong> Automatically format your SQL for better
+                                    readability with the "Beautify SQL" button</li>
+                                <li><strong>Syntax Highlighting:</strong> Color-coded SQL makes it easier to identify
+                                    different elements</li>
+                                <li><strong>One-Click Copy:</strong> Instantly copy your results to the clipboard</li>
+                                <li><strong>Clear Function:</strong> Reset all fields with the "Clear" button</li>
+                                <li><strong>Responsive Design:</strong> Works seamlessly on desktops, tablets, and
+                                    mobile devices</li>
+                            </ul>
+                            <div class="tip">
+                                <h4><i class="fas fa-star"></i> Pro Tip</h4>
+                                <p>After generating your SQL, you can further refine it using the beautify feature to
+                                    make complex queries more readable.</p>
+                            </div>
+                        </div>
+                        <div class="step-image">
+                            <div class="step-image-placeholder">
+                                Advanced features interface screenshot<br>
+                                (Showing formatting and other tools)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dual Mode Comparison -->
+    <section class="dual-mode">
+        <div class="container">
+            <h2 class="guide-title">Single Mode vs Dual Mode</h2>
+            <div class="mode-comparison">
+                <div class="mode-card">
+                    <h3><i class="fas fa-arrow-down"></i> Single Mode</h3>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Best for complete, continuous logs</li>
+                        <li><i class="fas fa-check-circle"></i> Simple copy-paste workflow</li>
+                        <li><i class="fas fa-check-circle"></i> Works with standard MyBatis output</li>
+                        <li><i class="fas fa-check-circle"></i> Supports prefixed and non-prefixed logs</li>
+                        <li><i class="fas fa-check-circle"></i> Ideal for quick conversions</li>
+                    </ul>
+                </div>
+                <div class="mode-card">
+                    <h3><i class="fas fa-columns"></i> Dual Mode</h3>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Perfect for fragmented logs</li>
+                        <li><i class="fas fa-check-circle"></i> Separate template and parameters</li>
+                        <li><i class="fas fa-check-circle"></i> More control over input</li>
+                        <li><i class="fas fa-check-circle"></i> Works with prefixed and non-prefixed inputs</li>
+                        <li><i class="fas fa-check-circle"></i> Great for complex debugging scenarios</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <h2 class="guide-title">Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What MyBatis log formats are supported?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our extension supports both standard MyBatis log formats and logs with "Preparing:" and
+                            "Parameters:" prefixes. It works with DEBUG level logs that show the SQL template and
+                            parameter values. Both single-line and multi-line formats are supported.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Is my data secure when using this extension?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely! All processing happens locally in your browser. No data is sent to any servers,
+                            ensuring your sensitive SQL queries and log information remain completely private. Your data
+                            never leaves your computer.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Why am I getting incorrect SQL output?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>This usually happens when the log format isn't correctly recognized. Make sure you're using
+                            the appropriate mode (Single or Dual) for your log structure. Also, check that your logs
+                            contain both the SQL template and parameter information. If issues persist, try cleaning up
+                            the log text by removing extra spaces or line breaks.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can I use this for production database queries?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>While technically possible, we recommend using this tool primarily for development and
+                            debugging purposes. Always ensure you have proper authorization before running any queries
+                            against production databases. The generated SQL is meant for analysis and testing, not
+                            direct production use.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>MyBatis SQL Log Merger</h3>
+                    <p>Simplify your MyBatis debugging workflow with our powerful Chrome extension that transforms logs
+                        into executable SQL statements.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#features">Features</a></li>
+                        <li><a href="grafana-demo.html">Grafana Demo</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="guide.html">User Guide</a></li>
+                        <li><a href="#">API Documentation</a></li>
+                        <li><a href="#">Troubleshooting</a></li>
+                        <li><a href="#">Release Notes</a></li>
+                        <li><a href="#">Community Forum</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> support@mybatissqlmerger.com</li>
+                        <li><i class="fas fa-bug"></i> Report an Issue</li>
+                        <li><i class="fas fa-lightbulb"></i> Feature Request</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 MyBatis SQL Log Merger. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Image carousel functionality
+        function initCarousels() {
+            const carousels = document.querySelectorAll('.image-carousel');
+
+            carousels.forEach(carousel => {
+                const container = carousel.querySelector('.carousel-container');
+                const slides = carousel.querySelectorAll('.carousel-slide');
+                const dots = carousel.querySelectorAll('.carousel-dot');
+                const prevBtn = carousel.querySelector('.carousel-nav.prev');
+                const nextBtn = carousel.querySelector('.carousel-nav.next');
+
+                let currentIndex = 0;
+                const slideCount = slides.length;
+
+                // Update carousel display
+                function updateCarousel() {
+                    container.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+                    // Update dots
+                    dots.forEach((dot, index) => {
+                        if (index === currentIndex) {
+                            dot.classList.add('active');
+                        } else {
+                            dot.classList.remove('active');
+                        }
+                    });
+                }
+
+                // Next slide
+                function nextSlide() {
+                    currentIndex = (currentIndex + 1) % slideCount;
+                    updateCarousel();
+                }
+
+                // Previous slide
+                function prevSlide() {
+                    currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+                    updateCarousel();
+                }
+
+                // Dot navigation
+                dots.forEach(dot => {
+                    dot.addEventListener('click', () => {
+                        currentIndex = parseInt(dot.getAttribute('data-index'));
+                        updateCarousel();
+                    });
+                });
+
+                // Button navigation
+                if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+                if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+
+                // Initial update
+                updateCarousel();
+            });
+        }
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isOpen = answer.classList.contains('open');
+
+                // Close all answers
+                document.querySelectorAll('.faq-answer').forEach(ans => {
+                    ans.classList.remove('open');
+                });
+
+                // Open clicked answer if it wasn't open
+                if (!isOpen) {
+                    answer.classList.add('open');
+                }
+
+                // Rotate chevron icons
+                document.querySelectorAll('.faq-question i').forEach(icon => {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                });
+
+                if (!isOpen) {
+                    const icon = question.querySelector('i');
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                }
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Initialize carousels when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            initCarousels();
+        });
+    </script>
+</body>
+
+</html>
