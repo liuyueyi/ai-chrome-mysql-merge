@@ -434,7 +434,8 @@
                 <h1 id="pageTitle" style="display: inline; vertical-align: middle;">Grafana SQL Log List Demo</h1>
             </div>
             <div class="plugin-info-right">
-                <button id="backBtn" class="toggle-btn" style="">Download</button>
+                <button id="guideBtn" class="toggle-btn">guide</button>
+                <button id="backBtn" class="toggle-btn">Download</button>
                 <span class="version-info" style="margin-left: 10px;">v1.0.2</span>
             </div>
         </div>
@@ -630,6 +631,11 @@
             // Back button
             document.getElementById('backBtn').addEventListener('click', () => {
                 window.location.href = 'https://chromewebstore.google.com/detail/mybatis-sql-log-merger/ldlekpjpadmkfoohidfgjjcmegdbkbho';
+            });
+
+            // guide button
+            document.getElementById('guideBtn').addEventListener('click', () => {
+                window.location.href = './guide.html';
             });
 
             // Collapsible panel functionality

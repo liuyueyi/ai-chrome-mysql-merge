@@ -72,7 +72,6 @@
             padding: 12px 25px;
             border: none;
             border-radius: 30px;
-            font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -537,6 +536,50 @@
             font-size: 0.9rem;
         }
 
+        /* Language Switcher */
+        .language-switcher {
+            background-color: #3498db;
+            /* Blue color from the same color scheme */
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            margin-right: 15px;
+            border-radius: 30px;
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            text-align: center;
+        }
+
+        .language-switcher:hover {
+            background-color: #2980b9;
+            /* Darker blue on hover */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .language-switcher:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+        }
+
+        .language-switcher option {
+            background-color: #3498db;
+            color: white;
+            font-weight: normal;
+            padding: 10px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .header-content {
@@ -565,6 +608,11 @@
             .step-title {
                 font-size: 1.5rem;
             }
+
+            .header-actions {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -575,28 +623,35 @@
         <div class="container header-content">
             <div class="logo">
                 <img src="imgs/icon128.png" alt="MyBatis SQL Log Merger Logo">
-                <h1>MyBatis SQL Log Merger</h1>
+                <h1 data-i18n="title">MyBatis SQL Log Merger</h1>
             </div>
-            <a href="https://chromewebstore.google.com/detail/mybatis-sql-log-merger/ldlekpjpadmkfoohidfgjjcmegdbkbho"
-                class="cta-button" target="_blank">
-                <i class="fas fa-download"></i> Install Now
-            </a>
+            <div class="header-actions">
+                <select id="language-switcher" class="language-switcher">
+                    <option value="en">English</option>
+                    <option value="zh">中文</option>
+                </select>
+                <a href="https://chromewebstore.google.com/detail/mybatis-sql-log-merger/ldlekpjpadmkfoohidfgjjcmegdbkbho"
+                    class="cta-button" target="_blank" data-i18n="installNow">
+                    <i class="fas fa-download"></i> Install Now
+                </a>
+            </div>
         </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h2>User Guide</h2>
-            <p>Learn how to effectively use MyBatis SQL Log Merger to transform your debugging workflow</p>
+            <h2 data-i18n="heroTitle">User Guide</h2>
+            <p data-i18n="heroDescription">Learn how to effectively use MyBatis SQL Log Merger to transform your
+                debugging workflow</p>
             <div class="hero-buttons">
-                <a href="#getting-started" class="secondary-button">
+                <a href="#getting-started" class="secondary-button" data-i18n="gettingStarted">
                     <i class="fas fa-book-open"></i> Getting Started
                 </a>
-                <a href="index.html" class="secondary-button">
+                <a href="index.html" class="secondary-button" data-i18n="home">
                     <i class="fas fa-home"></i> Home
                 </a>
-                <a href="grafana-demo.html" class="secondary-button">
+                <a href="grafana-demo.html" class="secondary-button" data-i18n="haveATry">
                     <i class="fas fa-book"></i> Have a Try
                 </a>
             </div>
@@ -606,8 +661,9 @@
     <!-- Guide Content -->
     <section class="guide-content">
         <div class="container">
-            <h2 class="guide-title">How to Use MyBatis SQL Log Merger</h2>
-            <p class="guide-intro">This comprehensive guide will walk you through all the features and capabilities of
+            <h2 class="guide-title" data-i18n="guideTitle">How to Use MyBatis SQL Log Merger</h2>
+            <p class="guide-intro" data-i18n="guideIntro">This comprehensive guide will walk you through all the
+                features and capabilities of
                 the MyBatis SQL Log Merger extension. Whether you're a beginner or an experienced user, you'll find
                 valuable tips to enhance your productivity.</p>
 
@@ -616,20 +672,22 @@
                 <div class="step" id="getting-started">
                     <div class="step-header">
                         <div class="step-number">1</div>
-                        <h3 class="step-title">Installation</h3>
+                        <h3 class="step-title" data-i18n="installation">Installation</h3>
                     </div>
                     <div class="step-content">
                         <div class="step-text">
-                            <p>Getting started with MyBatis SQL Log Merger is simple:</p>
+                            <p data-i18n="installation">Getting started with MyBatis SQL Log Merger is simple:</p>
                             <ol>
-                                <li>Visit the Chrome Web Store link provided below</li>
-                                <li>Click "Add to Chrome" to install the extension</li>
-                                <li>Once installed, you'll see the extension icon in your Chrome toolbar</li>
-                                <li>Click the icon to open the extension popup</li>
+                                <li data-i18n="installationStep1">Visit the Chrome Web Store link provided below</li>
+                                <li data-i18n="installationStep2">Click "Add to Chrome" to install the extension</li>
+                                <li data-i18n="installationStep3">Once installed, you'll see the extension icon in your
+                                    Chrome toolbar</li>
+                                <li data-i18n="installationStep4">Click the icon to open the extension popup</li>
                             </ol>
                             <div class="tip">
                                 <h4><i class="fas fa-lightbulb"></i> Pro Tip</h4>
-                                <p>You can pin the extension to your toolbar for quick access by clicking the puzzle
+                                <p data-i18n="installationTip">You can pin the extension to your toolbar for quick
+                                    access by clicking the puzzle
                                     piece icon in Chrome, finding MyBatis SQL Log Merger, and selecting the pin icon.
                                 </p>
                             </div>
@@ -646,28 +704,36 @@
                 <div class="step">
                     <div class="step-header">
                         <div class="step-number">2</div>
-                        <h3 class="step-title">Activating the Injection Button</h3>
+                        <h3 class="step-title" data-i18n="activateInjectionButton">Activating the Injection Button</h3>
                     </div>
                     <div class="step-content">
                         <div class="step-text">
-                            <p>MyBatis SQL Log Merger offers a convenient way to extract SQL directly from any webpage
+                            <p data-i18n="activateInjectionDesc">MyBatis SQL Log Merger offers a convenient way to
+                                extract SQL directly from any webpage
                                 by injecting a button into the page. Here's how to activate this feature:</p>
                             <ol>
-                                <li>Navigate to the target website where you want to use the extraction feature</li>
-                                <li>Click the MyBatis SQL Log Merger icon in the Chrome toolbar</li>
-                                <li>In the popup window, click the "Inject SQL Extraction Button" toggle next to the
+                                <li data-i18n="activateInjectionStep1">Navigate to the target website where you want to
+                                    use the extraction feature</li>
+                                <li data-i18n="activateInjectionStep2">Click the MyBatis SQL Log Merger icon in the
+                                    Chrome toolbar</li>
+                                <li data-i18n="activateInjectionStep3">In the popup window, click the "Inject SQL
+                                    Extraction Button" toggle next to the
                                     inactive status indicator</li>
-                                <li>The status will change to "Active" and the page will refresh to show the extraction
+                                <li data-i18n="activateInjectionStep4">The status will change to "Active" and the page
+                                    will refresh to show the extraction
                                     button</li>
-                                <li>You'll now see a green button in the bottom-right corner of the page</li>
+                                <li data-i18n="activateInjectionStep5">You'll now see a green button in the bottom-right
+                                    corner of the page</li>
                             </ol>
                             <div class="tip">
                                 <h4><i class="fas fa-lightbulb"></i> Pro Tip</h4>
                                 <ul style="padding-left: 20px;">
-                                    <li>You can also configure URL patterns in the Settings page to automatically
+                                    <li data-i18n="activateInjectionTip">You can also configure URL patterns in the
+                                        Settings page to automatically
                                         activate
                                         the button on multiple websites.</li>
-                                    <li>You can configure SQL websites in the Settings page to enable Quick Navigation.
+                                    <li data-i18n="activateInjectionTip">You can configure SQL websites in the Settings
+                                        page to enable Quick Navigation.
                                     </li>
                                 </ul>
                             </div>
@@ -701,28 +767,35 @@
                 <div class="step">
                     <div class="step-header">
                         <div class="step-number">3</div>
-                        <h3 class="step-title">Using the Injection Button to Extract SQL</h3>
+                        <h3 class="step-title" data-i18n="usingInjectionButton">Using the Injection Button to Extract
+                            SQL</h3>
                     </div>
                     <div class="step-content">
                         <div class="step-text">
-                            <p>Once activated, you can easily extract SQL from any selected MyBatis logs on the page:
+                            <p data-i18n="usingInjectionDesc">Once activated, you can easily extract SQL from any
+                                selected MyBatis logs on the page:
                             </p>
                             <ol>
-                                <li>Select the MyBatis log text on the webpage</li>
-                                <li>Click the green "Extract SQL" button that appears in the bottom-right corner</li>
-                                <li>View the merged SQL result in the popup panel</li>
-                                <li>Use the "Copy" button to copy the SQL to your clipboard</li>
+                                <li data-i18n="usingInjectionStep1">Select the MyBatis log text on the webpage</li>
+                                <li data-i18n="usingInjectionStep2">Click the green "Extract SQL" button that appears in
+                                    the bottom-right corner</li>
+                                <li data-i18n="usingInjectionStep3">View the merged SQL result in the popup panel</li>
+                                <li data-i18n="usingInjectionStep4">Use the "Copy" button to copy the SQL to your
+                                    clipboard</li>
                             </ol>
-                            <p>If you want to manually enter SQL templates and parameters, click the expand icon next to
+                            <p data-i18n="manualEntryDesc">If you want to manually enter SQL templates and parameters,
+                                click the expand icon next to
                                 the extraction button:</p>
                             <ol>
-                                <li>Click the "⋯" icon next to the extraction button</li>
-                                <li>Enter the SQL template and parameters in the popup panel</li>
-                                <li>Click "Parse" to generate the result</li>
+                                <li data-i18n="manualEntryStep1">Click the "⋯" icon next to the extraction button</li>
+                                <li data-i18n="manualEntryStep2">Enter the SQL template and parameters in the popup
+                                    panel</li>
+                                <li data-i18n="manualEntryStep3">Click "Parse" to generate the result</li>
                             </ol>
                             <div class="tip">
                                 <h4><i class="fas fa-info-circle"></i> Note</h4>
-                                <p>The injection button feature works with the same log formats as the standalone mode,
+                                <p data-i18n="usingInjectionNote">The injection button feature works with the same log
+                                    formats as the standalone mode,
                                     supporting both formats with and without Preparing: and Parameters: prefixes.</p>
                             </div>
                         </div>
@@ -751,23 +824,31 @@
                 <div class="step">
                     <div class="step-header">
                         <div class="step-number">4</div>
-                        <h3 class="step-title">Using Single Mode</h3>
+                        <h3 class="step-title" data-i18n="usingSingleMode">Using Single Mode</h3>
                     </div>
                     <div class="step-content">
                         <div class="step-text">
-                            <p>Single Mode is ideal when you have complete MyBatis logs in one place:</p>
+                            <p data-i18n="usingSingleDesc">Single Mode is ideal when you have complete MyBatis logs in
+                                one place:</p>
                             <ol>
-                                <li>Open the extension popup by clicking the toolbar icon</li>
-                                <li>Ensure you're in Single Mode (indicated by the active tab)</li>
-                                <li>Copy your MyBatis logs from your application console or log files</li>
-                                <li>Paste the logs into the large text area</li>
-                                <li>Click the "Process SQL" button to generate executable SQL</li>
-                                <li>Your formatted SQL will appear in the results section</li>
-                                <li>Use the "Copy Result" button to copy the SQL to your clipboard</li>
+                                <li data-i18n="usingSingleStep1">Open the extension popup by clicking the toolbar icon
+                                </li>
+                                <li data-i18n="usingSingleStep2">Ensure you're in Single Mode (indicated by the active
+                                    tab)</li>
+                                <li data-i18n="usingSingleStep3">Copy your MyBatis logs from your application console or
+                                    log files</li>
+                                <li data-i18n="usingSingleStep4">Paste the logs into the large text area</li>
+                                <li data-i18n="usingSingleStep5">Click the "Process SQL" button to generate executable
+                                    SQL</li>
+                                <li data-i18n="usingSingleStep6">Your formatted SQL will appear in the results section
+                                </li>
+                                <li data-i18n="usingSingleStep7">Use the "Copy Result" button to copy the SQL to your
+                                    clipboard</li>
                             </ol>
                             <div class="tip">
                                 <h4><i class="fas fa-info-circle"></i> Note</h4>
-                                <p>Single Mode works with logs that contain both the SQL template and parameters in one
+                                <p data-i18n="usingSingleNote">Single Mode works with logs that contain both the SQL
+                                    template and parameters in one
                                     continuous block. It supports logs with or without "Preparing:" and "Parameters:"
                                     prefixes.</p>
                             </div>
@@ -797,25 +878,32 @@
                 <div class="step">
                     <div class="step-header">
                         <div class="step-number">5</div>
-                        <h3 class="step-title">Using Dual Mode</h3>
+                        <h3 class="step-title" data-i18n="usingDualMode">Using Dual Mode</h3>
                     </div>
                     <div class="step-content">
                         <div class="step-text">
-                            <p>Dual Mode is perfect when your SQL templates and parameters are in separate locations:
+                            <p data-i18n="usingDualDesc">Dual Mode is perfect when your SQL templates and parameters are
+                                in separate locations:
                             </p>
                             <ol>
-                                <li>Switch to Dual Mode using the toggle button</li>
-                                <li>In the first text area, paste your SQL template (with or without "Preparing:"
+                                <li data-i18n="usingDualStep1">Switch to Dual Mode using the toggle button</li>
+                                <li data-i18n="usingDualStep2">In the first text area, paste your SQL template (with or
+                                    without "Preparing:"
                                     prefix)</li>
-                                <li>In the second text area, paste your parameters (with or without "Parameters:"
+                                <li data-i18n="usingDualStep3">In the second text area, paste your parameters (with or
+                                    without "Parameters:"
                                     prefix)</li>
-                                <li>Click the "Process SQL" button to combine them into executable SQL</li>
-                                <li>Your formatted SQL will appear in the results section</li>
-                                <li>Use the "Copy Result" button to copy the SQL to your clipboard</li>
+                                <li data-i18n="usingDualStep4">Click the "Process SQL" button to combine them into
+                                    executable SQL</li>
+                                <li data-i18n="usingDualStep5">Your formatted SQL will appear in the results section
+                                </li>
+                                <li data-i18n="usingDualStep6">Use the "Copy Result" button to copy the SQL to your
+                                    clipboard</li>
                             </ol>
                             <div class="tip">
-                                <h4><i class="fas fa-info-circle"></i> Note</h4>
-                                <p>Dual Mode gives you more control over the input and is especially useful when copying
+                                <h4><i class="fas fa-info-circle"></i> <span data-i18n="usingDualMode">Note</span></h4>
+                                <p data-i18n="usingDualNote">Dual Mode gives you more control over the input and is
+                                    especially useful when copying
                                     from different sources or when logs are fragmented.</p>
                             </div>
                         </div>
@@ -831,24 +919,33 @@
                 <div class="step">
                     <div class="step-header">
                         <div class="step-number">6</div>
-                        <h3 class="step-title">Advanced Features</h3>
+                        <h3 class="step-title" data-i18n="advancedFeatures">Advanced Features</h3>
                     </div>
                     <div class="step-content">
                         <div class="step-text">
-                            <p>Take advantage of these powerful features to enhance your workflow:</p>
+                            <p data-i18n="advancedFeaturesDesc">Take advantage of these powerful features to enhance
+                                your workflow:</p>
                             <ul>
-                                <li><strong>SQL Formatting:</strong> Automatically format your SQL for better
-                                    readability with the "Beautify SQL" button</li>
-                                <li><strong>Syntax Highlighting:</strong> Color-coded SQL makes it easier to identify
-                                    different elements</li>
-                                <li><strong>One-Click Copy:</strong> Instantly copy your results to the clipboard</li>
-                                <li><strong>Clear Function:</strong> Reset all fields with the "Clear" button</li>
-                                <li><strong>Responsive Design:</strong> Works seamlessly on desktops, tablets, and
-                                    mobile devices</li>
+                                <li><strong data-i18n="sqlFormatting">SQL Formatting:</strong> <span
+                                        data-i18n="sqlFormattingDesc">Automatically format your SQL for better
+                                        readability with the "Beautify SQL" button</span></li>
+                                <li><strong data-i18n="syntaxHighlighting">Syntax Highlighting:</strong> <span
+                                        data-i18n="syntaxHighlightingDesc">Color-coded SQL makes it easier to identify
+                                        different elements</span></li>
+                                <li><strong data-i18n="oneClickCopy">One-Click Copy:</strong> <span
+                                        data-i18n="oneClickCopyDesc">Instantly copy your results to the clipboard</span>
+                                </li>
+                                <li><strong data-i18n="clearFunction">Clear Function:</strong> <span
+                                        data-i18n="clearFunctionDesc">Reset all fields with the "Clear" button</span>
+                                </li>
+                                <li><strong data-i18n="responsiveDesign">Responsive Design:</strong> <span
+                                        data-i18n="responsiveDesignDesc">Works seamlessly on desktops, tablets, and
+                                        mobile devices</span></li>
                             </ul>
                             <div class="tip">
-                                <h4><i class="fas fa-star"></i> Pro Tip</h4>
-                                <p>After generating your SQL, you can further refine it using the beautify feature to
+                                <h4><i class="fas fa-star"></i> <span data-i18n="advancedFeatures">Pro Tip</span></h4>
+                                <p data-i18n="advancedFeaturesTip">After generating your SQL, you can further refine it
+                                    using the beautify feature to
                                     make complex queries more readable.</p>
                             </div>
                         </div>
@@ -866,26 +963,36 @@
     <!-- Dual Mode Comparison -->
     <section class="dual-mode">
         <div class="container">
-            <h2 class="guide-title">Single Mode vs Dual Mode</h2>
+            <h2 class="guide-title" data-i18n="singleModeVsDualMode">Single Mode vs Dual Mode</h2>
             <div class="mode-comparison">
                 <div class="mode-card">
-                    <h3><i class="fas fa-arrow-down"></i> Single Mode</h3>
+                    <h3 data-i18n="singleModeTitle"><i class="fas fa-arrow-down"></i> Single Mode</h3>
                     <ul>
-                        <li><i class="fas fa-check-circle"></i> Best for complete, continuous logs</li>
-                        <li><i class="fas fa-check-circle"></i> Simple copy-paste workflow</li>
-                        <li><i class="fas fa-check-circle"></i> Works with standard MyBatis output</li>
-                        <li><i class="fas fa-check-circle"></i> Supports prefixed and non-prefixed logs</li>
-                        <li><i class="fas fa-check-circle"></i> Ideal for quick conversions</li>
+                        <li><i class="fas fa-check-circle"></i> <span data-i18n="singleModeFeature1">Best for complete,
+                                continuous logs</span></li>
+                        <li><i class="fas fa-check-circle"></i> <span data-i18n="singleModeFeature2">Simple copy-paste
+                                workflow</span></li>
+                        <li><i class="fas fa-check-circle"></i> <span data-i18n="singleModeFeature3">Works with standard
+                                MyBatis output</span></li>
+                        <li><i class="fas fa-check-circle"></i> <span data-i18n="singleModeFeature4">Supports prefixed
+                                and non-prefixed logs</span></li>
+                        <li><i class="fas fa-check-circle"></i> <span data-i18n="singleModeFeature5">Ideal for quick
+                                conversions</span></li>
                     </ul>
                 </div>
                 <div class="mode-card">
-                    <h3><i class="fas fa-columns"></i> Dual Mode</h3>
+                    <h3 data-i18n="dualModeTitle"><i class="fas fa-columns"></i> Dual Mode</h3>
                     <ul>
-                        <li><i class="fas fa-check-circle"></i> Perfect for fragmented logs</li>
-                        <li><i class="fas fa-check-circle"></i> Separate template and parameters</li>
-                        <li><i class="fas fa-check-circle"></i> More control over input</li>
-                        <li><i class="fas fa-check-circle"></i> Works with prefixed and non-prefixed inputs</li>
-                        <li><i class="fas fa-check-circle"></i> Great for complex debugging scenarios</li>
+                        <li><i class="fas fa-check-circle"></i> <span data-i18n="dualModeFeature1">Perfect for
+                                fragmented logs</span></li>
+                        <li><i class="fas fa-check-circle"></i> <span data-i18n="dualModeFeature2">Separate template and
+                                parameters</span></li>
+                        <li><i class="fas fa-check-circle"></i> <span data-i18n="dualModeFeature3">More control over
+                                input</span></li>
+                        <li><i class="fas fa-check-circle"></i> <span data-i18n="dualModeFeature4">Works with prefixed
+                                and non-prefixed inputs</span></li>
+                        <li><i class="fas fa-check-circle"></i> <span data-i18n="dualModeFeature5">Great for complex
+                                debugging scenarios</span></li>
                     </ul>
                 </div>
             </div>
@@ -895,37 +1002,40 @@
     <!-- FAQ Section -->
     <section class="faq">
         <div class="container">
-            <h2 class="guide-title">Frequently Asked Questions</h2>
+            <h2 class="guide-title" data-i18n="faqTitle">Frequently Asked Questions</h2>
             <div class="faq-container">
                 <div class="faq-item">
                     <div class="faq-question">
-                        What MyBatis log formats are supported?
+                        <span data-i18n="faq1Question">What MyBatis log formats are supported?</span>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Our extension supports both standard MyBatis log formats and logs with "Preparing:" and
+                        <p data-i18n="faq1Answer">Our extension supports both standard MyBatis log formats and logs with
+                            "Preparing:" and
                             "Parameters:" prefixes. It works with DEBUG level logs that show the SQL template and
                             parameter values. Both single-line and multi-line formats are supported.</p>
                     </div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">
-                        Is my data secure when using this extension?
+                        <span data-i18n="faq2Question">Is my data secure when using this extension?</span>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Absolutely! All processing happens locally in your browser. No data is sent to any servers,
+                        <p data-i18n="faq2Answer">Absolutely! All processing happens locally in your browser. No data is
+                            sent to any servers,
                             ensuring your sensitive SQL queries and log information remain completely private. Your data
                             never leaves your computer.</p>
                     </div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">
-                        Why am I getting incorrect SQL output?
+                        <span data-i18n="faq3Question">Why am I getting incorrect SQL output?</span>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>This usually happens when the log format isn't correctly recognized. Make sure you're using
+                        <p data-i18n="faq3Answer">This usually happens when the log format isn't correctly recognized.
+                            Make sure you're using
                             the appropriate mode (Single or Dual) for your log structure. Also, check that your logs
                             contain both the SQL template and parameter information. If issues persist, try cleaning up
                             the log text by removing extra spaces or line breaks.</p>
@@ -933,11 +1043,12 @@
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">
-                        Can I use this for production database queries?
+                        <span data-i18n="faq4Question">Can I use this for production database queries?</span>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>While technically possible, we recommend using this tool primarily for development and
+                        <p data-i18n="faq4Answer">While technically possible, we recommend using this tool primarily for
+                            development and
                             debugging purposes. Always ensure you have proper authorization before running any queries
                             against production databases. The generated SQL is meant for analysis and testing, not
                             direct production use.</p>
@@ -952,38 +1063,42 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3>MyBatis SQL Log Merger</h3>
-                    <p>Simplify your MyBatis debugging workflow with our powerful Chrome extension that transforms logs
+                    <h3 data-i18n="footerTitle">MyBatis SQL Log Merger</h3>
+                    <p data-i18n="footerDescription">Simplify your MyBatis debugging workflow with our powerful Chrome
+                        extension that transforms logs
                         into executable SQL statements.</p>
                     <div class="social-links">
                         <a href="https://github.com/liuyueyi/ai-chrome-mysql-merge"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
                 <div class="footer-column">
-                    <h3>Quick Links</h3>
+                    <h3 data-i18n="quickLinks">Quick Links</h3>
                     <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="grafana-demo.html">Grafana Demo</a></li>
+                        <li><a href="#" data-i18n="home">Home</a></li>
+                        <li><a href="#features" data-i18n="features">Features</a></li>
+                        <li><a href="grafana-demo.html" data-i18n="grafanaDemo">Grafana Demo</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>Resources</h3>
+                    <h3 data-i18n="resources">Resources</h3>
                     <ul>
-                        <li><a href="guide.html">User Guide</a></li>
-                        <li><a href="https://github.com/liuyueyi/ai-chrome-mysql-merge/issues">Troubleshooting</a></li>
-                        <li><a href="https://github.com/liuyueyi/ai-chrome-mysql-merge/releases">Release Notes</a></li>
+                        <li><a href="guide.html" data-i18n="userGuide">User Guide</a></li>
+                        <li><a href="https://github.com/liuyueyi/ai-chrome-mysql-merge/issues"
+                                data-i18n="troubleshooting">Troubleshooting</a></li>
+                        <li><a href="https://github.com/liuyueyi/ai-chrome-mysql-merge/releases"
+                                data-i18n="releaseNotes">Release Notes</a></li>
                         </li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>Contact Us</h3>
+                    <h3 data-i18n="contactUs">Contact Us</h3>
                     <ul>
                         <li><i class="fas fa-envelope"></i> yihuihuiyi@gmail.com</li>
-                        <li><a href="https://github.com/liuyueyi/ai-chrome-mysql-merge/issues"><i
-                                    class="fas fa-bug"></i> Report an Issue</a></li>
+                        <li><a href="https://github.com/liuyueyi/ai-chrome-mysql-merge/issues"
+                                data-i18n="reportIssue"><i class="fas fa-bug"></i> Report an Issue</a></li>
                         <li><i class="fas fa-lightbulb"></i> <a
-                                href="https://github.com/liuyueyi/ai-chrome-mysql-merge/issues/1">Feature Request</a>
+                                href="https://github.com/liuyueyi/ai-chrome-mysql-merge/issues/1"
+                                data-i18n="featureRequest">Feature Request</a>
                         </li>
                     </ul>
                 </div>
@@ -995,6 +1110,241 @@
     </footer>
 
     <script>
+        // Language translations
+        const translations = {
+            en: {
+                title: "MyBatis SQL Log Merger",
+                installNow: "Install Now",
+                heroTitle: "User Guide",
+                heroDescription: "Learn how to effectively use MyBatis SQL Log Merger to transform your debugging workflow",
+                gettingStarted: "Getting Started",
+                home: "Home",
+                haveATry: "Have a Try",
+                guideTitle: "How to Use MyBatis SQL Log Merger",
+                guideIntro: "This comprehensive guide will walk you through all the features and capabilities of the MyBatis SQL Log Merger extension. Whether you're a beginner or an experienced user, you'll find valuable tips to enhance your productivity.",
+                installation: "Installation",
+                installationStep1: "Visit the Chrome Web Store link provided below",
+                installationStep2: "Click \"Add to Chrome\" to install the extension",
+                installationStep3: "Once installed, you'll see the extension icon in your Chrome toolbar",
+                installationStep4: "Click the icon to open the extension popup",
+                installationTip: "You can pin the extension to your toolbar for quick access by clicking the puzzle piece icon in Chrome, finding MyBatis SQL Log Merger, and selecting the pin icon.",
+                activateInjectionButton: "Activating the Injection Button",
+                activateInjectionDesc: "MyBatis SQL Log Merger offers a convenient way to extract SQL directly from any webpage by injecting a button into the page. Here's how to activate this feature:",
+                activateInjectionStep1: "Navigate to the target website where you want to use the extraction feature",
+                activateInjectionStep2: "Click the MyBatis SQL Log Merger icon in the Chrome toolbar",
+                activateInjectionStep3: "In the popup window, click the \"Inject SQL Extraction Button\" toggle next to the inactive status indicator",
+                activateInjectionStep4: "The status will change to \"Active\" and the page will refresh to show the extraction button",
+                activateInjectionStep5: "You'll now see a green button in the bottom-right corner of the page",
+                activateInjectionTip: "You can also configure URL patterns in the Settings page to automatically activate the button on multiple websites. You can configure SQL websites in the Settings page to enable Quick Navigation.",
+                usingInjectionButton: "Using the Injection Button to Extract SQL",
+                usingInjectionDesc: "Once activated, you can easily extract SQL from any selected MyBatis logs on the page:",
+                usingInjectionStep1: "Select the MyBatis log text on the webpage",
+                usingInjectionStep2: "Click the green \"Extract SQL\" button that appears in the bottom-right corner",
+                usingInjectionStep3: "View the merged SQL result in the popup panel",
+                usingInjectionStep4: "Use the \"Copy\" button to copy the SQL to your clipboard",
+                manualEntryDesc: "If you want to manually enter SQL templates and parameters, click the expand icon next to the extraction button:",
+                manualEntryStep1: "Click the \"⋯\" icon next to the extraction button",
+                manualEntryStep2: "Enter the SQL template and parameters in the popup panel",
+                manualEntryStep3: "Click \"Parse\" to generate the result",
+                usingInjectionNote: "The injection button feature works with the same log formats as the standalone mode, supporting both formats with and without Preparing: and Parameters: prefixes.",
+                usingSingleMode: "Using Single Mode",
+                usingSingleDesc: "Single Mode is ideal when you have complete MyBatis logs in one place:",
+                usingSingleStep1: "Open the extension popup by clicking the toolbar icon",
+                usingSingleStep2: "Ensure you're in Single Mode (indicated by the active tab)",
+                usingSingleStep3: "Copy your MyBatis logs from your application console or log files",
+                usingSingleStep4: "Paste the logs into the large text area",
+                usingSingleStep5: "Click the \"Process SQL\" button to generate executable SQL",
+                usingSingleStep6: "Your formatted SQL will appear in the results section",
+                usingSingleStep7: "Use the \"Copy Result\" button to copy the SQL to your clipboard",
+                usingSingleNote: "Single Mode works with logs that contain both the SQL template and parameters in one continuous block. It supports logs with or without \"Preparing:\" and \"Parameters:\" prefixes.",
+                usingDualMode: "Using Dual Mode",
+                usingDualDesc: "Dual Mode is perfect when your SQL templates and parameters are in separate locations:",
+                usingDualStep1: "Switch to Dual Mode using the toggle button",
+                usingDualStep2: "In the first text area, paste your SQL template (with or without \"Preparing:\" prefix)",
+                usingDualStep3: "In the second text area, paste your parameters (with or without \"Parameters:\" prefix)",
+                usingDualStep4: "Click the \"Process SQL\" button to combine them into executable SQL",
+                usingDualStep5: "Your formatted SQL will appear in the results section",
+                usingDualStep6: "Use the \"Copy Result\" button to copy the SQL to your clipboard",
+                usingDualNote: "Dual Mode gives you more control over the input and is especially useful when copying from different sources or when logs are fragmented.",
+                advancedFeatures: "Advanced Features",
+                advancedFeaturesDesc: "Take advantage of these powerful features to enhance your workflow:",
+                sqlFormatting: "SQL Formatting:",
+                sqlFormattingDesc: "Automatically format your SQL for better readability with the \"Beautify SQL\" button",
+                syntaxHighlighting: "Syntax Highlighting:",
+                syntaxHighlightingDesc: "Color-coded SQL makes it easier to identify different elements",
+                oneClickCopy: "One-Click Copy:",
+                oneClickCopyDesc: "Instantly copy your results to the clipboard",
+                clearFunction: "Clear Function:",
+                clearFunctionDesc: "Reset all fields with the \"Clear\" button",
+                responsiveDesign: "Responsive Design:",
+                responsiveDesignDesc: "Works seamlessly on desktops, tablets, and mobile devices",
+                advancedFeaturesTip: "After generating your SQL, you can further refine it using the beautify feature to make complex queries more readable.",
+                singleModeVsDualMode: "Single Mode vs Dual Mode",
+                singleModeTitle: "Single Mode",
+                singleModeFeature1: "Best for complete, continuous logs",
+                singleModeFeature2: "Simple copy-paste workflow",
+                singleModeFeature3: "Works with standard MyBatis output",
+                singleModeFeature4: "Supports prefixed and non-prefixed logs",
+                singleModeFeature5: "Ideal for quick conversions",
+                dualModeTitle: "Dual Mode",
+                dualModeFeature1: "Perfect for fragmented logs",
+                dualModeFeature2: "Separate template and parameters",
+                dualModeFeature3: "More control over input",
+                dualModeFeature4: "Works with prefixed and non-prefixed inputs",
+                dualModeFeature5: "Great for complex debugging scenarios",
+                faqTitle: "Frequently Asked Questions",
+                faq1Question: "What MyBatis log formats are supported?",
+                faq1Answer: "Our extension supports both standard MyBatis log formats and logs with \"Preparing:\" and \"Parameters:\" prefixes. It works with DEBUG level logs that show the SQL template and parameter values. Both single-line and multi-line formats are supported.",
+                faq2Question: "Is my data secure when using this extension?",
+                faq2Answer: "Absolutely! All processing happens locally in your browser. No data is sent to any servers, ensuring your sensitive SQL queries and log information remain completely private. Your data never leaves your computer.",
+                faq3Question: "Why am I getting incorrect SQL output?",
+                faq3Answer: "This usually happens when the log format isn't correctly recognized. Make sure you're using the appropriate mode (Single or Dual) for your log structure. Also, check that your logs contain both the SQL template and parameter information. If issues persist, try cleaning up the log text by removing extra spaces or line breaks.",
+                faq4Question: "Can I use this for production database queries?",
+                faq4Answer: "While technically possible, we recommend using this tool primarily for development and debugging purposes. Always ensure you have proper authorization before running any queries against production databases. The generated SQL is meant for analysis and testing, not direct production use.",
+                footerTitle: "MyBatis SQL Log Merger",
+                footerDescription: "Simplify your MyBatis debugging workflow with our powerful Chrome extension that transforms logs into executable SQL statements.",
+                quickLinks: "Quick Links",
+                features: "Features",
+                grafanaDemo: "Grafana Demo",
+                resources: "Resources",
+                userGuide: "User Guide",
+                troubleshooting: "Troubleshooting",
+                releaseNotes: "Release Notes",
+                contactUs: "Contact Us",
+                reportIssue: "Report an Issue",
+                featureRequest: "Feature Request"
+            },
+            zh: {
+                title: "MyBatis SQL 日志合并工具",
+                installNow: "立即安装",
+                heroTitle: "用户指南",
+                heroDescription: "了解如何有效使用 MyBatis SQL Log Merger 来改变您的调试工作流程",
+                gettingStarted: "入门指南",
+                home: "首页",
+                haveATry: "快速尝鲜",
+                guideTitle: "如何使用 MyBatis SQL 日志合并工具",
+                guideIntro: "本综合指南将引导您了解 MyBatis SQL Log Merger 扩展的所有特性和功能。无论您是初学者还是有经验的用户，都能找到有价值的提示来提高您的工作效率。",
+                installation: "安装",
+                installationStep1: "访问下面提供的 Chrome 网上应用店链接",
+                installationStep2: "点击\"添加到 Chrome\"来安装扩展",
+                installationStep3: "安装完成后，您将在 Chrome 工具栏中看到扩展图标",
+                installationStep4: "点击图标打开扩展弹出窗口",
+                installationTip: "您可以通过点击 Chrome 中的拼图块图标，找到 MyBatis SQL Log Merger 并选择固定图标，将扩展固定到工具栏以便快速访问。",
+                activateInjectionButton: "激活注入按钮",
+                activateInjectionDesc: "MyBatis SQL Log Merger 提供了一种便捷的方式，通过在网页中注入按钮直接从任何网页提取 SQL。以下是激活此功能的方法：",
+                activateInjectionStep1: "导航到您想要使用提取功能的目标网站",
+                activateInjectionStep2: "点击 Chrome 工具栏中的 MyBatis SQL Log Merger 图标",
+                activateInjectionStep3: "在弹出窗口中，点击非活动状态指示器旁边的\"注入 SQL 提取按钮\"切换开关",
+                activateInjectionStep4: "状态将更改为\"活动\"，页面将刷新以显示提取按钮",
+                activateInjectionStep5: "您现在将在页面右下角看到一个绿色按钮",
+                activateInjectionTip: "您还可以在设置页面配置 URL 模式，以在多个网站上自动激活按钮。您可以在设置页面配置 SQL 网站以启用快速导航。",
+                usingInjectionButton: "使用注入按钮提取 SQL",
+                usingInjectionDesc: "激活后，您可以轻松地从页面上的任何选定 MyBatis 日志中提取 SQL：",
+                usingInjectionStep1: "选择网页上的 MyBatis 日志文本",
+                usingInjectionStep2: "点击右下角出现的绿色\"提取 SQL\"按钮",
+                usingInjectionStep3: "在弹出面板中查看合并的 SQL 结果",
+                usingInjectionStep4: "使用\"复制\"按钮将 SQL 复制到剪贴板",
+                manualEntryDesc: "如果您想手动输入 SQL 模板和参数，请点击提取按钮旁边的展开图标：",
+                manualEntryStep1: "点击提取按钮旁边的\"⋯\"图标",
+                manualEntryStep2: "在弹出面板中输入 SQL 模板和参数",
+                manualEntryStep3: "点击\"解析\"生成结果",
+                usingInjectionNote: "注入按钮功能与独立模式支持相同的日志格式，支持带和不带 Preparing: 和 Parameters: 前缀的格式。",
+                usingSingleMode: "使用单模式",
+                usingSingleDesc: "当您在一个地方有完整的 MyBatis 日志时，单模式是理想的选择：",
+                usingSingleStep1: "通过点击工具栏图标打开扩展弹出窗口",
+                usingSingleStep2: "确保您处于单模式（由活动选项卡指示）",
+                usingSingleStep3: "从应用程序控制台或日志文件中复制 MyBatis 日志",
+                usingSingleStep4: "将日志粘贴到大文本区域",
+                usingSingleStep5: "点击\"处理 SQL\"按钮生成可执行的 SQL",
+                usingSingleStep6: "格式化的 SQL 将出现在结果部分",
+                usingSingleStep7: "使用\"复制结果\"按钮将 SQL 复制到剪贴板",
+                usingSingleNote: "单模式适用于包含 SQL 模板和参数在一个连续块中的日志。它支持带或不带\"Preparing:\"和\"Parameters:\"前缀的日志。",
+                usingDualMode: "使用双模式",
+                usingDualDesc: "当您的 SQL 模板和参数位于不同位置时，双模式是完美的选择：",
+                usingDualStep1: "使用切换按钮切换到双模式",
+                usingDualStep2: "在第一个文本区域中，粘贴您的 SQL 模板（带或不带\"Preparing:\"前缀）",
+                usingDualStep3: "在第二个文本区域中，粘贴您的参数（带或不带\"Parameters:\"前缀）",
+                usingDualStep4: "点击\"处理 SQL\"按钮将它们组合成可执行的 SQL",
+                usingDualStep5: "格式化的 SQL 将出现在结果部分",
+                usingDualStep6: "使用\"复制结果\"按钮将 SQL 复制到剪贴板",
+                usingDualNote: "双模式为您提供更多输入控制，特别适用于从不同来源复制或日志分散的情况。",
+                advancedFeatures: "高级功能",
+                advancedFeaturesDesc: "利用这些强大功能来增强您的工作流程：",
+                sqlFormatting: "SQL 格式化：",
+                sqlFormattingDesc: "使用\"美化 SQL\"按钮自动格式化您的 SQL 以获得更好的可读性",
+                syntaxHighlighting: "语法高亮：",
+                syntaxHighlightingDesc: "彩色编码的 SQL 使识别不同元素变得更加容易",
+                oneClickCopy: "一键复制：",
+                oneClickCopyDesc: "立即将结果复制到剪贴板",
+                clearFunction: "清除功能：",
+                clearFunctionDesc: "使用\"清除\"按钮重置所有字段",
+                responsiveDesign: "响应式设计：",
+                responsiveDesignDesc: "在桌面、平板和移动设备上无缝工作",
+                advancedFeaturesTip: "生成 SQL 后，您可以使用美化功能进一步优化，使复杂查询更易读。",
+                singleModeVsDualMode: "单模式 vs 双模式",
+                singleModeTitle: "单模式",
+                singleModeFeature1: "最适合完整、连续的日志",
+                singleModeFeature2: "简单的复制粘贴工作流程",
+                singleModeFeature3: "适用于标准的 MyBatis 输出",
+                singleModeFeature4: "支持带前缀和不带前缀的日志",
+                singleModeFeature5: "适合快速转换",
+                dualModeTitle: "双模式",
+                dualModeFeature1: "非常适合碎片化的日志",
+                dualModeFeature2: "分离模板和参数",
+                dualModeFeature3: "更多输入控制",
+                dualModeFeature4: "适用于带前缀和不带前缀的输入",
+                dualModeFeature5: "适合复杂的调试场景",
+                faqTitle: "常见问题",
+                faq1Question: "支持哪些 MyBatis 日志格式？",
+                faq1Answer: "我们的扩展支持标准的 MyBatis 日志格式以及带\"Preparing:\"和\"Parameters:\"前缀的日志。它适用于显示 SQL 模板和参数值的 DEBUG 级别日志。支持单行和多行格式。",
+                faq2Question: "使用此扩展时我的数据安全吗？",
+                faq2Answer: "绝对安全！所有处理都在您的浏览器本地进行。不会向任何服务器发送数据，确保您的敏感 SQL 查询和日志信息安全私密。您的数据永远不会离开您的计算机。",
+                faq3Question: "为什么我得到的 SQL 输出不正确？",
+                faq3Answer: "这通常发生在日志格式未被正确识别时。确保您使用的模式（单模式或双模式）适合您的日志结构。还要检查您的日志是否包含 SQL 模板和参数信息。如果问题仍然存在，请尝试通过删除多余的空格或换行符来清理日志文本。",
+                faq4Question: "我可以将其用于生产数据库查询吗？",
+                faq4Answer: "虽然技术上可行，但我们建议主要将此工具用于开发和调试目的。在对生产数据库运行任何查询之前，请确保获得适当授权。生成的 SQL 用于分析和测试，不直接用于生产。",
+                footerTitle: "MyBatis SQL 日志合并工具",
+                footerDescription: "使用我们强大的 Chrome 扩展简化 MyBatis 调试工作流程，将日志转换为可执行的 SQL 语句。",
+                quickLinks: "快速链接",
+                features: "功能",
+                grafanaDemo: "Grafana 演示",
+                resources: "资源",
+                userGuide: "用户指南",
+                troubleshooting: "故障排除",
+                releaseNotes: "发布说明",
+                contactUs: "联系我们",
+                reportIssue: "报告问题",
+                featureRequest: "功能请求"
+            }
+        };
+
+        // Set language
+        function setLanguage(lang) {
+            // Save to localStorage
+            localStorage.setItem('language', lang);
+
+            // Update all elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = translations[lang][key];
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+
+            // Update language switcher
+            document.getElementById('language-switcher').value = lang;
+        }
+
+        // Load language from localStorage or default to English
+        function loadLanguage() {
+            const savedLang = localStorage.getItem('language') || 'en';
+            setLanguage(savedLang);
+        }
+
         // Image carousel functionality
         function initCarousels() {
             const carousels = document.querySelectorAll('.image-carousel');
@@ -1106,8 +1456,17 @@
             }
         });
 
-        // Initialize carousels when DOM is loaded
+        // Initialize when DOM is loaded
         document.addEventListener('DOMContentLoaded', function () {
+            // Load saved language
+            loadLanguage();
+
+            // Add event listener to language switcher
+            document.getElementById('language-switcher').addEventListener('change', function () {
+                setLanguage(this.value);
+            });
+
+            // Initialize carousels
             initCarousels();
         });
     </script>

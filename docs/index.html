@@ -71,7 +71,6 @@
             padding: 12px 25px;
             border: none;
             border-radius: 30px;
-            font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -253,8 +252,8 @@
         }
 
         .testimonial-card:before {
-            content: "" ";
- font-size: 5rem;
+            content: "";
+            font-size: 5rem;
             position: absolute;
             top: -20px;
             left: 10px;
@@ -439,6 +438,50 @@
             font-size: 0.9rem;
         }
 
+        /* Language Switcher */
+        .language-switcher {
+            background-color: #3498db;
+            /* Blue color from the same color scheme */
+            color: white;
+            margin-right: 12px;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            text-align: center;
+        }
+
+        .language-switcher:hover {
+            background-color: #2980b9;
+            /* Darker blue on hover */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .language-switcher:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+        }
+
+        .language-switcher option {
+            background-color: #3498db;
+            color: white;
+            font-weight: normal;
+            padding: 10px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .header-content {
@@ -468,6 +511,11 @@
                 flex-direction: column;
                 gap: 30px;
             }
+
+            .header-actions {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -478,31 +526,38 @@
         <div class="container header-content">
             <div class="logo">
                 <img src="imgs/icon128.png" alt="MyBatis SQL Log Merger Logo">
-                <h1>MyBatis SQL Log Merger</h1>
+                <h1 data-i18n="title">MyBatis SQL Log Merger</h1>
             </div>
-            <a href="https://chromewebstore.google.com/detail/mybatis-sql-log-merger/ldlekpjpadmkfoohidfgjjcmegdbkbho"
-                class="cta-button" target="_blank">
-                <i class="fas fa-download"></i> Install Now
-            </a>
+            <div class="header-actions">
+                <select id="language-switcher" class="language-switcher">
+                    <option value="en">English</option>
+                    <option value="zh">中文</option>
+                </select>
+                <a href="https://chromewebstore.google.com/detail/mybatis-sql-log-merger/ldlekpjpadmkfoohidfgjjcmegdbkbho"
+                    class="cta-button" target="_blank" data-i18n="installNow">
+                    <i class="fas fa-download"></i> Install Now
+                </a>
+            </div>
         </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h2>Transform MyBatis Logs Into Executable SQL</h2>
-            <p>Our Chrome extension simplifies debugging by merging MyBatis SQL logs into ready-to-execute SQL
+            <h2 data-i18n="heroTitle">Transform MyBatis Logs Into Executable SQL</h2>
+            <p data-i18n="heroDescription">Our Chrome extension simplifies debugging by merging MyBatis SQL logs into
+                ready-to-execute SQL
                 statements. Save hours of manual work and boost your productivity.</p>
             <div class="hero-buttons">
                 <a href="https://chromewebstore.google.com/detail/mybatis-sql-log-merger/ldlekpjpadmkfoohidfgjjcmegdbkbho"
-                    class="cta-button" target="_blank">
+                    class="cta-button" target="_blank" data-i18n="addToChrome">
                     <i class="fab fa-chrome"></i> Add to Chrome
                 </a>
-                <a href="#features" class="secondary-button">
+                <a href="#features" class="secondary-button" data-i18n="learnMore">
                     <i class="fas fa-chevron-down"></i> Learn More
                 </a>
 
-                <a href="guide.html" class="secondary-button">
+                <a href="guide.html" class="secondary-button" data-i18n="guide">
                     <i class="fas fa-hands-helping"></i> Guide
                 </a>
             </div>
@@ -512,52 +567,58 @@
     <!-- Features Section -->
     <section class="features" id="features">
         <div class="container">
-            <h2 class="section-title">Powerful Features</h2>
+            <h2 class="section-title" data-i18n="featuresTitle">Powerful Features</h2>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-bolt"></i>
                     </div>
-                    <h3>Instant SQL Generation</h3>
-                    <p>Convert MyBatis logs to executable SQL with a single click. No more manual parameter
+                    <h3 data-i18n="instantSQLGeneration">Instant SQL Generation</h3>
+                    <p data-i18n="instantSQLGenerationDesc">Convert MyBatis logs to executable SQL with a single click.
+                        No more manual parameter
                         substitution!</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-code"></i>
                     </div>
-                    <h3>Dual Input Modes</h3>
-                    <p>Support both single-box mode for complete logs and dual-box mode for separate template and
+                    <h3 data-i18n="dualInputModes">Dual Input Modes</h3>
+                    <p data-i18n="dualInputModesDesc">Support both single-box mode for complete logs and dual-box mode
+                        for separate template and
                         parameters.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-paint-brush"></i>
                     </div>
-                    <h3>SQL Formatting & Highlighting</h3>
-                    <p>Automatically format and syntax-highlight your SQL for better readability and easier debugging.
+                    <h3 data-i18n="sqlFormattingHighlighting">SQL Formatting & Highlighting</h3>
+                    <p data-i18n="sqlFormattingHighlightingDesc">Automatically format and syntax-highlight your SQL for
+                        better readability and easier debugging.
                     </p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-copy"></i>
                     </div>
-                    <h3>One-Click Copy</h3>
-                    <p>Copy formatted SQL to clipboard instantly with our convenient copy button.</p>
+                    <h3 data-i18n="oneClickCopy">One-Click Copy</h3>
+                    <p data-i18n="oneClickCopyDesc">Copy formatted SQL to clipboard instantly with our convenient copy
+                        button.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-mobile-alt"></i>
                     </div>
-                    <h3>Fully Responsive</h3>
-                    <p>Works seamlessly on desktops, tablets, and mobile devices for on-the-go debugging.</p>
+                    <h3 data-i18n="fullyResponsive">Fully Responsive</h3>
+                    <p data-i18n="fullyResponsiveDesc">Works seamlessly on desktops, tablets, and mobile devices for
+                        on-the-go debugging.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
-                    <h3>Privacy Focused</h3>
-                    <p>All processing happens locally in your browser. Your data never leaves your computer.</p>
+                    <h3 data-i18n="privacyFocused">Privacy Focused</h3>
+                    <p data-i18n="privacyFocusedDesc">All processing happens locally in your browser. Your data never
+                        leaves your computer.</p>
                 </div>
             </div>
         </div>
@@ -566,27 +627,31 @@
     <!-- How It Works -->
     <section class="how-it-works">
         <div class="container">
-            <h2 class="section-title">How It Works</h2>
+            <h2 class="section-title" data-i18n="howItWorksTitle">How It Works</h2>
             <div class="steps">
                 <div class="step">
                     <div class="step-number">1</div>
-                    <h3>Install Extension</h3>
-                    <p>Add MyBatis SQL Log Merger to your Chrome browser from the Chrome Web Store.</p>
+                    <h3 data-i18n="installExtension">Install Extension</h3>
+                    <p data-i18n="installExtensionDesc">Add MyBatis SQL Log Merger to your Chrome browser from the
+                        Chrome Web Store.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
-                    <h3>Copy Logs</h3>
-                    <p>Copy your MyBatis SQL logs from your application console or log files.</p>
+                    <h3 data-i18n="copyLogs">Copy Logs</h3>
+                    <p data-i18n="copyLogsDesc">Copy your MyBatis SQL logs from your application console or log files.
+                    </p>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
-                    <h3>Paste & Process</h3>
-                    <p>Paste the logs into our extension and click "Process SQL" to generate executable statements.</p>
+                    <h3 data-i18n="pasteProcess">Paste & Process</h3>
+                    <p data-i18n="pasteProcessDesc">Paste the logs into our extension and click "Process SQL" to
+                        generate executable statements.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">4</div>
-                    <h3>Execute & Debug</h3>
-                    <p>Copy the formatted SQL and run it directly in your database client for testing.</p>
+                    <h3 data-i18n="executeDebug">Execute & Debug</h3>
+                    <p data-i18n="executeDebugDesc">Copy the formatted SQL and run it directly in your database client
+                        for testing.</p>
                 </div>
             </div>
         </div>
@@ -595,40 +660,43 @@
     <!-- Testimonials -->
     <section class="testimonials">
         <div class="container">
-            <h2 class="section-title">What Developers Say</h2>
+            <h2 class="section-title" data-i18n="testimonialsTitle">What Developers Say</h2>
             <div class="testimonial-grid">
                 <div class="testimonial-card">
-                    <p class="testimonial-text">This extension has saved me countless hours of manually reconstructing
+                    <p class="testimonial-text" data-i18n="testimonial1">This extension has saved me countless hours of
+                        manually reconstructing
                         SQL queries from MyBatis logs. It's an essential tool for any Java developer working with
                         databases.</p>
                     <div class="testimonial-author">
                         <div class="author-avatar">JD</div>
                         <div class="author-info">
-                            <h4>John Doe</h4>
-                            <p>Senior Java Developer</p>
+                            <h4 data-i18n="testimonialAuthor1">John Doe</h4>
+                            <p data-i18n="testimonialJob1">Senior Java Developer</p>
                         </div>
                     </div>
                 </div>
                 <div class="testimonial-card">
-                    <p class="testimonial-text">The dual input mode is brilliant! I can now easily work with logs
+                    <p class="testimonial-text" data-i18n="testimonial2">The dual input mode is brilliant! I can now
+                        easily work with logs
                         whether they're in the standard format or separated into template and parameters. Highly
                         recommended!</p>
                     <div class="testimonial-author">
                         <div class="author-avatar">AS</div>
                         <div class="author-info">
-                            <h4>Alex Smith</h4>
-                            <p>Backend Engineer</p>
+                            <h4 data-i18n="testimonialAuthor2">Alex Smith</h4>
+                            <p data-i18n="testimonialJob2">Backend Engineer</p>
                         </div>
                     </div>
                 </div>
                 <div class="testimonial-card">
-                    <p class="testimonial-text">The SQL formatting and syntax highlighting make it so much easier to
+                    <p class="testimonial-text" data-i18n="testimonial3">The SQL formatting and syntax highlighting make
+                        it so much easier to
                         spot issues in complex queries. This tool has become indispensable in my daily workflow.</p>
                     <div class="testimonial-author">
                         <div class="author-avatar">MR</div>
                         <div class="author-info">
-                            <h4>Maria Rodriguez</h4>
-                            <p>Database Administrator</p>
+                            <h4 data-i18n="testimonialAuthor3">Maria Rodriguez</h4>
+                            <p data-i18n="testimonialJob3">Database Administrator</p>
                         </div>
                     </div>
                 </div>
@@ -639,12 +707,14 @@
     <!-- CTA Section -->
     <section class="cta-section">
         <div class="container">
-            <h2>Ready to Simplify Your SQL Debugging?</h2>
-            <p>Join thousands of developers who have transformed their MyBatis debugging workflow with our extension.
+            <h2 data-i18n="ctaTitle">Ready to Simplify Your SQL Debugging?</h2>
+            <p data-i18n="ctaDescription">Join thousands of developers who have transformed their MyBatis debugging
+                workflow with our extension.
             </p>
             <a href="https://chromewebstore.google.com/detail/mybatis-sql-log-merger/ldlekpjpadmkfoohidfgjjcmegdbkbho"
                 class="cta-button" target="_blank">
-                <i class="fab fa-chrome"></i> Install MyBatis SQL Log Merger
+                <i class="fab fa-chrome"></i> <span data-i18n="installExtensionCTA">Install MyBatis SQL Log
+                    Merger</span>
             </a>
         </div>
     </section>
@@ -652,46 +722,50 @@
     <!-- FAQ Section -->
     <section class="faq">
         <div class="container">
-            <h2 class="section-title">Frequently Asked Questions</h2>
+            <h2 class="section-title" data-i18n="faqTitle">Frequently Asked Questions</h2>
             <div class="faq-container">
                 <div class="faq-item">
                     <div class="faq-question">
-                        Which MyBatis log formats are supported?
+                        <span data-i18n="faq1Question">Which MyBatis log formats are supported?</span>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Our extension supports both standard MyBatis log formats and logs with "Preparing:" and
+                        <p data-i18n="faq1Answer">Our extension supports both standard MyBatis log formats and logs with
+                            "Preparing:" and
                             "Parameters:" prefixes. It works with DEBUG level logs that show the SQL template and
                             parameter values.</p>
                     </div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">
-                        Is my data secure when using this extension?
+                        <span data-i18n="faq2Question">Is my data secure when using this extension?</span>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Absolutely! All processing happens locally in your browser. No data is sent to any servers,
+                        <p data-i18n="faq2Answer">Absolutely! All processing happens locally in your browser. No data is
+                            sent to any servers,
                             ensuring your sensitive SQL queries and log information remain completely private.</p>
                     </div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">
-                        Does this extension work with other browsers?
+                        <span data-i18n="faq3Question">Does this extension work with other browsers?</span>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Currently, the extension is designed for Chrome. However, the standalone version works in any
+                        <p data-i18n="faq3Answer">Currently, the extension is designed for Chrome. However, the
+                            standalone version works in any
                             modern browser. We're considering Firefox and Edge versions based on demand.</p>
                     </div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">
-                        Can I use this for production database queries?
+                        <span data-i18n="faq4Question">Can I use this for production database queries?</span>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>While technically possible, we recommend using this tool primarily for development and
+                        <p data-i18n="faq4Answer">While technically possible, we recommend using this tool primarily for
+                            development and
                             debugging purposes. Always ensure you have proper authorization before running any queries
                             against production databases.</p>
                     </div>
@@ -705,38 +779,42 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3>MyBatis SQL Log Merger</h3>
-                    <p>Simplify your MyBatis debugging workflow with our powerful Chrome extension that transforms logs
+                    <h3 data-i18n="footerTitle">MyBatis SQL Log Merger</h3>
+                    <p data-i18n="footerDescription">Simplify your MyBatis debugging workflow with our powerful Chrome
+                        extension that transforms logs
                         into executable SQL statements.</p>
                     <div class="social-links">
                         <a href="https://github.com/liuyueyi/ai-chrome-mysql-merge"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
                 <div class="footer-column">
-                    <h3>Quick Links</h3>
+                    <h3 data-i18n="quickLinks">Quick Links</h3>
                     <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="grafana-demo.html">Grafana Demo</a></li>
+                        <li><a href="#" data-i18n="home">Home</a></li>
+                        <li><a href="#features" data-i18n="features">Features</a></li>
+                        <li><a href="grafana-demo.html" data-i18n="grafanaDemo">Grafana Demo</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>Resources</h3>
+                    <h3 data-i18n="resources">Resources</h3>
                     <ul>
-                        <li><a href="guide.html">User Guide</a></li>
-                        <li><a href="https://github.com/liuyueyi/ai-chrome-mysql-merge/issues">Troubleshooting</a></li>
-                        <li><a href="https://github.com/liuyueyi/ai-chrome-mysql-merge/releases">Release Notes</a></li>
+                        <li><a href="guide.html" data-i18n="userGuide">User Guide</a></li>
+                        <li><a href="https://github.com/liuyueyi/ai-chrome-mysql-merge/issues"
+                                data-i18n="troubleshooting">Troubleshooting</a></li>
+                        <li><a href="https://github.com/liuyueyi/ai-chrome-mysql-merge/releases"
+                                data-i18n="releaseNotes">Release Notes</a></li>
                         </li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>Contact Us</h3>
+                    <h3 data-i18n="contactUs">Contact Us</h3>
                     <ul>
                         <li><i class="fas fa-envelope"></i> yihuihuiyi@gmail.com</li>
-                        <li><a href="https://github.com/liuyueyi/ai-chrome-mysql-merge/issues"><i
-                                    class="fas fa-bug"></i> Report an Issue</a></li>
+                        <li><a href="https://github.com/liuyueyi/ai-chrome-mysql-merge/issues"
+                                data-i18n="reportIssue"><i class="fas fa-bug"></i> Report an Issue</a></li>
                         <li><i class="fas fa-lightbulb"></i> <a
-                                href="https://github.com/liuyueyi/ai-chrome-mysql-merge/issues/1">Feature Request</a>
+                                href="https://github.com/liuyueyi/ai-chrome-mysql-merge/issues/1"
+                                data-i18n="featureRequest">Feature Request</a>
                         </li>
                     </ul>
                 </div>
@@ -748,6 +826,169 @@
     </footer>
 
     <script>
+        // Language translations
+        const translations = {
+            en: {
+                title: "MyBatis SQL Log Merger",
+                installNow: "Install Now",
+                heroTitle: "Transform MyBatis Logs Into Executable SQL",
+                heroDescription: "Our Chrome extension simplifies debugging by merging MyBatis SQL logs into ready-to-execute SQL statements. Save hours of manual work and boost your productivity.",
+                addToChrome: "Add to Chrome",
+                learnMore: "Learn More",
+                guide: "Guide",
+                featuresTitle: "Powerful Features",
+                instantSQLGeneration: "Instant SQL Generation",
+                instantSQLGenerationDesc: "Convert MyBatis logs to executable SQL with a single click. No more manual parameter substitution!",
+                dualInputModes: "Dual Input Modes",
+                dualInputModesDesc: "Support both single-box mode for complete logs and dual-box mode for separate template and parameters.",
+                sqlFormattingHighlighting: "SQL Formatting & Highlighting",
+                sqlFormattingHighlightingDesc: "Automatically format and syntax-highlight your SQL for better readability and easier debugging.",
+                oneClickCopy: "One-Click Copy",
+                oneClickCopyDesc: "Copy formatted SQL to clipboard instantly with our convenient copy button.",
+                fullyResponsive: "Fully Responsive",
+                fullyResponsiveDesc: "Works seamlessly on desktops, tablets, and mobile devices for on-the-go debugging.",
+                privacyFocused: "Privacy Focused",
+                privacyFocusedDesc: "All processing happens locally in your browser. Your data never leaves your computer.",
+                howItWorksTitle: "How It Works",
+                installExtension: "Install Extension",
+                installExtensionDesc: "Add MyBatis SQL Log Merger to your Chrome browser from the Chrome Web Store.",
+                copyLogs: "Copy Logs",
+                copyLogsDesc: "Copy your MyBatis SQL logs from your application console or log files.",
+                pasteProcess: "Paste & Process",
+                pasteProcessDesc: "Paste the logs into our extension and click \"Process SQL\" to generate executable statements.",
+                executeDebug: "Execute & Debug",
+                executeDebugDesc: "Copy the formatted SQL and run it directly in your database client for testing.",
+                testimonialsTitle: "What Developers Say",
+                testimonial1: "This extension has saved me countless hours of manually reconstructing SQL queries from MyBatis logs. It's an essential tool for any Java developer working with databases.",
+                testimonialAuthor1: "John Doe",
+                testimonialJob1: "Senior Java Developer",
+                testimonial2: "The dual input mode is brilliant! I can now easily work with logs whether they're in the standard format or separated into template and parameters. Highly recommended!",
+                testimonialAuthor2: "Alex Smith",
+                testimonialJob2: "Backend Engineer",
+                testimonial3: "The SQL formatting and syntax highlighting make it so much easier to spot issues in complex queries. This tool has become indispensable in my daily workflow.",
+                testimonialAuthor3: "Maria Rodriguez",
+                testimonialJob3: "Database Administrator",
+                ctaTitle: "Ready to Simplify Your SQL Debugging?",
+                ctaDescription: "Join thousands of developers who have transformed their MyBatis debugging workflow with our extension.",
+                installExtensionCTA: "Install MyBatis SQL Log Merger",
+                faqTitle: "Frequently Asked Questions",
+                faq1Question: "Which MyBatis log formats are supported?",
+                faq1Answer: "Our extension supports both standard MyBatis log formats and logs with \"Preparing:\" and \"Parameters:\" prefixes. It works with DEBUG level logs that show the SQL template and parameter values.",
+                faq2Question: "Is my data secure when using this extension?",
+                faq2Answer: "Absolutely! All processing happens locally in your browser. No data is sent to any servers, ensuring your sensitive SQL queries and log information remain completely private.",
+                faq3Question: "Does this extension work with other browsers?",
+                faq3Answer: "Currently, the extension is designed for Chrome. However, the standalone version works in any modern browser. We're considering Firefox and Edge versions based on demand.",
+                faq4Question: "Can I use this for production database queries?",
+                faq4Answer: "While technically possible, we recommend using this tool primarily for development and debugging purposes. Always ensure you have proper authorization before running any queries against production databases.",
+                footerTitle: "MyBatis SQL Log Merger",
+                footerDescription: "Simplify your MyBatis debugging workflow with our powerful Chrome extension that transforms logs into executable SQL statements.",
+                quickLinks: "Quick Links",
+                home: "Home",
+                features: "Features",
+                grafanaDemo: "Grafana Demo",
+                resources: "Resources",
+                userGuide: "User Guide",
+                troubleshooting: "Troubleshooting",
+                releaseNotes: "Release Notes",
+                contactUs: "Contact Us",
+                reportIssue: "Report an Issue",
+                featureRequest: "Feature Request"
+            },
+            zh: {
+                title: "MyBatis SQL 日志合并工具",
+                installNow: "立即安装",
+                heroTitle: "将 MyBatis 日志转换为可执行的 SQL",
+                heroDescription: "我们的 Chrome 扩展通过将 MyBatis SQL 日志合并为可直接执行的 SQL 语句来简化调试工作。节省数小时的手动操作，提高您的工作效率。",
+                addToChrome: "添加到 Chrome",
+                learnMore: "了解更多",
+                guide: "指南",
+                featuresTitle: "强大功能",
+                instantSQLGeneration: "即时 SQL 生成",
+                instantSQLGenerationDesc: "一键将 MyBatis 日志转换为可执行的 SQL，无需手动替换参数！",
+                dualInputModes: "双输入模式",
+                dualInputModesDesc: "支持单框模式处理完整日志，以及双框模式分别处理模板和参数。",
+                sqlFormattingHighlighting: "SQL 格式化和高亮显示",
+                sqlFormattingHighlightingDesc: "自动格式化和语法高亮您的 SQL，提高可读性和调试便利性。",
+                oneClickCopy: "一键复制",
+                oneClickCopyDesc: "使用我们便捷的复制按钮，立即将格式化的 SQL 复制到剪贴板。",
+                fullyResponsive: "完全响应式",
+                fullyResponsiveDesc: "在桌面、平板和移动设备上无缝工作，随时随地进行调试。",
+                privacyFocused: "注重隐私",
+                privacyFocusedDesc: "所有处理都在您的浏览器本地进行，您的数据永远不会离开您的计算机。",
+                howItWorksTitle: "工作原理",
+                installExtension: "安装扩展",
+                installExtensionDesc: "从 Chrome 网上应用店将 MyBatis SQL Log Merger 添加到您的 Chrome 浏览器。",
+                copyLogs: "复制日志",
+                copyLogsDesc: "从应用程序控制台或日志文件中复制 MyBatis SQL 日志。",
+                pasteProcess: "粘贴和处理",
+                pasteProcessDesc: "将日志粘贴到我们的扩展中，点击\"处理 SQL\"生成可执行语句。",
+                executeDebug: "执行和调试",
+                executeDebugDesc: "复制格式化的 SQL 并在数据库客户端中直接运行以进行测试。",
+                testimonialsTitle: "开发者怎么说",
+                testimonial1: "这个扩展为我节省了无数个小时手动重构 MyBatis 日志中的 SQL 查询。对于任何使用数据库的 Java 开发人员来说，这都是必不可少的工具。",
+                testimonialAuthor1: "约翰·多伊",
+                testimonialJob1: "高级 Java 开发人员",
+                testimonial2: "双输入模式太棒了！我现在可以轻松处理标准格式的日志或分离成模板和参数的日志。强烈推荐！",
+                testimonialAuthor2: "亚历克斯·史密斯",
+                testimonialJob2: "后端工程师",
+                testimonial3: "SQL 格式化和语法高亮使发现复杂查询中的问题变得容易得多。这个工具已成为我日常工作中不可或缺的一部分。",
+                testimonialAuthor3: "玛丽亚·罗德里格斯",
+                testimonialJob3: "数据库管理员",
+                ctaTitle: "准备好简化您的 SQL 调试了吗？",
+                ctaDescription: "加入数千名通过我们的扩展改变 MyBatis 调试工作流程的开发人员行列。",
+                installExtensionCTA: "安装 MyBatis SQL Log Merger",
+                faqTitle: "常见问题",
+                faq1Question: "支持哪些 MyBatis 日志格式？",
+                faq1Answer: "我们的扩展支持标准的 MyBatis 日志格式以及带有\"Preparing:\"和\"Parameters:\"前缀的日志。它适用于显示 SQL 模板和参数值的 DEBUG 级别日志。",
+                faq2Question: "使用此扩展时我的数据安全吗？",
+                faq2Answer: "绝对安全！所有处理都在您的浏览器本地进行。不会向任何服务器发送数据，确保您的敏感 SQL 查询和日志信息安全私密。",
+                faq3Question: "此扩展是否适用于其他浏览器？",
+                faq3Answer: "目前，该扩展是为 Chrome 设计的。但是，独立版本适用于任何现代浏览器。我们会根据需求考虑 Firefox 和 Edge 版本。",
+                faq4Question: "我可以将其用于生产数据库查询吗？",
+                faq4Answer: "虽然技术上可行，但我们建议主要将此工具用于开发和调试目的。在对生产数据库运行任何查询之前，请确保获得适当授权。",
+                footerTitle: "MyBatis SQL 日志合并工具",
+                footerDescription: "使用我们强大的 Chrome 扩展简化 MyBatis 调试工作流程，将日志转换为可执行的 SQL 语句。",
+                quickLinks: "快速链接",
+                home: "首页",
+                features: "功能",
+                grafanaDemo: "Grafana 演示",
+                resources: "资源",
+                userGuide: "用户指南",
+                troubleshooting: "故障排除",
+                releaseNotes: "发布说明",
+                contactUs: "联系我们",
+                reportIssue: "报告问题",
+                featureRequest: "功能请求"
+            }
+        };
+
+        // Set language
+        function setLanguage(lang) {
+            // Save to localStorage
+            localStorage.setItem('language', lang);
+
+            // Update all elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = translations[lang][key];
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+
+            // Update language switcher
+            document.getElementById('language-switcher').value = lang;
+        }
+
+        // Load language from localStorage or default to English
+        function loadLanguage() {
+            const savedLang = localStorage.getItem('language') || 'en';
+            setLanguage(savedLang);
+        }
+
         // FAQ Accordion
         document.querySelectorAll('.faq-question').forEach(question => {
             question.addEventListener('click', () => {
@@ -800,6 +1041,17 @@
             } else {
                 header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
             }
+        });
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            // Load saved language
+            loadLanguage();
+
+            // Add event listener to language switcher
+            document.getElementById('language-switcher').addEventListener('change', function () {
+                setLanguage(this.value);
+            });
         });
     </script>
 </body>

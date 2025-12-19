@@ -10,6 +10,13 @@ This Chrome extension helps developers merge MyBatis SQL logs into complete SQL 
 
 ![Extension Icon](images/icon128.png)
 
+### App Info
+
+- [HomeSite](https://liuyueyi.github.io/ai-chrome-mysql-merge/)
+- [Guide](https://liuyueyi.github.io/ai-chrome-mysql-merge/guide.html)
+
+---
+
 ### Features
 
 - Parse MyBatis log output to extract SQL templates and parameters
@@ -188,6 +195,13 @@ Feel free to submit issues or pull requests to improve this extension.
 这是一个Chrome扩展程序，帮助开发者将MyBatis SQL日志合并成完整的SQL语句，便于调试和分析。
 
 ![扩展图标](images/icon128.png)
+
+### 相关链接
+
+- [项目主页](https://liuyueyi.github.io/ai-chrome-mysql-merge/)
+- [使用教程](https://liuyueyi.github.io/ai-chrome-mysql-merge/guide.html)
+
+---
 
 ### 功能特点
 
