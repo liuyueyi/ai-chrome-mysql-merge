@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const toggleModeButton = document.getElementById('toggleModeBtn');
     const toggleModeButtonDouble = document.getElementById('toggleModeBtnDouble');
     const settingsButton = document.getElementById('settingsBtn'); // 新增设置按钮
+    const aboutButton = document.getElementById('aboutBtn'); // 新增关于按钮
     const navigateToSqlPlatformButton = document.getElementById('navigateToSqlPlatform'); // 新增导航按钮
 
     // Debug logging
@@ -104,6 +105,14 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('Settings button not found in DOM');
     }
 
+    // 添加关于按钮点击事件
+    if (aboutButton) {
+        console.log('Adding click event listener to about button');
+        aboutButton.addEventListener('click', openAboutPage);
+    } else {
+        console.error('About button not found in DOM');
+    }
+
     // 添加导航按钮点击事件
     if (navigateToSqlPlatformButton) {
         navigateToSqlPlatformButton.addEventListener('click', navigateToSqlPlatform);
@@ -153,6 +162,52 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // 最后的备用方案
         alert('无法打开设置页面。请手动导航到扩展的设置页面。');
+    }
+
+    // 打开关于页面
+    function openAboutPage() {
+        console.log('Attempting to open about page...');
+        console.log('Chrome object available:', !!chrome);
+
+        // 检查chrome对象是否存在
+        if (!chrome) {
+            console.error('Chrome object not available');
+            alert('无法打开关于页面。请在Chrome浏览器中作为扩展程序运行此页面。');
+            return;
+        }
+
+        console.log('Chrome runtime available:', !!(chrome.runtime));
+        console.log('Chrome tabs available:', !!(chrome.tabs));
+
+        // 尝试使用chrome.runtime.getURL直接构造URL并打开新标签页
+        if (chrome.runtime && chrome.runtime.getURL) {
+            try {
+                const aboutUrl = chrome.runtime.getURL('about.html');
+                console.log('About URL:', aboutUrl);
+
+                // 使用tabs.create打开关于页面
+                if (chrome.tabs) {
+                    chrome.tabs.create({ url: aboutUrl }, function (tab) {
+                        if (chrome.runtime.lastError) {
+                            console.error('Error creating tab:', chrome.runtime.lastError);
+                            // 如果tabs.create失败，尝试window.open作为备用
+                            window.open(aboutUrl, '_blank');
+                        } else {
+                            console.log('Successfully opened about tab:', tab);
+                        }
+                    });
+                } else {
+                    // 如果没有tabs API，直接使用window.open
+                    window.open(aboutUrl, '_blank');
+                }
+                return;
+            } catch (e) {
+                console.error('Error opening about page:', e);
+            }
+        }
+
+        // 最后的备用方案
+        alert('无法打开关于页面。请手动导航到扩展的关于页面。');
     }
 
     // 导航到SQL查询平台

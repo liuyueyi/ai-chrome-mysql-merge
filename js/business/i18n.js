@@ -17,11 +17,11 @@ const translations = {
         dualModeExampleLabel: '双框模式输入示例：',
         sqlTemplateExampleLabel: 'SQL模板（可带或不带Preparing:前缀）：',
         parametersExampleLabel: '参数（可带或不带Parameters:前缀）：',
-        singleModeLabel: 'MyBatis日志输入：',
-        resultLabel: '处理结果：',
-        sqlTemplateLabel: 'SQL模板输入：',
-        sqlParametersLabel: '参数输入：',
-        resultDoubleLabel: '处理结果：',
+        singleModeLabel: '📝 MyBatis日志输入：',
+        resultLabel: '♨️ 处理结果：',
+        sqlTemplateLabel: '📝 SQL模板输入：',
+        sqlParametersLabel: '🔢 参数输入：',
+        resultDoubleLabel: '♨️ 处理结果：',
         footerText: 'MyBatis SQL Log Merger Chrome Extension',
         toggleToDoubleMode: '切换到双框模式',
         toggleToSingleMode: '切换到单框模式',
@@ -29,7 +29,86 @@ const translations = {
         formatBtn: '美化SQL',
         copyBtn: '拷贝结果',
         clearBtn: '清空',
-        settingsBtn: '设置' // 新增设置按钮文本
+        settingsBtn: '设置', // 新增设置按钮文本
+
+        // 帮助页面文本
+        helpTitle: '帮助 - MyBatis SQL Log Merger',
+        backToPopup: '← 返回插件主页',
+        helpHeading: 'MyBatis SQL Log Merger 帮助文档',
+        introductionHeading: '简介',
+        introductionText1: 'MyBatis SQL Log Merger 是一款 Chrome 扩展程序，旨在帮助开发者轻松地将 MyBatis 日志中的 SQL 模板和参数合并成完整的可执行 SQL 语句。',
+        introductionText2: '该插件提供了三种不同的使用方式，满足各种使用场景的需求。',
+        usageModesHeading: '使用方式',
+        standaloneModeHeading: '1. 独立页面模式',
+        standaloneStep1: '点击 Chrome 工具栏中的插件图标',
+        standaloneStep2: '点击"Mybatis Sql合并"按钮',
+        standaloneStep3: '在独立页面中粘贴 MyBatis 日志或分别输入 SQL 模板和参数',
+        standaloneStep4: '点击"处理SQL"按钮生成完整的 SQL 语句',
+        standaloneNote: '独立页面支持两种输入模式：单框模式（粘贴完整日志，包含sql模板和参数）和双框模式（分别输入 SQL 模板和参数）。',
+        pageButtonModeHeading: '2. 页面按钮模式',
+        pageButtonStep1: '在目标网站上激活提取按钮功能（点击Chrome工具栏插件图标中的"注入提取SQL按钮"用于激活此功能）',
+        pageButtonStep2: '在任何网页上选中 MyBatis 日志文本',
+        pageButtonStep3: '点击页面右下角出现的绿色"提取MyBatis SQL"按钮',
+        pageButtonStep4: '在弹出的面板中查看合并后的 SQL 结果',
+        popupModeHeading: '3. 弹出窗口模式',
+        popupModeText: '弹出窗口主要用于快速访问插件的主要功能，如打开独立页面、激活页面按钮等。',
+        activatingButtonHeading: '激活页面按钮功能',
+        activatingButtonText: '默认情况下，页面按钮不会在任何网站上显示。您需要手动激活特定网站的功能：',
+        activatingButtonStep1: '导航到您想要使用插件的目标网站',
+        activatingButtonStep2: '点击 Chrome 工具栏中的插件图标',
+        activatingButtonStep3: '在弹出窗口中，点击"注入提取SQL按钮"旁边的"未激活"状态标签',
+        activatingButtonStep4: '状态将变为"已激活"，刷新页面后即可看到提取按钮',
+        activatingButtonTip: '您也可以在设置页面中配置 URL 模式来批量激活多个网站。',
+        usingExtractorHeading: '使用提取按钮',
+        usingExtractorStep1: '在网页上找到并选中 MyBatis 日志文本',
+        usingExtractorStep2: '点击页面右下角的绿色"提取MyBatis SQL"按钮',
+        usingExtractorStep3: '在弹出的结果面板中查看合并后的 SQL',
+        usingExtractorStep4: '您可以使用"复制"按钮将 SQL 复制到剪贴板',
+        manualEntryHeading: '手动输入模式',
+        manualEntryText: '如果您想手动输入 SQL 模板和参数，可以点击提取按钮旁的展开图标：',
+        manualEntryStep1: '点击提取按钮旁的"⋯"图标',
+        manualEntryStep2: '在弹出的面板中分别输入 SQL 模板和参数',
+        manualEntryStep3: '点击"合成SQL"按钮生成结果',
+        inputFormatsHeading: '输入格式说明',
+        singleModeFormatHeading: '单框模式',
+        singleModeFormatText: '支持带或不带 Preparing: 和 Parameters: 前缀的日志：',
+        dualModeFormatHeading: '双框模式',
+        dualModeFormatText1: 'SQL 模板支持以下两种格式：',
+        dualModeFormatText2: '参数支持以下两种格式：',
+        supportedTypesHeading: '支持的参数类型',
+        typeLong: 'Long',
+        typeString: 'String',
+        typeInteger: 'Integer',
+        typeDouble: 'Double',
+        typeFloat: 'Float',
+        typeBoolean: 'Boolean',
+        typeTimestamp: 'Timestamp',
+        typeDate: 'Date',
+        typeNull: 'NULL 值',
+        helpFooter: 'MyBatis SQL Log Merger v1.0.2',
+        noteLabel: '注意:',
+        tipLabel: '提示:',
+
+        // About page text
+        aboutTitle: '关于 - MyBatis SQL Log Merger',
+        aboutHeading: '关于 MyBatis SQL Log Merger',
+        authorHeading: '作者信息',
+        authorName: '作者: YiHui',
+        authorDescription: '一位专注于开发实用工具的软件工程师，致力于提升开发者的工作效率。',
+        projectHeading: '项目说明',
+        projectDescription1: 'MyBatis SQL Log Merger 是一款专为开发者设计的 Chrome 扩展程序，旨在简化 MyBatis 日志的处理过程。它能够自动将 MyBatis 生成的日志中的 SQL 模板和参数合并成完整的可执行 SQL 语句，大大提高了调试效率。',
+        projectDescription2: '该插件支持多种使用方式，包括独立页面模式、页面按钮模式和弹出窗口模式，满足不同场景下的使用需求。同时支持中英文界面切换，让全球开发者都能方便使用。',
+        sourceCodeLink: '源码仓库',
+        issueTrackerLink: '问题反馈',
+        releaseNotesLink: '版本更新',
+        opensourceHeading: '开源许可',
+        licenseText: '本项目采用 MIT 许可证开源，意味着您可以自由地使用、复制、修改、分发此软件。但我们不对使用本软件可能造成的任何后果承担责任。',
+        contributionText: '欢迎提交 Issue 或 Pull Request 来帮助改进项目。您的贡献将使这个工具变得更好！',
+        sponsorHeading: '支持项目发展',
+        sponsorDescription: '如果您觉得这个工具对您的工作有所帮助，欢迎通过以下方式支持项目的发展。您的支持将帮助我们持续改进和维护这个项目。',
+        coffeeSponsor: '请我喝杯咖啡 ☕',
+        patreonSponsor: '成为 Patreon 赞助者 🌟',
+        aboutFooter: 'MyBatis SQL Log Merger v1.0.2'
     },
     'en': {
         pageTitle: 'MyBatis SQL Log Merger',
@@ -48,11 +127,11 @@ const translations = {
         dualModeExampleLabel: 'Dual-box mode input example:',
         sqlTemplateExampleLabel: 'SQL template (with or without Preparing: prefix):',
         parametersExampleLabel: 'Parameters (with or without Parameters: prefix):',
-        singleModeLabel: 'MyBatis Log Input:',
-        resultLabel: 'Processing Result:',
-        sqlTemplateLabel: 'SQL Template Input:',
-        sqlParametersLabel: 'Parameters Input:',
-        resultDoubleLabel: 'Processing Result:',
+        singleModeLabel: '📝 MyBatis Log Input:',
+        resultLabel: '♨️ Processing Result:',
+        sqlTemplateLabel: '📝 SQL Template Input:',
+        sqlParametersLabel: '🔢 Parameters Input:',
+        resultDoubleLabel: '♨️ Processing Result:',
         footerText: 'MyBatis SQL Log Merger Chrome Extension',
         toggleToDoubleMode: 'Switch to Dual-box Mode',
         toggleToSingleMode: 'Switch to Single-box Mode',
@@ -60,7 +139,86 @@ const translations = {
         formatBtn: 'Beautify SQL',
         copyBtn: 'Copy Result',
         clearBtn: 'Clear',
-        settingsBtn: 'Settings' // 新增设置按钮文本
+        settingsBtn: 'Settings', // 新增设置按钮文本
+
+        // Help page text
+        helpTitle: 'Help - MyBatis SQL Log Merger',
+        backToPopup: '← Back to Plugin Home',
+        helpHeading: 'MyBatis SQL Log Merger Help Documentation',
+        introductionHeading: 'Introduction',
+        introductionText1: 'MyBatis SQL Log Merger is a Chrome extension designed to help developers easily merge SQL templates and parameters from MyBatis logs into complete executable SQL statements.',
+        introductionText2: 'The plugin provides three different usage methods to meet various usage scenario needs.',
+        usageModesHeading: 'Usage Methods',
+        standaloneModeHeading: '1. Standalone Page Mode',
+        standaloneStep1: 'Click the plugin icon in the Chrome toolbar',
+        standaloneStep2: 'Click the "Mybatis Sql Merge" button',
+        standaloneStep3: 'Paste MyBatis logs or enter SQL template and parameters separately in the standalone page',
+        standaloneStep4: 'Click the "Process SQL" button to generate a complete SQL statement',
+        standaloneNote: 'The standalone page supports two input modes: single-box mode (paste complete logs, including SQL template and parameters) and dual-box mode (enter SQL template and parameters separately).',
+        pageButtonModeHeading: '2. Page Button Mode',
+        pageButtonStep1: 'Activate the extraction button function on the target website (click the "Inject SQL Extraction Button" in the Chrome toolbar plugin icon to activate this function)',
+        pageButtonStep2: 'Select MyBatis log text on any webpage',
+        pageButtonStep3: 'Click the green "Extract MyBatis SQL" button that appears at the bottom right of the page',
+        pageButtonStep4: 'View the merged SQL result in the pop-up panel',
+        popupModeHeading: '3. Popup Window Mode',
+        popupModeText: 'The popup window is mainly used to quickly access the plugin\'s main functions, such as opening the standalone page and activating page buttons.',
+        activatingButtonHeading: 'Activating Page Button Function',
+        activatingButtonText: 'By default, the page button will not appear on any website. You need to manually activate the function for specific websites:',
+        activatingButtonStep1: 'Navigate to the target website where you want to use the plugin',
+        activatingButtonStep2: 'Click the plugin icon in the Chrome toolbar',
+        activatingButtonStep3: 'In the popup window, click the "Inactive" status label next to "Inject SQL Extraction Button"',
+        activatingButtonStep4: 'The status will change to "Active", and you will see the extraction button after refreshing the page',
+        activatingButtonTip: 'You can also configure URL patterns in the settings page to batch activate multiple websites.',
+        usingExtractorHeading: 'Using the Extraction Button',
+        usingExtractorStep1: 'Find and select MyBatis log text on the webpage',
+        usingExtractorStep2: 'Click the green "Extract MyBatis SQL" button at the bottom right of the page',
+        usingExtractorStep3: 'View the merged SQL in the pop-up result panel',
+        usingExtractorStep4: 'You can use the "Copy" button to copy the SQL to the clipboard',
+        manualEntryHeading: 'Manual Entry Mode',
+        manualEntryText: 'If you want to manually enter SQL templates and parameters, you can click the expand icon next to the extraction button:',
+        manualEntryStep1: 'Click the "⋯" icon next to the extraction button',
+        manualEntryStep2: 'Enter SQL template and parameters separately in the pop-up panel',
+        manualEntryStep3: 'Click the "Parse" button to generate the result',
+        inputFormatsHeading: 'Input Format Description',
+        singleModeFormatHeading: 'Single-box Mode',
+        singleModeFormatText: 'Supports logs with or without Preparing: and Parameters: prefixes:',
+        dualModeFormatHeading: 'Dual-box Mode',
+        dualModeFormatText1: 'SQL templates support the following two formats:',
+        dualModeFormatText2: 'Parameters support the following two formats:',
+        supportedTypesHeading: 'Supported Parameter Types',
+        typeLong: 'Long',
+        typeString: 'String',
+        typeInteger: 'Integer',
+        typeDouble: 'Double',
+        typeFloat: 'Float',
+        typeBoolean: 'Boolean',
+        typeTimestamp: 'Timestamp',
+        typeDate: 'Date',
+        typeNull: 'NULL Values',
+        helpFooter: 'MyBatis SQL Log Merger v1.0.2',
+        noteLabel: 'Note:',
+        tipLabel: 'Tip:',
+
+        // About page text
+        aboutTitle: 'About - MyBatis SQL Log Merger',
+        aboutHeading: 'About MyBatis SQL Log Merger',
+        authorHeading: 'Author Information',
+        authorName: 'Author: YiHui',
+        authorDescription: 'A software engineer focused on developing practical tools, dedicated to improving developer productivity.',
+        projectHeading: 'Project Description',
+        projectDescription1: 'MyBatis SQL Log Merger is a Chrome extension designed for developers to simplify the processing of MyBatis logs. It automatically merges SQL templates and parameters from MyBatis-generated logs into complete executable SQL statements, greatly improving debugging efficiency.',
+        projectDescription2: 'The plugin supports multiple usage methods, including standalone page mode, page button mode, and popup window mode, meeting usage needs in different scenarios. It also supports Chinese and English interface switching, making it convenient for developers worldwide.',
+        sourceCodeLink: 'Source Code Repository',
+        issueTrackerLink: 'Issue Tracker',
+        releaseNotesLink: 'Release Notes',
+        opensourceHeading: 'Open Source License',
+        licenseText: 'This project is open-sourced under the MIT License, which means you can freely use, copy, modify, and distribute this software. However, we are not responsible for any consequences that may arise from using this software.',
+        contributionText: 'Welcome to submit Issues or Pull Requests to help improve the project. Your contributions will make this tool better!',
+        sponsorHeading: 'Support Project Development',
+        sponsorDescription: 'If you find this tool helpful for your work, please support the project\'s development through the following methods.Your support will help us continuously improve and maintain this project.',
+        coffeeSponsor: 'Buy Me a Coffee ☕',
+        patreonSponsor: 'Become a Patreon Supporter 🌟',
+        aboutFooter: 'MyBatis SQL Log Merger v1.0.2'
     }
 };
 
@@ -175,6 +333,78 @@ function updateUIText() {
     const footerTextElement = document.getElementById('footerText');
     if (footerTextElement) {
         footerTextElement.textContent = getText('footerText');
+    }
+
+    // 更新帮助页面元素
+    const helpElements = [
+        'helpHeading', 'introductionHeading', 'introductionText1', 'introductionText2',
+        'usageModesHeading', 'standaloneModeHeading', 'standaloneStep1', 'standaloneStep2',
+        'standaloneStep3', 'standaloneStep4', 'standaloneNote', 'pageButtonModeHeading',
+        'pageButtonStep1', 'pageButtonStep2', 'pageButtonStep3', 'pageButtonStep4',
+        'popupModeHeading', 'popupModeText', 'activatingButtonHeading', 'activatingButtonText',
+        'activatingButtonStep1', 'activatingButtonStep2', 'activatingButtonStep3', 'activatingButtonStep4',
+        'activatingButtonTip', 'usingExtractorHeading', 'usingExtractorStep1', 'usingExtractorStep2',
+        'usingExtractorStep3', 'usingExtractorStep4', 'manualEntryHeading', 'manualEntryText',
+        'manualEntryStep1', 'manualEntryStep2', 'manualEntryStep3', 'inputFormatsHeading',
+        'singleModeFormatHeading', 'singleModeFormatText', 'dualModeFormatHeading', 'dualModeFormatText1',
+        'dualModeFormatText2', 'supportedTypesHeading', 'typeLong', 'typeString', 'typeInteger',
+        'typeDouble', 'typeFloat', 'typeBoolean', 'typeTimestamp', 'typeDate', 'typeNull',
+        'helpFooter', 'noteLabel', 'tipLabel'
+    ];
+
+    helpElements.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.textContent = getText(id);
+        }
+    });
+
+    // 更新关于页面元素
+    const aboutElements = [
+        'aboutHeading', 'authorHeading', 'authorName', 'authorDescription',
+        'projectHeading', 'projectDescription1', 'projectDescription2',
+        'opensourceHeading', 'licenseText', 'contributionText',
+        'sponsorHeading', 'sponsorDescription', 'aboutFooter'
+    ];
+
+    aboutElements.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.textContent = getText(id);
+        }
+    });
+
+    // 更新链接元素
+    const linkElements = [
+        'sourceCodeLink', 'issueTrackerLink', 'releaseNotesLink',
+        'coffeeSponsor', 'patreonSponsor'
+    ];
+
+    linkElements.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.textContent = getText(id);
+        }
+    });
+
+    // 更新返回按钮文本
+    const backButtonElement = document.querySelector('.back-button[data-i18n]');
+    if (backButtonElement) {
+        const key = backButtonElement.getAttribute('data-i18n');
+        backButtonElement.textContent = getText(key);
+    }
+
+    // 更新帮助页面标题
+    const helpTitleElement = document.querySelector('title[data-i18n]');
+    if (helpTitleElement) {
+        const key = helpTitleElement.getAttribute('data-i18n');
+        helpTitleElement.textContent = getText(key);
+    }
+
+    // 更新关于页面标题
+    const aboutTitleElement = document.querySelector('title[data-i18n="aboutTitle"]');
+    if (aboutTitleElement) {
+        aboutTitleElement.textContent = getText('aboutTitle');
     }
 }
 

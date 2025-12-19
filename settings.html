@@ -6,7 +6,7 @@
     <title data-i18n="settingsTitle">设置 - MyBatis SQL Log Merger</title>
     <style>
         body {
-            width: 500px;
+            max-width: 800px;
             margin: 0 auto;
             padding: 20px;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -168,6 +168,25 @@
             background-color: #c0392b;
         }
 
+        .back-button {
+            padding: 10px 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #2980b9;
+        }
+
         footer {
             text-align: center;
             margin-top: 20px;
@@ -178,6 +197,7 @@
 </head>
 
 <body>
+    <a href="popup.html" class="back-button" data-i18n="backToPopup">← 返回插件主页</a>
     <h2 id="settingsHeading" data-i18n="settingsHeading">设置</h2>
 
     <div class="setting-group">
@@ -227,6 +247,18 @@
     </footer>
 
     <script src="js/business/settings.js"></script>
+    <script>
+        // 添加返回按钮事件监听器，使其行为与帮助页面一致
+        document.addEventListener('DOMContentLoaded', function () {
+            const backButton = document.querySelector('.back-button');
+            if (backButton) {
+                backButton.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    window.close(); // 关闭当前窗口
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

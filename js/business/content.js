@@ -1,6 +1,3 @@
-// Content script to interact with the page
-console.log('MyBatis SQL Log Merger content script loaded');
-
 // 默认设置
 const DEFAULT_SETTINGS = {
     language: 'zh',
@@ -258,7 +255,7 @@ function updateButtonText(buttonGroup, language) {
     const expandButton = buttonGroup.querySelector('#mybatis-sql-merger-expand-btn');
 
     if (extractButton) {
-        extractButton.textContent = language === 'zh' ? '提取MyBatis SQL' : 'Extract MyBatis SQL';
+        extractButton.textContent = language === 'zh' ? '提取SQL' : 'Merge SQL';
     }
 
     // 更新展开按钮的图标状态
@@ -297,10 +294,13 @@ function addButtonGroupToPage(language = 'zh') {
     toolbar.style.padding = '4px';
     toolbar.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
 
+    // 添加折叠状态标志
+    toolbar.isCollapsed = false;
+
     // Create the extract button
     const extractButton = document.createElement('button');
     extractButton.id = 'mybatis-sql-merger-extract-btn';
-    extractButton.textContent = language === 'zh' ? '提取MyBatis SQL' : 'Extract MyBatis SQL';
+    extractButton.textContent = language === 'zh' ? '提取SQL' : 'Merge SQL';
     extractButton.style.padding = '8px 12px';
     extractButton.style.backgroundColor = 'transparent';
     extractButton.style.color = 'white';
@@ -342,6 +342,74 @@ function addButtonGroupToPage(language = 'zh') {
             // Update the expand button icon
             updateExpandButtonIcon(toolbar.querySelector('#mybatis-sql-merger-expand-btn'), language);
         }
+    });
+
+    // Create the collapse button with icon
+    const collapseButton = document.createElement('button');
+    collapseButton.id = 'mybatis-sql-merger-collapse-btn';
+    collapseButton.innerHTML = '»'; // Collapse icon
+    collapseButton.title = language === 'zh' ? '折叠按钮组' : 'Collapse Toolbar';
+    collapseButton.style.padding = '8px 6px';
+    collapseButton.style.backgroundColor = 'transparent';
+    collapseButton.style.color = 'white';
+    collapseButton.style.border = 'none';
+    collapseButton.style.borderRadius = '2px';
+    collapseButton.style.cursor = 'pointer';
+    collapseButton.style.fontSize = '14px';
+    collapseButton.style.fontWeight = '500';
+    collapseButton.style.marginLeft = '2px';
+    collapseButton.style.transition = 'background-color 0.2s';
+    collapseButton.style.minWidth = 'auto';
+
+    // Add click event to toggle collapse state
+    collapseButton.addEventListener('click', function () {
+        const toolbar = document.getElementById('mybatis-sql-merger-toolbar');
+        if (toolbar) {
+            if (!toolbar.isCollapsed) {
+                // 折叠状态：只显示折叠按钮，吸附在右边框
+                toolbar.isCollapsed = true;
+                toolbar.style.right = '0px';
+                toolbar.style.bottom = '50%';
+                toolbar.style.transform = 'translateY(50%)';
+                toolbar.style.flexDirection = 'column';
+                toolbar.style.padding = '2px';
+
+                // 隐藏其他按钮
+                extractButton.style.display = 'none';
+                expandButton.style.display = 'none';
+
+                // 更改折叠按钮图标和提示
+                collapseButton.innerHTML = '«';
+                collapseButton.title = language === 'zh' ? '展开按钮组' : 'Expand Toolbar';
+            } else {
+                // 展开状态：恢复正常布局
+                toolbar.isCollapsed = false;
+                toolbar.style.right = '20px';
+                toolbar.style.bottom = '20px';
+                toolbar.style.transform = 'none';
+                toolbar.style.flexDirection = 'row';
+                toolbar.style.padding = '4px';
+
+                // 显示其他按钮
+                extractButton.style.display = '';
+                expandButton.style.display = '';
+
+                // 更改折叠按钮图标和提示
+                collapseButton.innerHTML = '»';
+                collapseButton.title = language === 'zh' ? '折叠按钮组' : 'Collapse Toolbar';
+
+                // 不再需要恢复默认的虚化状态
+            }
+        }
+    });
+
+    // Add hover effect for collapse button
+    collapseButton.addEventListener('mouseenter', function () {
+        this.style.backgroundColor = 'rgb(17, 150, 21)';
+    });
+
+    collapseButton.addEventListener('mouseleave', function () {
+        this.style.backgroundColor = 'transparent';
     });
 
     // Create the expand button with icon
@@ -388,9 +456,36 @@ function addButtonGroupToPage(language = 'zh') {
         }
     });
 
+    // Add mouse enter event to activate toolbar
+    toolbar.addEventListener('mouseenter', function () {
+        // 在折叠状态下，临时显示其他按钮但不改变折叠状态
+        if (this.isCollapsed) {
+            extractButton.style.display = '';
+            expandButton.style.display = '';
+            // 增加按钮组宽度以容纳所有按钮
+            this.style.width = 'auto';
+        }
+    });
+
+    // Add mouse leave event to deactivate toolbar
+    toolbar.addEventListener('mouseleave', function () {
+        // 如果是折叠状态，恢复原来的样式
+        if (this.isCollapsed) {
+            extractButton.style.display = 'none';
+            expandButton.style.display = 'none';
+            this.style.width = '';
+        }
+    });
+
+    // Add selection change event to update toolbar based on selection
+    document.addEventListener('selectionchange', function () {
+        // 不再需要根据选择状态改变工具栏的外观
+    });
+
     // Add buttons to the toolbar
     toolbar.appendChild(extractButton);
     toolbar.appendChild(expandButton);
+    toolbar.appendChild(collapseButton);
 
     // Add toolbar to the page
     document.body.appendChild(toolbar);
