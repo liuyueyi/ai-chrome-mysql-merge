@@ -1,0 +1,10 @@
+{
+  "extName": {
+    "message": "MyBatis SQL Log Merger",
+    "description": "Extension name"
+  },
+  "extDescription": {
+    "message": "Auto Merge MyBatis SQL logs into complete SQL statements",
+    "description": "Extension description"
+  }
+}

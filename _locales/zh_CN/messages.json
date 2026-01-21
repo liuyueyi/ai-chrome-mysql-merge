@@ -1,0 +1,10 @@
+{
+  "extName": {
+    "message": "MyBatis SQL Log Merger",
+    "description": "Extension name"
+  },
+  "extDescription": {
+    "message": "自动实现MyBatis SQL日志合并为可执行 SQL 语句的效率工具",
+    "description": "Extension description"
+  }
+}
