@@ -184,6 +184,14 @@ where
 - Complex nested parameter structures may not be fully supported
 - Does not validate the resulting SQL for syntax correctness
 
+### Changelog
+
+- [1.1.0](https://github.com/liuyueyi/ai-chrome-mysql-merge/releases/tag/1.1.0) 2026-1-21
+  - Compatible with scenarios where SQL parameters contain JSON, functions, etc.
+- [1.0.3](https://github.com/liuyueyi/ai-chrome-mysql-merge/releases/tag/1.0.3) 2025-12-19
+  - Completed core functionality, published to marketplace
+  - Added standalone SQL processing tool page
+
 ### Contributing
 
 Feel free to submit issues or pull requests to improve this extension.
@@ -369,6 +377,14 @@ where
 - 目前仅适用于基本的SELECT、INSERT、UPDATE、DELETE语句
 - 复杂的嵌套参数结构可能无法完全支持
 - 不验证生成的SQL的语法正确性
+
+### 变更
+
+- [1.1.0](https://github.com/liuyueyi/ai-chrome-mysql-merge/releases/tag/1.1.0) 2026-1-21
+  - 兼容sql参数中包含json、函数等场景
+- [1.0.3](https://github.com/liuyueyi/ai-chrome-mysql-merge/releases/tag/1.0.3) 2025-12-19
+  - 完成主体功能，上架市场
+  - 新增独立的sql处理工具页面
 
 ### 贡献
 

@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const translations = {
         'zh': {
             appTitle: 'MyBatis SQL Log Merger',
-            versionText: 'v1.0',
-            mergeText: 'MyBatis SQL合并',
+            versionText: 'v1.1.0',
+            mergeText: 'MyBatis SQL合并独立工具页',
             injectExtractionText: '注入提取SQL按钮',
             cancelExtractionText: '取消提取SQL按钮',
             settingsText: '设置',
@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', function () {
             inactiveStatus: '未激活'
         },
         'en': {
-            appTitle: 'MyBatis SQL Log Merger',
-            versionText: 'v1.0',
+            appTitle: 'MyBatis SQL Log Merger Standalone Page',
+            versionText: 'v1.1.0',
             mergeText: 'MyBatis SQL Merge',
             injectExtractionText: 'Inject SQL Extraction Button',
             cancelExtractionText: 'Cancel SQL Extraction Button',

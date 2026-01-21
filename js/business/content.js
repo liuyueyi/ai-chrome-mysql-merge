@@ -84,50 +84,105 @@ function mergeSqlLog(logText) {
 function parseParameters(paramsStr) {
     if (!paramsStr) return [];
 
-    // Split parameters by comma, but be careful with commas inside parentheses
+    // Improved parsing algorithm that properly handles nested structures like JSON
     const parameters = [];
     let currentParam = '';
     let parenCount = 0;
+    let bracketCount = 0;
+    let inQuotes = false;
+    let quoteChar = null;
 
     for (let i = 0; i < paramsStr.length; i++) {
         const char = paramsStr[i];
+        const nextChar = i < paramsStr.length - 1 ? paramsStr[i + 1] : '';
+        const nextTwoChars = i < paramsStr.length - 2 ? paramsStr.substr(i, 3) : ''; // Get next 3 chars to check for ", "
 
-        if (char === '(') {
+        if (char === quoteChar && inQuotes) {
+            // Check if this quote is escaped
+            if (nextChar === quoteChar) {
+                // This is an escaped quote, add both characters
+                currentParam += char + nextChar;
+                i++; // Skip the next quote since we've already processed it
+            } else {
+                // End of quoted string
+                inQuotes = false;
+                quoteChar = null;
+                currentParam += char;
+            }
+        } else if ((char === '"' || char === "'") && !inQuotes) {
+            // Starting a quoted string
+            inQuotes = true;
+            quoteChar = char;
+            currentParam += char;
+        } else if (inQuotes) {
+            // Inside quotes, just add the character
+            currentParam += char;
+        } else if (char === '{') {
+            bracketCount++;
+            currentParam += char;
+        } else if (char === '}') {
+            bracketCount--;
+            currentParam += char;
+        } else if (char === '[') {
+            bracketCount++;
+            currentParam += char;
+        } else if (char === ']') {
+            bracketCount--;
+            currentParam += char;
+        } else if (char === '(') {
             parenCount++;
             currentParam += char;
         } else if (char === ')') {
             parenCount--;
             currentParam += char;
-        } else if (char === ',' && parenCount === 0) {
+        } else if (char === ',' && nextChar === ' ' && parenCount === 0 && bracketCount === 0 && !inQuotes) {
+            // We reached the end of a parameter only if we're not inside any parentheses or brackets
+            // and the comma is followed by a space (MyBatis format: value(type), nextValue(nextType))
             parameters.push(currentParam.trim());
             currentParam = '';
+            i++; // Skip the space after comma
         } else {
             currentParam += char;
         }
     }
 
-    // Don't forget the last parameter
+    // Don't forget the last parameter - this handles the case where the last parameter 
+    // doesn't end with a comma (which is typical for the final parameter)
     if (currentParam.trim()) {
         parameters.push(currentParam.trim());
     }
 
+    // 针对最后一个参数进行特殊处理，比如最后一个参数可能是 `1(Long)这个sql解析失败了`，此时需要我们将)后面的内容去掉
+    if (parameters.length > 0) {
+        parameters[parameters.length - 1] = parameters[parameters.length - 1].split(')')[0] + ')';
+    }
+
     // Process each parameter to extract just the value
     return parameters.map(param => {
-        // Match patterns like "123(Long)" or "abc(String)"
+        // Match patterns like "123(Long)" or "abc(String)" or JSON[String]
         // Handle different parameter formats:
         // - Numeric: "123(Long)" -> "123"
         // - String: "abc(String)" -> "abc"
+        // - JSON String: "{\"key\": \"value\"}(String)" -> "{\"key\": \"value\"}"
         // - Null: "null(Timestamp)" -> null
-        const match = param.match(/^(.+)\s*\([^)]+\)\s*$/);
+        const match = param.match(/^(.+)\s*\(([^)]+)\)\s*$/);
         if (match) {
             let value = match[1].trim();
+            const type = match[2].trim();
+
             // Handle null values
             if (value.toLowerCase() === 'null') {
                 return 'NULL';
             }
-            // If it's a string, remove quotes
-            if (value.startsWith('"') && value.endsWith('"') && value.length > 1) {
-                value = value.substring(1, value.length - 1);
+
+            // If it's a String type, handle JSON strings and other quoted strings
+            if (type.toLowerCase().includes('string') || type.toLowerCase().includes('varchar') || type.toLowerCase().includes('char')) {
+                // For JSON strings that may already have quotes internally, we need to be careful
+                // If the value starts and ends with quotes and has more internal structure, it might be a JSON string
+                if (value.startsWith('"') && value.endsWith('"') && value.length > 1) {
+                    // Extract content from outer quotes, preserving internal structure
+                    value = value.substring(1, value.length - 1);
+                }
             }
             return value;
         }
@@ -144,6 +199,11 @@ function mergeSqlWithParameters(sqlTemplate, parameters) {
         const param = parameters[i];
         // Check if the parameter is numeric
         if (isNumeric(param)) {
+            resultSql = resultSql.replace('?', param);
+        } else if (param.toLowerCase() === 'null') {
+            resultSql = resultSql.replace('?', 'NULL');
+        } else if (param.toLowerCase().includes('()') || (param.includes('(') && param.includes(')'))) {
+            // Handle parameters with () like now()
             resultSql = resultSql.replace('?', param);
         } else {
             // For string values, wrap in quotes
